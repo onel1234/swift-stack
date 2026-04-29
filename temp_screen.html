@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Custom Web Development - Kinetic Logic</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#464555",
+                        "surface-variant": "#d3e4fe",
+                        "secondary": "#565e74",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#93e8ff",
+                        "secondary-container": "#dae2fd",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "tertiary": "#00505f",
+                        "inverse-primary": "#c3c0ff",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-background": "#0b1c30",
+                        "tertiary-container": "#006a7c",
+                        "on-primary-fixed": "#0f0069",
+                        "primary-fixed": "#e2dfff",
+                        "on-secondary-container": "#5c647a",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-bright": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#acedff",
+                        "surface-dim": "#cbdbf5",
+                        "outline-variant": "#c7c4d8",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed": "#001f26",
+                        "surface-tint": "#4d44e3",
+                        "surface-container-highest": "#d3e4fe",
+                        "inverse-surface": "#213145",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#dad7ff",
+                        "primary-container": "#4f46e5",
+                        "outline": "#777587",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "background": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "on-error": "#ffffff",
+                        "primary": "#3525cd",
+                        "surface-container": "#e5eeff",
+                        "secondary-fixed": "#dae2fd",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "section-padding": "120px",
+                        "margin": "48px",
+                        "unit": "4px",
+                        "container-max": "1280px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pt-20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-center h-20 max-w-7xl mx-auto px-8 w-full">
+<div class="text-xl font-bold tracking-tighter text-slate-900 dark:text-white">
+                Kinetic Logic
+            </div>
+<div class="hidden md:flex gap-8 items-center font-sans tracking-tight text-sm font-medium">
+<a class="text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 pb-1" href="#">Services</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" href="#">Work</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" href="#">Process</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" href="#">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" href="#">Contact</a>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-DEFAULT hover:bg-primary/90 transition-colors scale-95 duration-200 active:opacity-80">
+                Start a Project
+            </button>
+</div>
+</nav>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="py-section-padding px-8 bg-surface-container-low relative overflow-hidden">
+<div class="max-w-container-max mx-auto text-center relative z-10">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-stack-md">Custom Web Development</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-stack-lg">
+                    We build scalable, secure, and performant web applications engineered to solve complex business challenges and drive digital transformation.
+                </p>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded-DEFAULT shadow-[0_10px_30px_rgba(79,70,229,0.2)] hover:bg-primary/90 transition-colors">
+                    Start a Project
+                </button>
+</div>
+</section>
+<!-- Our Process -->
+<section class="py-section-padding px-8">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-lg text-center">Engineering Workflow</h2>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-gutter relative">
+<!-- Connecting Line (Desktop) -->
+<div class="hidden md:block absolute top-[40px] left-0 w-full h-[2px] bg-outline-variant z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 bg-surface-container rounded-full flex items-center justify-center mb-stack-sm border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 0;">search</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Discovery</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Requirement analysis and architecture planning.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 bg-surface-container rounded-full flex items-center justify-center mb-stack-sm border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 0;">design_services</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Design</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">UX/UI prototyping and system design.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 bg-surface-container rounded-full flex items-center justify-center mb-stack-sm border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 0;">code</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Development</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Agile implementation of core features.</p>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 bg-surface-container rounded-full flex items-center justify-center mb-stack-sm border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 0;">bug_report</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Testing</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Rigorous QA, security, and performance audits.</p>
+</div>
+<!-- Step 5 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 bg-surface-container rounded-full flex items-center justify-center mb-stack-sm border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 0;">rocket_launch</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Launch</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Deployment and continuous integration.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Benefits -->
+<section class="py-section-padding px-8 bg-surface-bright">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-lg text-center">Core Advantages</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Benefit Card -->
+<div class="bg-white border border-outline-variant p-stack-lg rounded-DEFAULT hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary mb-stack-sm text-[40px]" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Scalability</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Architectures built to handle exponential growth and traffic spikes seamlessly.</p>
+</div>
+<!-- Benefit Card -->
+<div class="bg-white border border-outline-variant p-stack-lg rounded-DEFAULT hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary mb-stack-sm text-[40px]" style="font-variation-settings: 'FILL' 1;">security</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Security</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Enterprise-grade protection with robust data encryption and compliance.</p>
+</div>
+<!-- Benefit Card -->
+<div class="bg-white border border-outline-variant p-stack-lg rounded-DEFAULT hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary mb-stack-sm text-[40px]" style="font-variation-settings: 'FILL' 1;">speed</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Performance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Optimized codebases ensuring lightning-fast load times and responsiveness.</p>
+</div>
+<!-- Benefit Card -->
+<div class="bg-white border border-outline-variant p-stack-lg rounded-DEFAULT hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary mb-stack-sm text-[40px]" style="font-variation-settings: 'FILL' 1;">build</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Maintenance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Clean, documented code for easy long-term support and feature additions.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Case Studies -->
+<section class="py-section-padding px-8">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-lg text-center">Featured Work</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Case Study 1 -->
+<div class="group cursor-pointer">
+<div class="overflow-hidden rounded-DEFAULT mb-stack-sm border border-outline-variant">
+<img alt="Dashboard interface showing complex data analytics" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern dark mode analytics dashboard interface on a laptop screen showing detailed charts and graphs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_KOKBFAS1eu4Ls5gIc1o8GDT33CeFGuG04jf8Ne0vWkjM8UONxwM0h9bLQo8Uvc0pm44-sfoqe3RphVKAK-jx3R6L7R087qpMi-WgQQaS8WOYV5QMxpi-IOBTmORwUGoKqdOjaJ9nJusE72rC7m4Wyx-s6ukLA86R8K0uXrreGJgndnkFMcG_elVF-2Y6tYDPeZz_1zY2IHDVE5E4ldpEtnpGUZDxrBis_b8a_jYecXUm4OjwQl7XVmkwTJk9ROPbEvg794IZcSg"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-unit">FinTech Analytics Platform</h3>
+<a class="font-label-md text-label-md text-primary flex items-center gap-2 group-hover:gap-3 transition-all" href="#">
+                            View Details <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Case Study 2 -->
+<div class="group cursor-pointer">
+<div class="overflow-hidden rounded-DEFAULT mb-stack-sm border border-outline-variant">
+<img alt="Data visualization screen" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a monitor displaying complex data visualization nodes and network graphs in blue tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-0grgnQHoAsdEun3VoKgEfW90Dl6RVB1TFtMwpir7S-WoauEr70nzDeTl2YeL5SnE9QhYJmthLSPnM70ebeIA-SsRBLJBaoyObhTevyI-ykxfz6qXsoCJGIdZqOor3d7m7f5-Um2bto1yTTWxHU0aDAD9amYqhs0q5ps5jdsxt5OlkttwSCvWenlek-54s8dLBcef6J0TyuCdnU7QrEu_PG_euX4sI_3m0AnXsWmzCpslFpHPVgl7w1FO5Di04LyB_w0Xdtkngms"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-unit">Enterprise Logistics Portal</h3>
+<a class="font-label-md text-label-md text-primary flex items-center gap-2 group-hover:gap-3 transition-all" href="#">
+                            View Details <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-section-padding px-8 bg-surface-container text-center">
+<div class="max-w-2xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Ready to build something extraordinary?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg">Let's discuss how our engineering team can bring your vision to life.</p>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded-DEFAULT shadow-[0_10px_30px_rgba(79,70,229,0.2)] hover:bg-primary/90 transition-colors">
+                    Contact Us
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-20 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 font-sans text-xs uppercase tracking-widest text-slate-500 dark:text-slate-500">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-start gap-12">
+<div>
+<div class="text-lg font-bold text-slate-900 dark:text-white mb-4">
+                    Kinetic Logic
+                </div>
+<p>© 2024 Kinetic Logic. Engineering excellence in web development.</p>
+</div>
+<div class="flex gap-8">
+<a class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Privacy Policy</a>
+<a class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Terms of Service</a>
+<a class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">LinkedIn</a>
+<a class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</body></html>
