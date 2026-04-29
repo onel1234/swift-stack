@@ -3,16 +3,37 @@ import { ButtonLink } from '../ui/Button';
 
 export function Footer() {
   return (
-    <footer style={{ backgroundColor: 'var(--inverse-surface)', color: 'var(--on-tertiary)', padding: 'var(--spacing-section-padding) 0' }}>
+    <footer className="footer-section" style={{ backgroundColor: 'var(--inverse-surface)', color: 'var(--on-tertiary)' }}>
       <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-stack-lg)', alignItems: 'center', textAlign: 'center' }}>
-        <h2 className="headline-md" style={{ color: 'var(--on-primary)' }}>Ready to elevate your digital presence?</h2>
-        <p className="body-lg" style={{ color: 'var(--on-primary-container)', maxWidth: '600px' }}>
+        <h2 className="headline-md footer-headline" style={{ color: 'var(--on-primary)' }}>Ready to elevate your digital presence?</h2>
+        <p className="body-lg footer-text" style={{ color: 'var(--on-primary-container)', maxWidth: '600px' }}>
           Reach out to our engineering team and let's architect the future of your web experience.
         </p>
-        <ButtonLink href="#contact" variant="primary" className="btn-primary">Start a Project</ButtonLink>
-
-
+        <ButtonLink href="#contact" variant="primary" className="btn-primary footer-btn">Start a Project</ButtonLink>
       </div>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        .footer-section {
+          padding: var(--spacing-section-padding) 0;
+        }
+
+        @media(max-width: 768px) {
+          .footer-section {
+            padding: 80px 0;
+          }
+          .footer-headline {
+            font-size: 28px;
+          }
+          .footer-text {
+            font-size: 16px;
+          }
+          .footer-btn {
+            width: 100%;
+          }
+        }
+        `
+      }} />
     </footer>
   );
 }

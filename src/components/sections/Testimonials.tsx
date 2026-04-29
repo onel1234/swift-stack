@@ -201,6 +201,26 @@ export function Testimonials() {
           color: var(--outline);
           letter-spacing: 0.05em;
         }
+
+        @media(max-width: 768px) {
+          .testimonial-card {
+            padding: 32px 24px;
+          }
+          .quote-watermark {
+            font-size: 160px;
+            right: 10px;
+            top: -5px;
+          }
+          .quote-text {
+            font-size: 16px;
+          }
+          .card-content {
+            gap: 20px;
+          }
+          .author-block {
+            padding-top: 20px;
+          }
+        }
       `}} />
     </section>
   );
