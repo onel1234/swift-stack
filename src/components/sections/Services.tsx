@@ -4,9 +4,9 @@ export function Services() {
   return (
     <section id="services" className="section" style={{ backgroundColor: 'var(--surface)', position: 'relative', overflow: 'hidden' }}>
       {/* Decorative Background Blob */}
-      <div className="blob" style={{ 
-        width: '800px', height: '800px', background: 'rgba(6, 182, 212, 0.05)', 
-        top: '20%', right: '-300px' 
+      <div className="blob" style={{
+        width: '800px', height: '800px', background: 'rgba(6, 182, 212, 0.05)',
+        top: '20%', right: '-300px'
       }}></div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -26,7 +26,7 @@ export function Services() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: 'var(--spacing-stack-lg)'
         }}>
-          
+
           {/* Card 1 */}
           <div className="service-card">
             <div className="service-icon-wrapper">
@@ -43,6 +43,7 @@ export function Services() {
             <div className="service-link">
               Explore Development <span>→</span>
             </div>
+
           </div>
 
           {/* Card 2 */}
@@ -84,7 +85,8 @@ export function Services() {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .service-card {
           position: relative;
           background-color: var(--surface-container-lowest);
