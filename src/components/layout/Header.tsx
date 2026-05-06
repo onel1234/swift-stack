@@ -10,7 +10,7 @@ export function Header() {
         </div>
         <nav className="desktop-nav" style={{ display: 'flex', gap: '32px' }}>
           <a href="#services" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Services</a>
-          <a href="#work" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Work</a>
+          <a href="#process" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Process</a>
           <a href="#about" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>About</a>
         </nav>
         <div style={{ flexShrink: 0 }}>

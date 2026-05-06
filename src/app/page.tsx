@@ -2,7 +2,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Services } from '@/components/sections/Services';
-import { Works } from '@/components/sections/Works';
+import { Process } from '@/components/sections/Process';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { ContactModal } from '@/components/ui/ContactModal';
 
@@ -13,7 +13,7 @@ export default function Home() {
       <main style={{ flex: 1 }}>
         <Hero />
         <Services />
-        <Works />
+        <Process />
         <Testimonials />
       </main>
       <Footer />
