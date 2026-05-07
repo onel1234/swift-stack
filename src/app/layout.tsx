@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Visionary Web Agency',
+  title: 'Swift Stack | Web Agency',
   description: 'Architecting the Future of Web Experiences',
 };
 
