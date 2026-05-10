@@ -9,12 +9,12 @@ export function Header() {
           <img src="/Gemini_Generated_Image_drx615drx615drx6-removebg-preview.png" alt="Visionary Logo" style={{ height: '60px', width: 'auto' }} />
         </div>
         <nav className="desktop-nav" style={{ display: 'flex', gap: '32px' }}>
-          <a href="#services" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Services</a>
-          <a href="#process" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Process</a>
-          <a href="#about" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>About</a>
+          <a href="/#services" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Services</a>
+          <a href="/#process" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Process</a>
+          <a href="/work" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Our Work</a>
         </nav>
         <div style={{ flexShrink: 0 }}>
-          <ButtonLink href="#contact" variant="primary" style={{ padding: '8px 24px', fontSize: '14px', width: 'auto' }}>Get Started</ButtonLink>
+          <ButtonLink href="/#contact" variant="primary" style={{ padding: '8px 24px', fontSize: '14px', width: 'auto' }}>Get Started</ButtonLink>
         </div>
       </div>
     </header>

@@ -52,10 +52,10 @@ export function Hero() {
         </p>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'var(--spacing-stack-md)', marginTop: 'var(--spacing-stack-sm)', width: '100%' }}>
-          <ButtonLink href="#work" variant="primary">
+          <ButtonLink href="/work" variant="primary">
             Explore Our Work <span style={{ marginLeft: '8px' }}>→</span>
           </ButtonLink>
-          <ButtonLink href="#contact" variant="secondary" style={{ borderColor: 'var(--outline-variant)', color: 'var(--on-surface)' }}>
+          <ButtonLink href="/#contact" variant="secondary" style={{ borderColor: 'var(--outline-variant)', color: 'var(--on-surface)' }}>
             Start a Conversation
           </ButtonLink>
         </div>

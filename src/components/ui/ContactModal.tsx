@@ -34,7 +34,7 @@ export function ContactModal() {
   }, []);
 
   const closeModal = () => {
-    window.history.pushState('', document.title, window.location.pathname + window.location.search);
+    window.history.pushState(null, '', window.location.pathname + window.location.search);
     setIsOpen(false);
     document.body.style.overflow = 'auto';
   };
