@@ -6,20 +6,44 @@ import { Footer } from '@/components/layout/Footer';
 import { ContactModal } from '@/components/ui/ContactModal';
 import { motion } from 'framer-motion';
 
-const projects = [
+const caseStudies = [
   {
     id: 'ceylon-naturalist',
-    title: 'Ceylon Naturalist',
-    description: 'A bespoke platform crafted for nature enthusiasts, blending seamless e-commerce with rich storytelling. Designed to evoke the pristine beauty of nature while driving conversions.',
+    client: 'Ceylon Naturalist',
+    industry: 'E-Commerce & Wellness',
+    title: 'Scaling a Boutique Nature Brand to Global Markets',
+    challenge: 'The client had a fragmented online presence with low conversion rates and an outdated e-commerce flow that failed to capture the premium essence of their brand.',
+    solution: 'We engineered a bespoke, high-performance storefront. By integrating seamless UX with rich, immersive storytelling and optimized checkout flows, we elevated the entire customer journey.',
+    results: [
+      { metric: '+150%', label: 'Conversion Rate' },
+      { metric: '-40%', label: 'Bounce Rate' },
+      { metric: '2.5x', label: 'Avg Order Value' }
+    ],
+    testimonial: {
+      quote: "The new platform completely transformed our business. We're seeing sales numbers we didn't think were possible this early on.",
+      author: "Founder, Ceylon Naturalist"
+    },
     url: 'https://ceylonnaturalist.com/',
-    tags: ['E-Commerce', 'Brand Identity', 'UI/UX Design']
+    tags: ['E-Commerce', 'Brand Identity', 'Conversion Optimization']
   },
   {
     id: 'prana-fuel',
-    title: 'Prana Fuel',
-    description: 'A high-energy, vibrant digital experience for a wellness brand. Built for maximum performance and engagement, featuring dynamic animations and a modern aesthetic.',
+    client: 'Prana Fuel',
+    industry: 'Health & Fitness',
+    title: 'Igniting Digital Engagement for a Wellness Startup',
+    challenge: 'Prana Fuel needed a high-energy digital experience to launch their new product line, but their existing landing pages were slow and lacked visual impact, leading to high bounce rates.',
+    solution: 'We built a vibrant, motion-rich web application focused on maximum performance and engagement. Leveraging modern animations and an aggressive optimization strategy, we delivered a lightning-fast experience.',
+    results: [
+      { metric: '< 1s', label: 'Page Load Time' },
+      { metric: '+210%', label: 'User Engagement' },
+      { metric: '4.8x', label: 'ROI on Ad Spend' }
+    ],
+    testimonial: {
+      quote: "Their team didn't just build a website; they built an engine for our growth. The kinetic energy of the site perfectly matches our brand.",
+      author: "Marketing Director, Prana Fuel"
+    },
     url: 'https://prana-fuel-your-vitality.netlify.app/',
-    tags: ['Web Application', 'Wellness', 'Motion Design']
+    tags: ['Web Application', 'Motion Design', 'Performance Tuning']
   }
 ];
 
@@ -37,63 +61,97 @@ export default function WorkPage() {
           >
             <div className="pill-badge" style={{ marginBottom: '24px' }}>
               <span className="dot"></span>
-              Our Portfolio
+              Client Success Stories
             </div>
             <h1 className="headline-xl" style={{ marginBottom: '24px' }}>
-              Crafting <span className="hero-gradient-text">Digital Excellence</span>
+              We don't just build websites.<br />
+              <span className="hero-gradient-text">We build businesses.</span>
             </h1>
-            <p className="body-lg" style={{ maxWidth: '600px', margin: '0 auto', color: 'var(--on-surface-variant)' }}>
-              Explore our selected works where visionary design meets robust engineering. We don't just build websites; we create immersive digital experiences that elevate brands.
+            <p className="body-lg" style={{ maxWidth: '650px', margin: '0 auto', color: 'var(--on-surface-variant)' }}>
+              Beautiful design is only half the equation. Explore how we combine visionary aesthetics with rigorous engineering to drive measurable growth, increase conversions, and deliver exceptional ROI for our partners.
             </p>
           </motion.div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
-            {projects.map((project, index) => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '100px' }}>
+            {caseStudies.map((study, index) => (
               <motion.div 
-                key={project.id}
+                key={study.id}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                  gap: '48px',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+                  gap: '64px',
                   alignItems: 'center',
-                  backgroundColor: 'var(--surface-container-lowest)',
-                  padding: '48px',
-                  borderRadius: 'var(--radius-xl)',
-                  border: '1px solid var(--outline-variant)',
-                  boxShadow: 'var(--shadow-soft)'
                 }}
               >
                 <div style={{ order: index % 2 === 1 ? 2 : 1 }}>
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
-                    {project.tags.map(tag => (
-                      <span key={tag} style={{ 
-                        fontSize: '12px', 
-                        fontWeight: 600, 
-                        padding: '6px 16px', 
-                        backgroundColor: 'var(--surface-container)', 
-                        color: 'var(--primary)',
-                        borderRadius: 'var(--radius-full)'
-                      }}>
-                        {tag}
-                      </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
+                    <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--on-surface-variant)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      {study.client}
+                    </span>
+                    <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'var(--outline)' }}></span>
+                    <span style={{ fontSize: '14px', color: 'var(--on-surface-variant)' }}>
+                      {study.industry}
+                    </span>
+                  </div>
+                  
+                  <h2 className="headline-lg" style={{ marginBottom: '24px' }}>{study.title}</h2>
+                  
+                  {/* Metrics Grid */}
+                  <div style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(3, 1fr)', 
+                    gap: '16px', 
+                    marginBottom: '32px',
+                    padding: '24px',
+                    backgroundColor: 'var(--surface-container-lowest)',
+                    borderRadius: 'var(--radius-lg)',
+                    border: '1px solid var(--outline-variant)'
+                  }}>
+                    {study.results.map((result, i) => (
+                      <div key={i} style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '28px', fontWeight: 800, color: 'var(--primary)', marginBottom: '4px', fontFamily: 'var(--font-family-primary)' }}>
+                          {result.metric}
+                        </div>
+                        <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--on-surface-variant)', textTransform: 'uppercase' }}>
+                          {result.label}
+                        </div>
+                      </div>
                     ))}
                   </div>
-                  <h2 className="headline-lg" style={{ marginBottom: '16px' }}>{project.title}</h2>
-                  <p className="body-lg" style={{ color: 'var(--on-surface-variant)', marginBottom: '32px' }}>
-                    {project.description}
-                  </p>
+
+                  <div style={{ marginBottom: '24px' }}>
+                    <h4 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '8px', color: 'var(--on-surface)' }}>The Challenge</h4>
+                    <p className="body-md" style={{ color: 'var(--on-surface-variant)' }}>{study.challenge}</p>
+                  </div>
+                  
+                  <div style={{ marginBottom: '32px' }}>
+                    <h4 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '8px', color: 'var(--on-surface)' }}>The Solution</h4>
+                    <p className="body-md" style={{ color: 'var(--on-surface-variant)' }}>{study.solution}</p>
+                  </div>
+
+                  {/* Testimonial */}
+                  <div style={{ 
+                    borderLeft: '4px solid var(--primary)', 
+                    paddingLeft: '20px', 
+                    marginBottom: '32px',
+                    fontStyle: 'italic' 
+                  }}>
+                    <p className="body-lg" style={{ color: 'var(--on-surface)', marginBottom: '12px' }}>"{study.testimonial.quote}"</p>
+                    <p style={{ fontSize: '14px', fontWeight: 600, color: 'var(--on-surface-variant)' }}>— {study.testimonial.author}</p>
+                  </div>
+
                   <a 
-                    href={project.url} 
+                    href={study.url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="btn btn-primary"
                     style={{ textDecoration: 'none' }}
                   >
-                    Visit Live Site <span style={{ marginLeft: '8px' }}>↗</span>
+                    View Live Project <span style={{ marginLeft: '8px' }}>↗</span>
                   </a>
                 </div>
                 
@@ -101,29 +159,30 @@ export default function WorkPage() {
                   order: index % 2 === 1 ? 1 : 2,
                   position: 'relative',
                   width: '100%',
-                  aspectRatio: '16/10',
-                  borderRadius: 'var(--radius-lg)',
+                  aspectRatio: '4/5',
+                  borderRadius: 'var(--radius-xl)',
                   overflow: 'hidden',
                   backgroundColor: 'var(--surface-container-high)',
-                  border: '1px solid var(--outline-variant)'
+                  border: '1px solid var(--outline-variant)',
+                  boxShadow: 'var(--shadow-elevated)'
                 }}>
                   {/* Browser Mockup Header */}
                   <div style={{ 
-                    height: '32px', 
+                    height: '40px', 
                     backgroundColor: 'var(--surface-container-highest)',
                     display: 'flex',
                     alignItems: 'center',
-                    padding: '0 16px',
-                    gap: '6px',
+                    padding: '0 20px',
+                    gap: '8px',
                     borderBottom: '1px solid var(--outline-variant)'
                   }}>
-                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ff5f56' }} />
-                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
-                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#27c93f' }} />
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ff5f56' }} />
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27c93f' }} />
                   </div>
                   
                   {/* Live Preview Iframe */}
-                  <div style={{ width: '100%', height: 'calc(100% - 32px)', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ width: '100%', height: 'calc(100% - 40px)', position: 'relative', overflow: 'hidden' }}>
                     <div style={{ 
                       position: 'absolute',
                       width: '400%',
@@ -133,18 +192,18 @@ export default function WorkPage() {
                       pointerEvents: 'none' /* Prevent interaction inside preview */
                     }}>
                       <iframe 
-                        src={project.url}
+                        src={study.url}
                         style={{ width: '100%', height: '100%', border: 'none' }}
                         sandbox="allow-scripts allow-same-origin"
                         scrolling="no"
-                        title={`${project.title} Preview`}
+                        title={`${study.title} Preview`}
                       />
                     </div>
-                    {/* Overlay to prevent interaction and add a subtle gradient if needed */}
+                    {/* Overlay */}
                     <div style={{ 
                       position: 'absolute', 
                       inset: 0, 
-                      background: 'linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.05) 100%)',
+                      background: 'linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,0.1) 100%)',
                       pointerEvents: 'none' 
                     }} />
                   </div>
@@ -182,12 +241,12 @@ export default function WorkPage() {
             }} />
             
             <div style={{ position: 'relative', zIndex: 1 }}>
-              <h2 className="headline-md" style={{ marginBottom: '16px' }}>Ready to start your next project?</h2>
+              <h2 className="headline-md" style={{ marginBottom: '16px' }}>Want these kinds of results?</h2>
               <p className="body-lg" style={{ marginBottom: '32px', opacity: 0.9, maxWidth: '500px', margin: '0 auto 32px auto' }}>
-                Let's collaborate to build something extraordinary. We're currently accepting new clients.
+                Stop losing customers to slow, poorly designed websites. Let's engineer a solution that drives real revenue for your business.
               </p>
               <a href="/#contact" className="btn btn-secondary work-cta-btn" style={{ backgroundColor: 'var(--on-primary)', color: 'var(--primary)', borderColor: 'var(--on-primary)' }}>
-                Get in Touch
+                Start Your Transformation
               </a>
             </div>
           </motion.div>

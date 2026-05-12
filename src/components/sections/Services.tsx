@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export function Services() {
   return (
@@ -28,7 +29,7 @@ export function Services() {
         }}>
 
           {/* Card 1 */}
-          <div className="service-card">
+          <Link href="/custom-web-development" className="service-card" style={{ textDecoration: 'none' }}>
             <div className="service-icon-wrapper">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="16 18 22 12 16 6"></polyline>
@@ -43,11 +44,10 @@ export function Services() {
             <div className="service-link">
               Explore Development <span>→</span>
             </div>
-
-          </div>
+          </Link>
 
           {/* Card 2 */}
-          <div className="service-card">
+          <Link href="/ui-ux-design" className="service-card" style={{ textDecoration: 'none' }}>
             <div className="service-icon-wrapper">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -63,10 +63,10 @@ export function Services() {
             <div className="service-link">
               View Design Process <span>→</span>
             </div>
-          </div>
+          </Link>
 
           {/* Card 3 */}
-          <div className="service-card">
+          <Link href="/performance-optimization" className="service-card" style={{ textDecoration: 'none' }}>
             <div className="service-icon-wrapper">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
@@ -80,7 +80,7 @@ export function Services() {
             <div className="service-link">
               Discover Optimization <span>→</span>
             </div>
-          </div>
+          </Link>
 
         </div>
       </div>
