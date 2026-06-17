@@ -47,8 +47,8 @@ export function MenuOverlay({ isOpen, onClose, onOpenContact }: { isOpen: boolea
           >
             {/* Top row */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                <img src="/website_icon-removebg-preview.png" alt="Swift Stack" style={{ width: '3.125rem', height: '3.125rem', flexShrink: 0, objectFit: 'contain' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0', fontSize: '1rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.2em', whiteSpace: 'nowrap' }}>
+                <img src="/website_icon-removebg-preview.png" alt="Swift Stack" style={{ width: '3.125rem', height: '3.125rem', flexShrink: 0, objectFit: 'contain', marginRight: '-0.75rem', marginLeft: '-0.5rem' }} />
                 Swift Stack
               </div>
               <motion.button
