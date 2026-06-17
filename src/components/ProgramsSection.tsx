@@ -24,7 +24,8 @@ export function ProgramsSection() {
         text={['Built for', 'scale & impact']}
         type="lines"
         isReady={isReady}
-        style={{ fontSize: '3rem', fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.02em', marginTop: '1rem', color: 'var(--ink)' }}
+        className="programs-title"
+        style={{ fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.02em', marginTop: '1rem', color: 'var(--ink)' }}
       />
 
       <ul style={{ marginTop: '3.5rem' }}>
@@ -91,9 +92,11 @@ export function ProgramsSection() {
       </ul>
       <style>{`
         .programs-sec { padding: 6rem 1.5rem; }
+        .programs-title { font-size: 11vw; white-space: normal; word-break: break-word; }
         .prog-name { font-size: 1.5rem; }
         @media (min-width: 640px) {
           .programs-sec { padding: 6rem 2.5rem; }
+          .programs-title { font-size: 3rem; white-space: nowrap; }
           .prog-name { font-size: 1.875rem; }
         }
       `}</style>
