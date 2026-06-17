@@ -60,11 +60,6 @@ export function Loader() {
             transition={{ type: 'spring', stiffness: 200, damping: 22 }}
             style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.2em' }}
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" style={{ width: '1.75rem', height: '1.75rem' }}>
-              <circle cx="12" cy="12" r="9"/>
-              <path d="M4.8 5.6A9 9 0 0 0 4.8 18.4"/>
-              <path d="M19.2 5.6a9 9 0 0 1 0 12.8"/>
-            </svg>
            Swift Stack Digital
           </motion.div>
           

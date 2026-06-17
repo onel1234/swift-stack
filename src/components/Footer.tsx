@@ -31,12 +31,8 @@ export function Footer({ onOpenContact }: { onOpenContact: () => void }) {
       {/* Columns Grid */}
       <div className="footer-grid" style={{ padding: '3.5rem 0', display: 'grid', gap: '2.5rem' }}>
         <div style={{ maxWidth: '20rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.125rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" style={{ width: '1.5rem', height: '1.5rem' }}>
-              <circle cx="12" cy="12" r="9"/>
-              <path d="M4.8 5.6A9 9 0 0 0 4.8 18.4"/>
-              <path d="M19.2 5.6a9 9 0 0 1 0 12.8"/>
-            </svg>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0', fontSize: '1.125rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.2em', whiteSpace: 'nowrap' }}>
+            <img src="/website_icon-removebg-preview.png" alt="Swift Stack Digital" style={{ width: '3.75rem', height: '3.75rem', flexShrink: 0, objectFit: 'contain', marginRight: '-0.75rem', marginLeft: '-0.5rem' }} />
             Swift Stack Digital
           </div>
           <div style={{ fontSize: '0.875rem', color: 'color-mix(in srgb, white 65%, transparent)', marginTop: '1rem', lineHeight: 1.6 }}>

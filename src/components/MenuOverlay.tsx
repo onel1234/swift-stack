@@ -18,10 +18,10 @@ export function MenuOverlay({ isOpen, onClose, onOpenContact }: { isOpen: boolea
   }, [isOpen, onClose]);
 
   const LINKS = [
-    { label: 'Programs', href: '#programs' },
-    { label: 'Facilities', href: '#facilities' },
-    { label: 'Reviews', href: '#testimonials' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Services', href: '#programs' },
+    { label: 'Work', href: '#facilities' },
+    { label: 'About', href: '#trust-title' },
+    { label: 'Testimonials', href: '#testimonials' },
   ];
 
   if (!mounted) return null;
@@ -48,12 +48,8 @@ export function MenuOverlay({ isOpen, onClose, onOpenContact }: { isOpen: boolea
             {/* Top row */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" style={{ width: '1.25rem', height: '1.25rem' }}>
-                  <circle cx="12" cy="12" r="9"/>
-                  <path d="M4.8 5.6A9 9 0 0 0 4.8 18.4"/>
-                  <path d="M19.2 5.6a9 9 0 0 1 0 12.8"/>
-                </svg>
-                Baseline
+                <img src="/website_icon-removebg-preview.png" alt="Swift Stack" style={{ width: '3.125rem', height: '3.125rem', flexShrink: 0, objectFit: 'contain' }} />
+                Swift Stack
               </div>
               <motion.button
                 onClick={onClose}
@@ -98,14 +94,9 @@ export function MenuOverlay({ isOpen, onClose, onOpenContact }: { isOpen: boolea
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--brand-light)'; (e.currentTarget as HTMLElement).style.color = 'white'; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'white'; (e.currentTarget as HTMLElement).style.color = 'var(--brand-deep)'; }}
               >
-                Book a Visit
+                Start a Project
               </button>
-              <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.875rem', color: 'color-mix(in srgb, white 70%, transparent)' }}>
-                <a href="#instagram" className="hover-white">Instagram</a>
-                <a href="#x" className="hover-white">X</a>
-                <a href="#youtube" className="hover-white">YouTube</a>
-                <a href="#linkedin" className="hover-white">LinkedIn</a>
-              </div>
+
             </div>
           </motion.div>
         </div>

@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { TextReveal } from './ui/TextReveal';
 import { ArrowButton } from './ui/ArrowButton';
@@ -24,6 +24,13 @@ export function TrustSection() {
 
   const nextSlide = () => setActive(s => (s + 1) % SLIDES.length);
   const prevSlide = () => setActive(s => (s - 1 + SLIDES.length) % SLIDES.length);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive(s => (s + 1) % SLIDES.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section ref={ref} className="trust-sec" style={{ position: 'relative', isolation: 'isolate', overflow: 'hidden', background: 'var(--background)' }}>

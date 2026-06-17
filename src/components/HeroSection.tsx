@@ -46,14 +46,11 @@ export function HeroSection({ onOpenMenu, onOpenContact }: { onOpenMenu: () => v
       <header style={{ display: 'flex', padding: '1.5rem 1.5rem 0', fontSize: '0.75rem', zIndex: 10 }}>
         <nav style={{ flex: 1, display: 'flex', gap: '2rem' }} className="hidden lg-flex">
           <a href="#programs" style={{ opacity: 0.9, transition: 'opacity 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.opacity='1'} onMouseLeave={(e) => e.currentTarget.style.opacity='0.9'}>Services</a>
-          <a href="#trust-title" style={{ opacity: 0.9, transition: 'opacity 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.opacity='1'} onMouseLeave={(e) => e.currentTarget.style.opacity='0.9'}>About Us</a>
+          <a href="#facilities" style={{ opacity: 0.9, transition: 'opacity 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.opacity='1'} onMouseLeave={(e) => e.currentTarget.style.opacity='0.9'}>Work</a>
+          <a href="#trust-title" style={{ opacity: 0.9, transition: 'opacity 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.opacity='1'} onMouseLeave={(e) => e.currentTarget.style.opacity='0.9'}>About</a>
+          <a href="#testimonials" style={{ opacity: 0.9, transition: 'opacity 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.opacity='1'} onMouseLeave={(e) => e.currentTarget.style.opacity='0.9'}>Testimonials</a>
         </nav>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '1rem', whiteSpace: 'nowrap' }}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" style={{ width: '1.25rem', height: '1.25rem', flexShrink: 0 }}>
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M4.8 5.6A9 9 0 0 0 4.8 18.4"/>
-            <path d="M19.2 5.6a9 9 0 0 1 0 12.8"/>
-          </svg>
           Swift Stack
         </div>
         <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem' }}>
