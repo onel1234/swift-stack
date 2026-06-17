@@ -133,7 +133,7 @@ export default function WorkPage() {
                     <p className="body-md" style={{ color: 'var(--on-surface-variant)' }}>{study.solution}</p>
                   </div>
 
-                  {/* Testimonial */}
+                  {/* Testimonial 
                   <div style={{ 
                     borderLeft: '4px solid var(--primary)', 
                     paddingLeft: '20px', 
@@ -143,6 +143,7 @@ export default function WorkPage() {
                     <p className="body-lg" style={{ color: 'var(--on-surface)', marginBottom: '12px' }}>"{study.testimonial.quote}"</p>
                     <p style={{ fontSize: '14px', fontWeight: 600, color: 'var(--on-surface-variant)' }}>— {study.testimonial.author}</p>
                   </div>
+                  */}
 
                   <a 
                     href={study.url} 
