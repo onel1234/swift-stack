@@ -5,8 +5,8 @@ import { LenisProvider } from '@/components/LenisProvider';
 import { AdaptiveScale } from '@/components/AdaptiveScale';
 
 export const metadata: Metadata = {
-  title: 'Baseline — Tennis Club & Academy',
-  description: 'A members\' tennis club and academy where focused coaching meets championship courts.',
+  title: 'Swift Stack — Digital Agency',
+  description: 'A premium digital agency where cutting-edge engineering meets world-class design.',
 };
 
 export default function RootLayout({
