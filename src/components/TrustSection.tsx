@@ -6,9 +6,9 @@ import { ArrowButton } from './ui/ArrowButton';
 import { CarouselDots } from './ui/CarouselDots';
 
 const SLIDES = [
-  { words: ['Expert', 'Result-', 'Driven', 'Coaching'], img: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/5.webp', name: 'Marco Vidal', role: 'Head Coach', alt: 'Head coach' },
-  { words: ['Sharper', 'Faster', 'Stronger', 'Player'], img: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/4.webp', name: 'Elena Sokolova', role: 'Performance Coach', alt: 'Performance coach' },
-  { words: ['Future', 'Champions', 'Start', 'Here'], img: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/1.webp', name: 'James Okoro', role: 'Juniors Lead', alt: 'Juniors lead' }
+  { words: ['Modern', 'Web', 'Development', 'Agency'], img: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=400&auto=format&fit=crop', name: 'Web Development', role: 'Full-Stack Solutions', alt: 'Web Development' },
+  { words: ['Data-', 'Driven', 'SEO', 'Strategy'], img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400&auto=format&fit=crop', name: 'SEO', role: 'Search Engine Optimization', alt: 'SEO Analytics' },
+  { words: ['Smart', 'Cloud', '& AI', 'Systems'], img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop', name: 'AI & Cloud', role: 'Intelligent Infrastructure', alt: 'AI & Cloud Infrastructure' }
 ];
 
 export function TrustSection() {
@@ -38,7 +38,7 @@ export function TrustSection() {
           style={{ borderRadius: 'var(--radius-pill)', background: 'var(--surface)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}
         >
           <div style={{ fontSize: '1.5rem', fontWeight: 500 }}>100%</div>
-          <div style={{ fontSize: '0.6rem', color: 'var(--ink-soft)', maxWidth: '7em', lineHeight: 1.2, marginTop: '0.25rem' }}>Coaching built around your game</div>
+          <div style={{ fontSize: '0.6rem', color: 'var(--ink-soft)', maxWidth: '7em', lineHeight: 1.2, marginTop: '0.25rem' }}>Tailored to your business needs</div>
         </motion.div>
 
         <motion.article
@@ -52,8 +52,8 @@ export function TrustSection() {
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
             <div style={{ borderRadius: '0.75rem', background: 'var(--background)', padding: '0.5rem 1rem', fontSize: '1.25rem', fontWeight: 500 }}>#01</div>
             <div>
-              <div style={{ fontSize: '1.125rem', fontWeight: 500 }}>Trusted by serious players</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--ink-soft)', lineHeight: 1.6, marginTop: '0.5rem' }}>From first-timers to nationally ranked juniors, players train here because the progress shows up on the scoreboard.</div>
+              <div style={{ fontSize: '1.125rem', fontWeight: 500 }}>Trusted by growing startups</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--ink-soft)', lineHeight: 1.6, marginTop: '0.5rem' }}>From early-stage ventures to enterprise leaders, companies partner with us because the ROI shows up on the balance sheet.</div>
             </div>
           </div>
         </motion.article>
@@ -102,7 +102,7 @@ export function TrustSection() {
       <div className="trust-controls" style={{ position: 'relative', zIndex: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <ArrowButton variant="outline" direction="prev" onClick={prevSlide} />
         <CarouselDots count={3} activeIndex={active} onChange={setActive} />
-        <ArrowButton variant="solid" direction="next" onClick={nextSlide} />
+        <ArrowButton variant="outline" direction="next" onClick={nextSlide} />
       </div>
 
       <style>{`

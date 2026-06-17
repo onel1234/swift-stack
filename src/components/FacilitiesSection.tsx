@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { TextReveal } from './ui/TextReveal';
 
 export function FacilitiesSection() {
-  const pText = "Reserve a court for focused practice, squad drills, or private sessions — and train in the same conditions you'll compete in.";
+  const pText = "Browse our portfolio of high-performance web applications, scalable cloud infrastructures, and data-driven SEO campaigns designed to elevate your brand.";
 
   return (
     <section id="facilities" className="fac-sec" style={{ background: 'var(--background)', borderRadius: 'var(--radius-card-lg)', marginTop: '-2.5rem', position: 'relative', zIndex: 10 }}>
@@ -16,13 +16,13 @@ export function FacilitiesSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ type: 'spring', stiffness: 240, damping: 20 }}
-            src="https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/3.webp"
-            alt="Player stretching for a forehand on clay"
+            src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop"
+            alt="Lead Developer"
             style={{ width: '4rem', height: '4rem', borderRadius: 'var(--radius-card)', objectFit: 'cover' }}
           />
           <TextReveal
             as="h2" id="facilities-title"
-            text={['Tour Our', 'World-Class', 'Courts']}
+            text={['Featured', 'Case', 'Studies']}
             type="lines"
             stagger={0.12}
             style={{ fontSize: '3rem', fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.02em', marginTop: '1.5rem', color: 'var(--ink)' }}
@@ -66,13 +66,13 @@ export function FacilitiesSection() {
             <motion.img 
               variants={{ hover: { scale: 1.03 } }}
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-              src="https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/1.webp" 
-              alt="Player on the baseline of an outdoor clay court" 
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400&auto=format&fit=crop" 
+              alt="Fintech Dashboard" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
             <div style={{ position: 'absolute', left: '0.75rem', right: '0.75rem', bottom: '0.75rem', borderRadius: '0.75rem', background: 'color-mix(in srgb, var(--brand-deep) 40%, transparent)', color: 'white', backdropFilter: 'blur(4px)', padding: '0.75rem 1rem' }}>
-              <div style={{ fontSize: '0.875rem', fontWeight: 500 }}>Redline Clay</div>
-              <div style={{ fontSize: '0.65rem', opacity: 0.85, marginTop: '0.25rem', lineHeight: 1.4 }}>A fast outdoor clay court tuned for long, physical rallies.</div>
+              <div style={{ fontSize: '0.875rem', fontWeight: 500 }}>Fintech Dashboard</div>
+              <div style={{ fontSize: '0.65rem', opacity: 0.85, marginTop: '0.25rem', lineHeight: 1.4 }}>A real-time financial analytics dashboard built with React and Node.js.</div>
             </div>
           </motion.figure>
 
@@ -87,13 +87,13 @@ export function FacilitiesSection() {
             <motion.img 
               variants={{ hover: { scale: 1.03 } }}
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-              src="https://api.getlayers.ai/storage/v1/object/public/public/assets/baseline-88535e4000/4.webp" 
-              alt="Player following through on a blue hard court" 
+              src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=400&auto=format&fit=crop" 
+              alt="E-Commerce Platform" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
             <div style={{ position: 'absolute', left: '0.75rem', right: '0.75rem', bottom: '0.75rem', borderRadius: '0.75rem', background: 'color-mix(in srgb, var(--accent-teal) 55%, transparent)', color: 'white', backdropFilter: 'blur(4px)', padding: '0.75rem 1rem' }}>
-              <div style={{ fontSize: '0.875rem', fontWeight: 500 }}>Harbor Court</div>
-              <div style={{ fontSize: '0.65rem', opacity: 0.85, marginTop: '0.25rem', lineHeight: 1.4 }}>A sheltered hard court built for precision and night play.</div>
+              <div style={{ fontSize: '0.875rem', fontWeight: 500 }}>E-Commerce Platform</div>
+              <div style={{ fontSize: '0.65rem', opacity: 0.85, marginTop: '0.25rem', lineHeight: 1.4 }}>A headless e-commerce solution driving a 40% increase in conversions.</div>
             </div>
           </motion.figure>
 

@@ -65,7 +65,7 @@ export function Loader() {
               <path d="M4.8 5.6A9 9 0 0 0 4.8 18.4"/>
               <path d="M19.2 5.6a9 9 0 0 1 0 12.8"/>
             </svg>
-            Baseline
+           Swift Stack Digital
           </motion.div>
           
           <div style={{ width: '10rem', height: '1px', borderRadius: 'var(--radius-pill)', background: 'color-mix(in srgb, white 20%, transparent)', overflow: 'hidden' }}>

@@ -5,10 +5,10 @@ import { TextReveal } from './ui/TextReveal';
 import { useAppReady } from './AppContext';
 
 const STATS = [
-  { value: '24', label: 'Certified coaches' },
-  { value: '12', label: 'Championship courts' },
-  { value: '9K+', label: 'Members training' },
-  { value: '15', label: 'Years on the baseline' }
+  { value: '3x', label: 'Average Traffic Growth' },
+  { value: '45%', label: 'Higher Conversion Rates' },
+  { value: '60%', label: 'Faster Application Speeds' },
+  { value: '99.9%', label: 'System Reliability' }
 ];
 
 export function StatsSection() {
@@ -19,7 +19,7 @@ export function StatsSection() {
       <Eyebrow tone="light">By the numbers</Eyebrow>
       <TextReveal
         as="h2" id="stats-title"
-        text={['A club that', 'keeps score']}
+        text={['Metrics that', 'matter most']}
         type="lines"
         isReady={isReady}
         style={{ fontSize: '3rem', fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.02em', marginTop: '1rem' }}
