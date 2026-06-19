@@ -5,8 +5,18 @@ import { LenisProvider } from '@/components/LenisProvider';
 import { AdaptiveScale } from '@/components/AdaptiveScale';
 
 export const metadata: Metadata = {
-  title: 'Swift Stack — Digital Agency',
-  description: 'A premium digital agency where cutting-edge engineering meets world-class design.',
+  title: 'Swift Stack Digital | Web Development & SEO Agency in Sri Lanka',
+  description: 'Sri Lanka-based web development agency specializing in full-stack apps, SEO growth, and AI integration. Ship fast, scale big.',
+  openGraph: {
+    title: 'Swift Stack Digital | Web Development & SEO Agency in Sri Lanka',
+    description: 'Sri Lanka-based web development agency specializing in full-stack apps, SEO growth, and AI integration. Ship fast, scale big.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Swift Stack Digital | Web Development & SEO Agency in Sri Lanka',
+    description: 'Sri Lanka-based web development agency specializing in full-stack apps, SEO growth, and AI integration. Ship fast, scale big.',
+  }
 };
 
 export default function RootLayout({

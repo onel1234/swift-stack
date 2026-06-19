@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { TextReveal } from './ui/TextReveal';
 import { ArrowButton } from './ui/ArrowButton';
 import { CarouselDots } from './ui/CarouselDots';
+import Image from 'next/image';
 
 const SLIDES = [
   { words: ['Modern', 'Web', 'Development', 'Agency'], img: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=400&auto=format&fit=crop', name: 'Web Development', role: 'Full-Stack Solutions', alt: 'Web Development' },
@@ -88,16 +89,22 @@ export function TrustSection() {
         style={{ position: 'relative', zIndex: 10, borderRadius: 'var(--radius-card)', background: 'var(--brand)', overflow: 'hidden' }}
       >
         <AnimatePresence mode="wait">
-          <motion.img
+          <motion.div
             key={active}
-            src={SLIDES[active].img}
-            alt={SLIDES[active].alt}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
             transition={{ type: 'spring', stiffness: 260, damping: 26 }}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
-          />
+            style={{ position: 'absolute', inset: 0 }}
+          >
+            <Image
+              src={SLIDES[active].img}
+              alt={SLIDES[active].alt}
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 640px) 100vw, 22rem"
+            />
+          </motion.div>
         </AnimatePresence>
         <div style={{ position: 'absolute', left: '0.75rem', right: '0.75rem', bottom: '0.75rem', borderRadius: '0.75rem', background: 'color-mix(in srgb, var(--brand-deep) 40%, transparent)', color: 'white', backdropFilter: 'blur(4px)', padding: '0.5rem 0.75rem' }}>
           <div style={{ fontSize: '0.875rem', fontWeight: 500 }}>{SLIDES[active].name}</div>
