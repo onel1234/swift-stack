@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ContactModal } from '@/components/ui/ContactModal';
+import Image from 'next/image';
 
 export default function CustomWebDevelopment() {
   return (
@@ -79,7 +80,7 @@ export default function CustomWebDevelopment() {
               <a href="/work" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{ cursor: 'pointer' }}>
                   <div style={{ overflow: 'hidden', borderRadius: 'var(--radius-base)', marginBottom: 'var(--spacing-stack-sm)', border: '1px solid var(--outline-variant)' }}>
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426&ixlib=rb-4.0.3" alt="FinTech Analytics" style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }} />
+                    <Image src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426&ixlib=rb-4.0.3" alt="FinTech Analytics" width={800} height={400} style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }} />
                   </div>
                   <h3 className="headline-md" style={{ marginBottom: 'var(--spacing-unit)', color: 'var(--on-surface)' }}>Enterprise Web Applications</h3>
                   <div className="label-md" style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -91,7 +92,7 @@ export default function CustomWebDevelopment() {
               <a href="/work" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{ cursor: 'pointer' }}>
                   <div style={{ overflow: 'hidden', borderRadius: 'var(--radius-base)', marginBottom: 'var(--spacing-stack-sm)', border: '1px solid var(--outline-variant)' }}>
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2370&ixlib=rb-4.0.3" alt="Enterprise Logistics" style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }} />
+                    <Image src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2370&ixlib=rb-4.0.3" alt="Enterprise Logistics" width={800} height={400} style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }} />
                   </div>
                   <h3 className="headline-md" style={{ marginBottom: 'var(--spacing-unit)', color: 'var(--on-surface)' }}>High-Performance E-Commerce</h3>
                   <div className="label-md" style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>

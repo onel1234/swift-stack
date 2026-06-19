@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useAppReady } from './AppContext';
 import { TextReveal } from './ui/TextReveal';
 import { CarouselDots } from './ui/CarouselDots';
+import Image from 'next/image';
 
 export function HeroSection({ onOpenMenu, onOpenContact }: { onOpenMenu: () => void, onOpenContact: () => void }) {
   const isReady = useAppReady();
@@ -13,9 +14,9 @@ export function HeroSection({ onOpenMenu, onOpenContact }: { onOpenMenu: () => v
 
   const [activeSlide, setActiveSlide] = useState(0);
   const slides = [
-    { img: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=400&auto=format&fit=crop', brand: 'Swift Stack', title: 'Custom Web Apps', cta: 'View cases', alt: 'Laptop with web design layout' },
-    { img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=400&auto=format&fit=crop', brand: 'UI/UX', title: 'Kinetic Design', cta: 'See process', alt: 'UI/UX design color swatches' },
-    { img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400&auto=format&fit=crop', brand: 'Performance', title: 'Optimization', cta: 'Read more', alt: 'Performance charts on screen' }
+    { img: '/images/custom-web-apps.jpg', brand: 'Swift Stack', title: 'Custom Web Apps', cta: 'View cases', alt: 'Swift Stack Digital – web development agency in Sri Lanka' },
+    { img: '/images/ui-ux-design.jpg', brand: 'UI/UX', title: 'Kinetic Design', cta: 'See process', alt: 'Swift Stack Digital – UI/UX design portfolio' },
+    { img: '/images/performance-optimization.jpg', brand: 'Performance', title: 'Optimization', cta: 'Read more', alt: 'Swift Stack Digital – Web performance optimization in Sri Lanka' }
   ];
 
   useEffect(() => {
@@ -37,8 +38,8 @@ export function HeroSection({ onOpenMenu, onOpenContact }: { onOpenMenu: () => v
       display: 'flex', flexDirection: 'column'
     }}>
       {/* Background Plate */}
-      <motion.div style={{ position: 'absolute', left: 0, right: 0, top: '-16%', height: '132%', width: '100%', zIndex: -10, y }}>
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop" alt="Software development workspace" className="hero-img" fetchPriority="high" />
+      <motion.div className="hero-img-container" style={{ y }}>
+        <Image src="/images/hero-workspace.jpg" alt="Swift Stack Digital – Full-stack web development workspace in Sri Lanka" fill className="hero-img" priority sizes="100vw" style={{ objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,47,99,0.65), rgba(15,47,99,0.35), rgba(15,47,99,0.75))' }} />
       </motion.div>
 
@@ -77,16 +78,26 @@ export function HeroSection({ onOpenMenu, onOpenContact }: { onOpenMenu: () => v
 
       {/* Bottom Row */}
       <div style={{ marginTop: 'auto', padding: '0 1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', zIndex: 10, gap: '1.5rem' }} className="hero-bottom">
-        <TextReveal
-          as="p"
-          text={['Ship Fast,', 'Scale Big']}
-          type="lines"
-          isReady={isReady}
-          baseDelay={0.35}
-          stagger={0.11}
-          duration={0.9}
-          className="hero-sub-title"
-        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <TextReveal
+            as="p"
+            text={['Ship Fast,', 'Scale Big']}
+            type="lines"
+            isReady={isReady}
+            baseDelay={0.35}
+            stagger={0.11}
+            duration={0.9}
+            className="hero-sub-title"
+          />
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            animate={isReady ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            style={{ fontSize: '1rem', fontWeight: 400, opacity: 0.85, maxWidth: '24rem', lineHeight: 1.4 }}
+          >
+            Full-Stack Web Development & SEO Agency in Sri Lanka
+          </motion.h2>
+        </div>
         
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '1rem' }}>
           {/* Collection Slider */}
@@ -107,7 +118,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: { onOpenMenu: () => v
                   transition={{ type: 'spring', stiffness: 210, damping: 24 }}
                   style={{ display: 'flex', gap: '0.75rem', borderRadius: '1.5rem', border: '1px solid color-mix(in srgb, white 15%, transparent)', background: 'color-mix(in srgb, white 10%, transparent)', padding: '0.75rem', boxShadow: '0 4px 20px color-mix(in srgb, var(--brand-deep) 20%, transparent)', backdropFilter: 'blur(4px)', position: 'absolute', inset: 0 }}
                 >
-                  <img src={slides[activeSlide].img} alt={slides[activeSlide].alt} style={{ width: '3.5rem', height: '3.5rem', borderRadius: '0.75rem', objectFit: 'cover' }} />
+                  <Image src={slides[activeSlide].img} alt={slides[activeSlide].alt} width={56} height={56} style={{ width: '3.5rem', height: '3.5rem', borderRadius: '0.75rem', objectFit: 'cover' }} />
                   <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                     <div style={{ fontSize: '0.7rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{slides[activeSlide].brand}</div>
                     <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', opacity: 0.8 }}>{slides[activeSlide].title}</div>
@@ -138,13 +149,14 @@ export function HeroSection({ onOpenMenu, onOpenContact }: { onOpenMenu: () => v
                 <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '0.25rem' }}>Projects Delivered</div>
               </div>
             </div>
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop" alt="Development team collaborating" style={{ width: '4rem', aspectRatio: '3/4', borderRadius: '0.75rem', objectFit: 'cover' }} />
+            <Image src="/images/team-collaboration.jpg" alt="Swift Stack Digital – Web development team in Sri Lanka" width={64} height={85} style={{ width: '4rem', height: 'auto', aspectRatio: '3/4', borderRadius: '0.75rem', objectFit: 'cover' }} />
           </motion.article>
         </div>
       </div>
       <style>{`
         .hidden { display: none !important; }
-        .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: 40% center; }
+        .hero-img-container { position: absolute; left: 0; right: 0; top: -16%; height: 132%; width: 100%; z-index: -10; }
+        .hero-img { object-position: 40% center; }
         .hero-main-title { flex-direction: column; font-size: 11vw; font-weight: 500; text-transform: uppercase; line-height: 0.9; letter-spacing: -0.04em; white-space: nowrap; }
         .hero-sub-title { font-size: 1.75rem; font-weight: 500; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.02em; color: color-mix(in srgb, white 85%, transparent); display: flex; flex-direction: column; }
 

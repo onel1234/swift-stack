@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ContactModal } from '@/components/ui/ContactModal';
+import Image from 'next/image';
 
 export default function UIUXDesign() {
   return (
@@ -79,7 +80,7 @@ export default function UIUXDesign() {
               <a href="/work" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{ cursor: 'pointer' }}>
                   <div style={{ overflow: 'hidden', borderRadius: 'var(--radius-base)', marginBottom: 'var(--spacing-stack-sm)', border: '1px solid var(--outline-variant)' }}>
-                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=2000&ixlib=rb-4.0.3" alt="Brand Identity" style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }} />
+                    <Image src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=2000&ixlib=rb-4.0.3" alt="Brand Identity" width={800} height={400} style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }} />
                   </div>
                   <h3 className="headline-md" style={{ marginBottom: 'var(--spacing-unit)', color: 'var(--on-surface)' }}>Brand Identity Systems</h3>
                   <div className="label-md" style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -91,7 +92,7 @@ export default function UIUXDesign() {
               <a href="/work" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{ cursor: 'pointer' }}>
                   <div style={{ overflow: 'hidden', borderRadius: 'var(--radius-base)', marginBottom: 'var(--spacing-stack-sm)', border: '1px solid var(--outline-variant)' }}>
-                    <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&q=80&w=2000&ixlib=rb-4.0.3" alt="UX Interface" style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }} />
+                    <Image src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&q=80&w=2000&ixlib=rb-4.0.3" alt="UX Interface" width={800} height={400} style={{ width: '100%', height: '240px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }} />
                   </div>
                   <h3 className="headline-md" style={{ marginBottom: 'var(--spacing-unit)', color: 'var(--on-surface)' }}>Digital Product Interfaces</h3>
                   <div className="label-md" style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>

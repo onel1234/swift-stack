@@ -16,7 +16,7 @@ export function TestimonialsSection() {
       <Eyebrow tone="dark">Client feedback</Eyebrow>
       <TextReveal
         as="h2" id="testimonials-title"
-        text={['Loved by', 'our partners']}
+        text={['Loved by ', 'our partners']}
         type="lines"
         isReady={isReady}
         style={{ fontSize: '3rem', fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.02em', marginTop: '1rem', color: 'var(--ink)' }}

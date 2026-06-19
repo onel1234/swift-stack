@@ -2,6 +2,7 @@
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { TextReveal } from './ui/TextReveal';
+import Image from 'next/image';
 
 export function FacilitiesSection() {
   const pText = "Browse our portfolio of high-performance web applications, scalable cloud infrastructures, and data-driven SEO campaigns designed to elevate your brand.";
@@ -126,7 +127,7 @@ export function FacilitiesSection() {
                   boxShadow: '0 20px 40px color-mix(in srgb, var(--brand-deep) 30%, transparent)'
                 }}
               >
-                <img src={projects[hoveredProject].img} alt={projects[hoveredProject].name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <Image src={projects[hoveredProject].img} alt={projects[hoveredProject].name} fill style={{ objectFit: 'cover' }} sizes="24rem" />
               </motion.div>
             )}
           </AnimatePresence>
