@@ -18,9 +18,9 @@ export function MenuOverlay({ isOpen, onClose, onOpenContact }: { isOpen: boolea
   }, [isOpen, onClose]);
 
   const LINKS = [
-    { label: 'Services', href: '#programs' },
+    { label: 'Services', href: '#services' },
     { label: 'Work', href: '#facilities' },
-    { label: 'About', href: '#trust-title' },
+    { label: 'FAQ', href: '#faq' },
     { label: 'Testimonials', href: '#testimonials' },
   ];
 

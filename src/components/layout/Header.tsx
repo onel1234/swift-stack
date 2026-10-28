@@ -13,6 +13,7 @@ export function Header() {
           <a href="/#services" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Services</a>
           <a href="/#process" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Process</a>
           <a href="/work" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>Our Work</a>
+          <a href="/#faq" className="label-md" style={{ color: 'var(--on-surface-variant)', textDecoration: 'none', textTransform: 'capitalize', letterSpacing: '0' }}>FAQ</a>
         </nav>
         <div style={{ flexShrink: 0 }}>
           <ButtonLink href="/#contact" variant="primary" style={{ padding: '8px 24px', fontSize: '14px', width: 'auto' }}>Get Started</ButtonLink>

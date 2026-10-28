@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { AppProvider } from '@/components/AppContext';
 import { Loader } from '@/components/Loader';
 import { HeroSection } from '@/components/HeroSection';
-import { TrustSection } from '@/components/TrustSection';
-import { ProgramsSection } from '@/components/ProgramsSection';
+import { ServicesSection } from '@/components/ServicesSection';
+
 import { FacilitiesSection } from '@/components/FacilitiesSection';
-import { StatsSection } from '@/components/StatsSection';
+import { FaqSection } from '@/components/FaqSection';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { Footer } from '@/components/Footer';
 import { ContactModal } from '@/components/ContactModal';
@@ -25,11 +25,11 @@ export default function Page() {
           onOpenMenu={() => setIsMenuOpen(true)} 
           onOpenContact={() => setIsContactOpen(true)} 
         />
-        <TrustSection />
-        <ProgramsSection />
+        <ServicesSection onOpenContact={() => setIsContactOpen(true)} />
+
         <FacilitiesSection />
-        <StatsSection />
-        <TestimonialsSection />
+        <FaqSection onOpenContact={() => setIsContactOpen(true)} />
+        <TestimonialsSection onOpenContact={() => setIsContactOpen(true)} />
         <Footer onOpenContact={() => setIsContactOpen(true)} />
       </main>
 
