@@ -58,8 +58,9 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           overflow: 'hidden',
         }}
       >
+        {/* Desktop Celestial Background Frame */}
         <div
-          className="hero-bg-frame"
+          className="hero-bg-frame hero-bg-desktop"
           style={{
             position: 'absolute',
             inset: 0,
@@ -78,6 +79,30 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             style={{
               objectFit: 'cover',
               objectPosition: 'center 20%',
+            }}
+          />
+        </div>
+
+        {/* Mobile Portrait Background Frame (Pixel-Matched to Mobile Design Horizon) */}
+        <div
+          className="hero-bg-frame hero-bg-mobile"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <Image
+            src="/images/Astronaut-Mobile-Horizon.jpg"
+            alt="Astronaut Horizon Mobile - Swift Stack Digital"
+            fill
+            priority
+            sizes="100vw"
+            quality={95}
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center top',
             }}
           />
         </div>
@@ -352,7 +377,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           WEB DEVELOPMENT &nbsp;/&nbsp; SEO &nbsp;/&nbsp; DIGITAL SOLUTIONS
         </motion.div>
 
-        {/* Main Headline: Two clean lines locked with nowrap to eliminate jumping on wide monitors */}
+        {/* Main Headline: Two clean lines locked on desktop, 3 lines on mobile matching reference */}
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -371,19 +396,22 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             alignItems: 'center',
           }}
         >
-          <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+          <span className="hero-hl-desktop" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
             Build Your Digital Future
           </span>
-          <span className="hero-gradient-text" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+          <span className="hero-hl-mobile-1">Build Your</span>
+          <span className="hero-hl-mobile-2">Digital Future</span>
+          <span className="hero-gradient-text hero-hl-gradient" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
             With Swift Stack
           </span>
         </motion.h1>
 
-        {/* Subtitle description: fixed 2-line structure */}
+        {/* Subtitle description */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="hero-subtitle"
           style={{
             maxWidth: '44rem',
             margin: '0 auto clamp(1rem, 2vh, 1.75rem)',
@@ -471,6 +499,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="hero-features-container"
         style={{
           position: 'relative',
           zIndex: 20,
@@ -679,8 +708,23 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           border-color: rgba(255, 255, 255, 0.45) !important;
         }
 
+        .hero-bg-desktop {
+          display: block;
+        }
+        .hero-bg-mobile {
+          display: none;
+        }
+
+        .hero-hl-desktop {
+          display: inline-block;
+        }
+        .hero-hl-mobile-1,
+        .hero-hl-mobile-2 {
+          display: none;
+        }
+
         @media (min-aspect-ratio: 16/9) {
-          .hero-bg-frame {
+          .hero-bg-desktop {
             height: 108% !important;
             top: 2% !important;
           }
@@ -690,7 +734,20 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           .hero-root {
             border-radius: 0 !important;
             height: 100svh !important;
-            min-height: 700px !important;
+            min-height: 640px !important;
+          }
+
+          /* Responsive Background Switch */
+          .hero-bg-desktop {
+            display: none !important;
+          }
+          .hero-bg-mobile {
+            display: block !important;
+          }
+
+          /* Header on Mobile */
+          .hero-header {
+            padding: 18px 20px 0 !important;
           }
           .hero-nav-links {
             display: none !important;
@@ -700,82 +757,134 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           }
           .hero-mobile-menu-btn {
             display: grid !important;
+            width: 2.35rem !important;
+            height: 2.35rem !important;
           }
 
-          /* Content wrapper: fixed px padding so vw root font doesn't inflate it */
+          /* Content wrapper: positioned in upper deep space */
           .hero-content-wrapper {
-            padding: 24px 24px 0 !important;
+            padding: clamp(24px, 5vh, 42px) 16px 0 !important;
+            max-width: 100% !important;
           }
 
-          /* Eyebrow: scale down, allow wrapping */
+          /* Eyebrow: single delicate line with sky blue glow */
           .hero-eyebrow {
-            font-size: 10px !important;
-            letter-spacing: 0.18em !important;
+            font-size: 10.5px !important;
+            letter-spacing: 0.16em !important;
             white-space: nowrap !important;
-            margin-bottom: 12px !important;
+            margin-bottom: 14px !important;
+            color: #38bdf8 !important;
           }
 
-          /* Headline: proper mobile size */
+          /* Headline: exactly 3 clean lines matching mobile reference */
+          .hero-hl-desktop {
+            display: none !important;
+          }
+          .hero-hl-mobile-1,
+          .hero-hl-mobile-2 {
+            display: block !important;
+            white-space: nowrap !important;
+          }
+          .hero-hl-gradient {
+            white-space: nowrap !important;
+          }
           .hero-headline {
-            font-size: 32px !important;
-            line-height: 1.15 !important;
-            margin-bottom: 12px !important;
-          }
-          .hero-headline span {
-            white-space: normal !important;
+            font-size: clamp(1.95rem, 8.2vw, 2.35rem) !important;
+            line-height: 1.14 !important;
+            letter-spacing: -0.025em !important;
+            margin-bottom: 14px !important;
           }
 
-          /* Subtitle */
+          /* Subtitle: compact 4-line centered structure */
+          .hero-subtitle {
+            max-width: 325px !important;
+            margin: 0 auto 18px !important;
+          }
           .hero-sub-text {
-            font-size: 14px !important;
-            line-height: 1.6 !important;
+            font-size: 13px !important;
+            line-height: 1.55 !important;
+            color: #94a3b8 !important;
+            display: inline-block !important;
           }
 
-          /* CTA buttons: stacked, proper sizing */
+          /* CTA buttons: compact centered pills matching reference */
           .hero-cta-row {
             flex-direction: column !important;
+            align-items: center !important;
             width: 100% !important;
-            max-width: 280px !important;
-            gap: 12px !important;
+            gap: 10px !important;
           }
-          .hero-primary-cta,
-          .hero-secondary-cta {
-            width: 100% !important;
+          .hero-primary-cta {
+            width: auto !important;
+            min-width: 175px !important;
+            max-width: 195px !important;
+            height: 42px !important;
+            padding: 0 24px !important;
+            font-size: 14.5px !important;
+            font-weight: 600 !important;
             justify-content: center !important;
-            padding: 14px 24px !important;
-            font-size: 15px !important;
+            border-radius: 9999px !important;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #6366f1 100%) !important;
+            box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4), 0 0 24px rgba(99, 102, 241, 0.25) !important;
+          }
+          .hero-secondary-cta {
+            width: auto !important;
+            min-width: 175px !important;
+            max-width: 195px !important;
+            height: 42px !important;
+            padding: 0 24px !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            justify-content: center !important;
+            border-radius: 9999px !important;
+            background: rgba(15, 23, 42, 0.65) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            backdrop-filter: blur(10px) !important;
+            WebkitBackdropFilter: blur(10px) !important;
           }
 
-          /* Features bar: horizontal 3-column, centered */
+          /* Bottom features container & bar */
+          .hero-features-container {
+            padding: 0 10px 18px !important;
+            max-width: 100% !important;
+          }
           .hero-features-bar {
             flex-direction: row !important;
             gap: 0 !important;
             align-items: flex-start !important;
-            justify-content: center !important;
+            justify-content: space-between !important;
+            width: 100% !important;
           }
           .hero-feature-divider {
             display: block !important;
-            height: 40px !important;
-            margin: 0 6px !important;
+            width: 1px !important;
+            height: 44px !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+            margin: 0 4px !important;
             align-self: center !important;
+            flex-shrink: 0 !important;
           }
           .hero-feature-item {
             flex-direction: column !important;
             text-align: center !important;
             align-items: center !important;
-            gap: 6px !important;
+            gap: 5px !important;
             flex: 1 !important;
             min-width: 0 !important;
+            padding: 0 2px !important;
           }
           .hero-feature-title {
             white-space: normal !important;
-            font-size: 12px !important;
-            line-height: 1.3 !important;
+            font-size: 11.5px !important;
+            font-weight: 600 !important;
+            line-height: 1.25 !important;
           }
           .hero-feature-desc {
             white-space: normal !important;
-            font-size: 11px !important;
-            line-height: 1.4 !important;
+            font-size: 10px !important;
+            line-height: 1.35 !important;
+            color: #94a3b8 !important;
+            margin-top: 2px !important;
           }
         }
       `}</style>
