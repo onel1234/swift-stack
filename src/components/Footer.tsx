@@ -32,7 +32,7 @@ export function Footer({ onOpenContact }: { onOpenContact: () => void }) {
       <div className="footer-grid" style={{ padding: '3.5rem 0', display: 'grid', gap: '2.5rem' }}>
         <div style={{ maxWidth: '20rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0', fontSize: '1.125rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.2em', whiteSpace: 'nowrap' }}>
-            <img src="/website_icon-removebg-preview.png" alt="Swift Stack Digital" style={{ width: '3.75rem', height: '3.75rem', flexShrink: 0, objectFit: 'contain', marginRight: '-0.75rem', marginLeft: '-0.5rem' }} />
+            <img src="/Gemini_Generated_Image_p1oekyp1oekyp1oe-removebg-preview.png" alt="Swift Stack Digital" style={{ width: '3.75rem', height: '3.75rem', flexShrink: 0, objectFit: 'contain', marginRight: '-0.75rem', marginLeft: '-0.5rem' }} />
             Swift Stack Digital
           </div>
           <div style={{ fontSize: '0.875rem', color: 'color-mix(in srgb, white 65%, transparent)', marginTop: '1rem', lineHeight: 1.6 }}>

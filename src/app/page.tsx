@@ -37,7 +37,7 @@ export default function Page() {
       <MenuOverlay isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} onOpenContact={() => setIsContactOpen(true)} />
 
       <style>{`
-        .main-container { padding: 0.5rem; }
+        .main-container { padding: 0; }
         .modal-container { padding: 0.75rem !important; }
         .modal-panel { padding: 1.5rem !important; }
         .modal-title { font-size: 2.25rem !important; }
