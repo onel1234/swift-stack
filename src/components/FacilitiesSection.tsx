@@ -8,10 +8,10 @@ export function FacilitiesSection() {
   const pText = "Browse our portfolio of high-performance web applications, scalable cloud infrastructures, and data-driven SEO campaigns designed to elevate your brand.";
 
   const projects = [
-    { name: 'Ceylon Naturalist', desc: 'Nature & Wildlife Platform', img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=600&auto=format&fit=crop', link: 'https://ceylonnaturalist.com/' },
-    { name: 'Chill Co', desc: 'E-Commerce Storefront', img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600&auto=format&fit=crop', link: 'https://chill-co.vercel.app/' },
-    { name: 'SaaS Onboarding', desc: 'User activation flow', img: '/agency_onboarding.png' },
-    { name: 'Enterprise Cloud', desc: 'Scalable infrastructure', img: '/hero-software.png' },
+    { name: 'Ceylon Naturalist', desc: 'Nature & Wildlife Platform', url: 'https://ceylonnaturalist.com/', link: '/work/ceylon-naturalist' },
+    { name: 'Chill Co', desc: 'E-Commerce Storefront', url: 'https://chill-co.vercel.app/', link: '/work/chill-co' },
+    { name: 'Catalyst Digital', desc: 'Digital Agency', url: 'https://catalyst-digital-alpha.vercel.app/', link: '/work/catalyst-digital' },
+    { name: 'Prana Fuel', desc: 'Health & Fitness', url: 'https://prana-fuel-your-vitality.netlify.app/', link: '/work/prana-fuel' },
   ];
 
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -34,7 +34,7 @@ export function FacilitiesSection() {
         <div style={{ maxWidth: '24rem' }}>
           <TextReveal
             as="h2" id="facilities-title"
-            text={['Featured', 'Case', 'Studies']}
+            text={['The', 'Projects', 'We', 'Have', 'Done']}
             type="lines"
             stagger={0.12}
             style={{ fontSize: '3rem', fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.02em', marginTop: '1.5rem', color: 'var(--ink)' }}
@@ -71,7 +71,8 @@ export function FacilitiesSection() {
           onMouseLeave={() => setHoveredProject(null)}
         >
           {projects.map((proj, i) => (
-            <motion.div 
+            <motion.a 
+              href={proj.link}
               key={i} 
               onMouseEnter={() => setHoveredProject(i)}
               initial={{ opacity: 0, y: 20 }}
@@ -84,21 +85,19 @@ export function FacilitiesSection() {
                 borderBottom: '1px solid color-mix(in srgb, var(--ink) 15%, transparent)',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 cursor: 'pointer',
+                textDecoration: 'none'
               }}
             >
               <div>
                 <h3 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 500, margin: 0, transition: 'color 0.3s', color: hoveredProject === i ? 'var(--brand-deep)' : 'var(--ink)' }}>{proj.name}</h3>
-                <p style={{ margin: 0, opacity: 0.6, fontSize: '0.875rem', marginTop: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{proj.desc}</p>
+                <p style={{ margin: 0, opacity: 0.6, fontSize: '0.875rem', marginTop: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--ink)' }}>{proj.desc}</p>
               </div>
-              <a 
-                href={proj.link || '#'}
-                target={proj.link ? "_blank" : undefined}
-                rel={proj.link ? "noopener noreferrer" : undefined}
-                style={{ opacity: hoveredProject === i ? 1 : 0, transition: 'opacity 0.3s, transform 0.3s', transform: hoveredProject === i ? 'translateX(0)' : 'translateX(-10px)', fontSize: '1.5rem', color: 'var(--brand-deep)', textDecoration: 'none' }}
+              <div 
+                style={{ opacity: hoveredProject === i ? 1 : 0, transition: 'opacity 0.3s, transform 0.3s', transform: hoveredProject === i ? 'translateX(0)' : 'translateX(-10px)', fontSize: '1.5rem', color: 'var(--brand-deep)' }}
               >
                 &rarr;
-              </a>
-            </motion.div>
+              </div>
+            </motion.a>
           ))}
 
           {/* Floating Preview */}
@@ -120,14 +119,50 @@ export function FacilitiesSection() {
                   translateY: '-50%',
                   pointerEvents: 'none',
                   zIndex: 100,
-                  width: '24rem',
-                  aspectRatio: '4/3',
-                  borderRadius: '1rem',
-                  overflow: 'hidden',
-                  boxShadow: '0 20px 40px color-mix(in srgb, var(--brand-deep) 30%, transparent)'
+                  width: '32rem',
                 }}
               >
-                <Image src={projects[hoveredProject].img} alt={projects[hoveredProject].name} fill style={{ objectFit: 'cover' }} sizes="24rem" />
+                {/* Laptop Screen */}
+                <div style={{
+                  width: '100%',
+                  aspectRatio: '16/10',
+                  backgroundColor: '#121212',
+                  borderRadius: '16px 16px 0 0',
+                  padding: '12px 12px 18px 12px',
+                  border: '2px solid #2a2a2a',
+                  borderBottom: 'none',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+                }}>
+                  <div style={{ width: '100%', height: '100%', backgroundColor: '#fff', borderRadius: '4px', overflow: 'hidden', position: 'relative' }}>
+                     <iframe 
+                       src={projects[hoveredProject].url}
+                       style={{ 
+                         width: '400%', 
+                         height: '400%', 
+                         transform: 'scale(0.25)', 
+                         transformOrigin: 'top left', 
+                         border: 'none'
+                       }}
+                     />
+                  </div>
+                </div>
+                {/* Laptop Base */}
+                <div style={{
+                  width: '105%',
+                  marginLeft: '-2.5%',
+                  height: '24px',
+                  backgroundColor: '#1a1a1a',
+                  borderRadius: '0 0 16px 16px',
+                  borderTop: '2px solid #333',
+                  boxShadow: 'inset 0 -4px 6px -1px rgba(0,0,0,0.5)',
+                  position: 'relative',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ width: '20%', height: '8px', backgroundColor: '#0a0a0a', borderBottomLeftRadius: '8px', borderBottomRightRadius: '8px', marginTop: '0' }} />
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
