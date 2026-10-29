@@ -35,6 +35,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   const checkScrollability = () => {
     if (carouselRef.current) {
@@ -45,6 +46,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   };
 
   useEffect(() => {
+    setIsMounted(true);
     if (carouselRef.current) {
       carouselRef.current.scrollLeft = initialScroll;
       checkScrollability();
@@ -130,7 +132,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         <div className="carousel-controls-bar">
           <button
             onClick={scrollLeft}
-            disabled={!canScrollLeft}
+            disabled={isMounted ? !canScrollLeft : undefined}
+            suppressHydrationWarning
             aria-label="Previous project"
             className="carousel-nav-btn"
           >
@@ -150,7 +153,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           </button>
           <button
             onClick={scrollRight}
-            disabled={!canScrollRight}
+            disabled={isMounted ? !canScrollRight : undefined}
+            suppressHydrationWarning
             aria-label="Next project"
             className="carousel-nav-btn"
           >

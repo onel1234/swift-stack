@@ -59,7 +59,7 @@ const FAQS: FaqItem[] = [
 ];
 
 export function FaqSection({ onOpenContact }: FaqSectionProps) {
-  const [openId, setOpenId] = useState<string | null>('01');
+  const [openId, setOpenId] = useState<string | null>(null);
 
   const toggleFaq = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
