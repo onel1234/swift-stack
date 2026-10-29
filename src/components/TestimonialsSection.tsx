@@ -95,6 +95,7 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
   const [activeIndex, setActiveIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Monitor scroll track state on mobile
   const checkScrollState = () => {
@@ -113,6 +114,7 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
   };
 
   useEffect(() => {
+    setIsMounted(true);
     checkScrollState();
   }, []);
 
@@ -156,33 +158,6 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
       <div className="testimonials-container">
         {/* Section Header */}
         <div style={{ textAlign: 'center' }}>
-          {/* Rating Pill */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.4 }}
-            className="testimonials-eyebrow-pill"
-          >
-            <span className="testimonials-star-group">
-              {[...Array(5)].map((_, i) => (
-                <svg
-                  key={i}
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="#f59e0b"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              ))}
-            </span>
-            <span className="testimonials-pill-text">
-              5.0 / 5.0 · VERIFIED CLIENT REVIEWS
-            </span>
-          </motion.div>
-
           <motion.h2
             id="testimonials-title"
             initial={{ opacity: 0, y: 20 }}
@@ -356,7 +331,8 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
             <button
               type="button"
               onClick={scrollPrev}
-              disabled={!canScrollLeft}
+              disabled={isMounted ? !canScrollLeft : undefined}
+              suppressHydrationWarning
               aria-label="Previous testimonial"
               className="mobile-arrow-btn"
             >
@@ -378,7 +354,8 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
             <button
               type="button"
               onClick={scrollNext}
-              disabled={!canScrollRight}
+              disabled={isMounted ? !canScrollRight : undefined}
+              suppressHydrationWarning
               aria-label="Next testimonial"
               className="mobile-arrow-btn"
             >
@@ -446,27 +423,6 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
           margin: 0 auto;
           padding: 0 1.5rem;
           width: 100%;
-        }
-        .testimonials-eyebrow-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: #f4f4f7;
-          border: 1px solid rgba(15, 15, 17, 0.08);
-          border-radius: 9999px;
-          padding: 0.4rem 0.9rem;
-          margin-bottom: 1.5rem;
-        }
-        .testimonials-star-group {
-          display: flex;
-          align-items: center;
-          gap: 0.15rem;
-        }
-        .testimonials-pill-text {
-          font-size: 0.6875rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          color: #0f0f11;
         }
         .testimonials-heading-title {
           font-size: clamp(2.25rem, 5vw, 3.75rem);

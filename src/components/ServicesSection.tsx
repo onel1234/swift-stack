@@ -46,7 +46,6 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
         position: 'relative',
         zIndex: 5,
         width: '100%',
-        padding: '6.5rem 1.5rem',
         overflow: 'hidden',
       }}
     >
@@ -55,7 +54,7 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
 
       <div style={{ maxWidth: '78rem', margin: '0 auto', width: '100%' }}>
         {/* Editorial Heading */}
-        <div style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
+        <div className="services-header-box" style={{ textAlign: 'center' }}>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +63,6 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
             className="services-heading-title"
             style={{
               fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif",
-              fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
               fontWeight: 500,
               lineHeight: 1.18,
               letterSpacing: '-0.01em',
@@ -231,6 +229,18 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
       </div>
 
       <style>{`
+        .services-section-root {
+          padding: 6.5rem 1.5rem;
+        }
+
+        .services-header-box {
+          margin-bottom: 4.5rem;
+        }
+
+        .services-heading-title {
+          font-size: clamp(2.25rem, 5vw, 3.75rem);
+        }
+
         .service-row-inner {
           display: flex;
           align-items: center;
@@ -276,34 +286,98 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
           }
         }
 
+        /* Mobile & Small Tablets - Scaled to match other sections while preserving desktop styling */
         @media (max-width: 860px) {
           .services-section-root {
-            padding: 4rem 1rem !important;
+            padding: 3.5rem 1.25rem 4rem !important;
+          }
+          .services-header-box {
+            margin-bottom: 2.25rem !important;
+          }
+          .services-heading-title {
+            font-size: clamp(1.75rem, 6.8vw, 2.35rem) !important;
           }
           .service-row-inner {
             flex-direction: column;
             align-items: flex-start;
-            padding: 1.5rem 1.25rem;
-            gap: 1rem;
+            padding: 1.25rem 1.15rem !important;
+            gap: 0.75rem !important;
           }
           .service-left-col {
             width: 100%;
             justify-content: flex-start;
             min-width: 0;
-            padding-right: 3.5rem;
+            padding-right: 3rem !important;
+            gap: 0.85rem !important;
+          }
+          .service-number {
+            font-size: 1rem !important;
+            min-width: 1.75rem !important;
+          }
+          .service-title-text {
+            font-size: 1.25rem !important;
           }
           .service-mid-col {
             padding: 0;
             width: 100%;
           }
+          .service-desc-text {
+            font-size: 0.875rem !important;
+            line-height: 1.55 !important;
+          }
           .service-right-col {
             position: absolute;
-            top: 1.5rem;
-            right: 1.25rem;
+            top: 1.15rem !important;
+            right: 1.15rem !important;
           }
           .service-circle-btn {
-            width: 2.75rem !important;
-            height: 2.75rem !important;
+            width: 2.35rem !important;
+            height: 2.35rem !important;
+          }
+          .service-circle-btn svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .services-section-root {
+            padding: 3rem 1rem 3.5rem !important;
+          }
+          .services-header-box {
+            margin-bottom: 1.85rem !important;
+          }
+          .services-heading-title {
+            font-size: clamp(1.55rem, 6.5vw, 1.95rem) !important;
+          }
+          .service-row-inner {
+            padding: 1.15rem 1rem !important;
+            gap: 0.65rem !important;
+          }
+          .service-left-col {
+            padding-right: 2.75rem !important;
+            gap: 0.75rem !important;
+          }
+          .service-number {
+            font-size: 0.9rem !important;
+            min-width: 1.5rem !important;
+          }
+          .service-title-text {
+            font-size: 1.15rem !important;
+          }
+          .service-desc-text {
+            font-size: 0.8125rem !important;
+            line-height: 1.5 !important;
+          }
+          .service-circle-btn {
+            top: 1rem !important;
+            right: 1rem !important;
+            width: 2.15rem !important;
+            height: 2.15rem !important;
+          }
+          .service-circle-btn svg {
+            width: 15px !important;
+            height: 15px !important;
           }
         }
       `}</style>
