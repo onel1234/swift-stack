@@ -7,12 +7,12 @@ type AppContextType = {
 };
 
 const AppContext = createContext<AppContextType>({
-  isReady: false,
+  isReady: true,
   setReady: () => {},
 });
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [isReady, setReady] = useState(false);
+  const [isReady, setReady] = useState(true);
   return (
     <AppContext.Provider value={{ isReady, setReady }}>
       {children}

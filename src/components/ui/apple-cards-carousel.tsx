@@ -1,14 +1,18 @@
 "use client";
 import React, {
+  useCallback,
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
   createContext,
   useContext,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+
+const emptySubscribe = () => () => {};
 
 interface CarouselProps {
   items: React.ReactNode[];
@@ -35,23 +39,30 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
-  const checkScrollability = () => {
+  const checkScrollability = useCallback(() => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
       setCanScrollLeft(scrollLeft > 6);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    setIsMounted(true);
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = initialScroll;
-      checkScrollability();
-    }
-  }, [initialScroll]);
+    if (!carouselRef.current) return;
+    carouselRef.current.scrollLeft = initialScroll;
+    const rafId = requestAnimationFrame(() => checkScrollability());
+    window.addEventListener("resize", checkScrollability);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", checkScrollability);
+    };
+  }, [initialScroll, checkScrollability]);
+
+  const isMobile = () => {
+    return typeof window !== "undefined" && window.innerWidth < 768;
+  };
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -67,10 +78,11 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     }
   };
 
-  const handleCardClose = (index: number) => {
+  const handleCardClose = useCallback((index: number) => {
     if (carouselRef.current) {
-      const cardWidth = isMobile() ? 280 : 360;
-      const gap = isMobile() ? 16 : 24;
+      const mobile = typeof window !== "undefined" && window.innerWidth < 768;
+      const cardWidth = mobile ? 280 : 360;
+      const gap = mobile ? 16 : 24;
       const scrollPosition = (cardWidth + gap) * index;
       carouselRef.current.scrollTo({
         left: scrollPosition,
@@ -78,11 +90,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
       });
       setCurrentIndex(index);
     }
-  };
-
-  const isMobile = () => {
-    return typeof window !== "undefined" && window.innerWidth < 768;
-  };
+  }, []);
 
   return (
     <CarouselContext.Provider
@@ -256,6 +264,15 @@ export const Card = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const { onCardClose } = useContext(CarouselContext);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    onCardClose(index);
+  }, [onCardClose, index]);
+
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -270,18 +287,9 @@ export const Card = ({
       document.body.style.overflow = "auto";
     }
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, handleClose]);
 
-  useOutsideClick(containerRef, () => handleClose());
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    onCardClose(index);
-  };
+  useOutsideClick(containerRef, handleClose);
 
   return (
     <>
@@ -305,6 +313,7 @@ export const Card = ({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ type: "spring", stiffness: 260, damping: 28 }}
+              data-lenis-prevent
               className="apple-modal-content-card"
             >
               {/* Sticky Top Close Button */}
@@ -361,6 +370,7 @@ export const Card = ({
           src={card.src}
           alt={card.title}
           fill
+          loading="eager"
           sizes="(max-width: 768px) 80vw, 360px"
           className="card-bg-img"
         />
@@ -548,7 +558,7 @@ export const Card = ({
           margin-bottom: 0.5rem;
         }
         .modal-title-text {
-          font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+          font-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
           font-size: clamp(1.75rem, 3.5vw, 2.75rem);
           font-weight: 600;
           letter-spacing: -0.02em;
@@ -627,19 +637,31 @@ export const BlurImage = ({
   src,
   className,
   alt,
+  loading = "lazy",
   ...rest
 }: ImageProps) => {
   const [isLoading, setLoading] = useState(true);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+        setLoading(false);
+      }
+    });
+    return () => cancelAnimationFrame(id);
+  }, [src]);
+
   return (
     <Image
+      ref={imgRef}
       className={className}
       onLoad={() => setLoading(false)}
       src={src}
       width={width}
       height={height}
-      loading="lazy"
+      loading={loading}
       decoding="async"
-      blurDataURL={typeof src === "string" ? src : undefined}
       alt={alt ? alt : "Background of a card"}
       style={{
         ...((rest.style as React.CSSProperties) || {}),

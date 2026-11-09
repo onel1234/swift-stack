@@ -18,6 +18,7 @@
 }
 
 html {
+  position: relative;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -103,11 +104,14 @@ html.lenis {
 
 /* Global Modal & Menu Overlay Styles (shared across homepage and subpages) */
 .modal-container {
-  padding: 0.75rem !important;
+  padding: 0 !important;
 }
 
 .modal-panel {
-  padding: 1.5rem 1.25rem max(1.5rem, env(safe-area-inset-bottom)) !important;
+  padding: 1.25rem 1rem max(1.5rem, env(safe-area-inset-bottom)) !important;
+  border-radius: 24px 24px 0 0 !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-title {
@@ -171,6 +175,7 @@ html.lenis {
 
   .modal-panel {
     padding: 2rem !important;
+    border-radius: var(--radius-card-lg) !important;
   }
 
   .modal-title {

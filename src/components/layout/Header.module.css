@@ -1,0 +1,224 @@
+.siteHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+  background-color: rgba(2, 4, 10, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.05rem 1.5rem;
+}
+
+.siteHeaderScrolled {
+  background-color: rgba(2, 4, 10, 0.92);
+  padding: 0.75rem 1.5rem;
+}
+
+.siteHeaderInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.siteHeaderBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.siteHeaderLogo {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.siteHeaderBrandText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.siteHeaderTitle {
+  font-family: var(--font-onest), "Plus Jakarta Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.siteHeaderSub {
+  font-family: var(--font-onest), "Plus Jakarta Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #94a3b8;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.subpageNavLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.headerLink {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.headerLinkActive {
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.siteHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.headerCtaBtn {
+  border-radius: 9999px;
+  padding: 0.625rem 1.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: #ffffff;
+  color: #02040a;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.headerMenuBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .headerLink:hover {
+    color: #ffffff;
+  }
+
+  .headerCtaBtn:hover {
+    background-color: #38bdf8;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 1023px) {
+  .siteHeader {
+    padding: 12px 24px;
+  }
+
+  .siteHeaderScrolled {
+    padding: 10px 24px;
+  }
+
+  .siteHeaderLogo {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .siteHeaderTitle {
+    font-size: 16px;
+  }
+
+  .siteHeaderSub {
+    font-size: 11px;
+  }
+
+  .subpageNavLinks {
+    display: none;
+  }
+
+  .headerCtaBtn {
+    padding: 9px 18px;
+    font-size: 12px;
+    min-height: 40px;
+  }
+
+  .headerMenuBtn {
+    display: flex;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .siteHeader {
+    padding: 12px 16px;
+  }
+
+  .siteHeaderScrolled {
+    padding: 10px 16px;
+  }
+
+  .siteHeaderBrand {
+    gap: 10px;
+  }
+
+  .siteHeaderLogo {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .siteHeaderTitle {
+    font-size: 15.5px;
+  }
+
+  .siteHeaderSub {
+    font-size: 10px;
+  }
+
+  .siteHeaderHasMenu .headerCtaBtn {
+    display: none;
+  }
+
+  .headerCtaBtn {
+    padding: 8px 14px;
+    font-size: 11.5px;
+  }
+}

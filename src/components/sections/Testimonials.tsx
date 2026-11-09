@@ -19,7 +19,7 @@ export function Testimonials() {
           </div>
           <h2 className="headline-lg" style={{ color: 'var(--on-surface)' }}>Client Voices</h2>
           <p className="body-lg" style={{ color: 'var(--on-surface-variant)', maxWidth: '600px', margin: '16px auto 0' }}>
-            Don't just take our word for it. Here's what industry leaders have to say about our engineering and design capabilities.
+            Don&apos;t just take our word for it. Here&apos;s what industry leaders have to say about our engineering and design capabilities.
           </p>
         </div>
 
@@ -27,7 +27,7 @@ export function Testimonials() {
 
           {/* Card 1 */}
           <div className="testimonial-card">
-            <div className="quote-watermark">"</div>
+            <div className="quote-watermark">&ldquo;</div>
             <div className="card-content">
               <div className="stars">
                 {[...Array(5)].map((_, i) => (
@@ -51,7 +51,7 @@ export function Testimonials() {
 
           {/* Card 2 - Offset */}
           <div className="testimonial-card offset">
-            <div className="quote-watermark">"</div>
+            <div className="quote-watermark">&ldquo;</div>
             <div className="card-content">
               <div className="stars">
                 {[...Array(5)].map((_, i) => (
@@ -61,7 +61,7 @@ export function Testimonials() {
                 ))}
               </div>
               <p className="body-lg quote-text">
-                The team's dedication to modern minimalism perfectly captured our brand identity. A seamless execution from initial design to final deployment.
+                The team&apos;s dedication to modern minimalism perfectly captured our brand identity. A seamless execution from initial design to final deployment.
               </p>
               <div className="author-block">
                 <div className="avatar avatar-2"></div>

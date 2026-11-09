@@ -1,277 +1,224 @@
-"use client";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import { PageShellClient } from '@/components/PageShellClient';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { TrackedCtaLink, TrackedWhatsAppAnchor } from '@/components/TrackedLinks';
+import { PROJECTS } from '@/data/projects';
+import { getBreadcrumbSchema } from '@/lib/schema';
+import { DEFAULT_SOCIAL_IMAGES, SITE_NAME, SITE_URL } from '@/lib/site';
+import styles from '@/components/SubpageStyles.module.css';
 
-import React from 'react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { ContactModal } from '@/components/ui/ContactModal';
-import { motion } from 'framer-motion';
-
-const caseStudies = [
-  {
-    id: 'ceylon-naturalist',
-    client: 'Ceylon Naturalist',
-    industry: 'E-Commerce & Wellness',
-    title: 'Scaling a Boutique Nature Brand to Global Markets',
-    challenge: 'The client had a fragmented online presence with low conversion rates and an outdated e-commerce flow that failed to capture the premium essence of their brand.',
-    solution: 'We engineered a bespoke, high-performance storefront. By integrating seamless UX with rich, immersive storytelling and optimized checkout flows, we elevated the entire customer journey.',
-    results: [
-      { metric: '+150%', label: 'Conversion Rate' },
-      { metric: '-40%', label: 'Bounce Rate' },
-      { metric: '2.5x', label: 'Avg Order Value' }
-    ],
-    testimonial: {
-      quote: "The new platform completely transformed our business. We're seeing sales numbers we didn't think were possible this early on.",
-      author: "Founder, Ceylon Naturalist"
-    },
-    url: 'https://ceylonnaturalist.com/',
-    tags: ['E-Commerce', 'Brand Identity', 'Conversion Optimization']
+export const metadata: Metadata = {
+  title: {
+    absolute: `Our Work & Case Studies | ${SITE_NAME}`,
   },
-  {
-    id: 'prana-fuel',
-    client: 'Prana Fuel',
-    industry: 'Health & Fitness',
-    title: 'Igniting Digital Engagement for a Wellness Startup',
-    challenge: 'Prana Fuel needed a high-energy digital experience to launch their new product line, but their existing landing pages were slow and lacked visual impact, leading to high bounce rates.',
-    solution: 'We built a vibrant, motion-rich web application focused on maximum performance and engagement. Leveraging modern animations and an aggressive optimization strategy, we delivered a lightning-fast experience.',
-    results: [
-      { metric: '< 1s', label: 'Page Load Time' },
-      { metric: '+210%', label: 'User Engagement' },
-      { metric: '4.8x', label: 'ROI on Ad Spend' }
-    ],
-    testimonial: {
-      quote: "Their team didn't just build a website; they built an engine for our growth. The kinetic energy of the site perfectly matches our brand.",
-      author: "Marketing Director, Prana Fuel"
-    },
-    url: 'https://prana-fuel-your-vitality.netlify.app/',
-    tags: ['Web Application', 'Motion Design', 'Performance Tuning']
-  }
-];
+  description:
+    'Explore websites, e-commerce stores (Ceylon Naturalist, Chill Co. loyalty & affiliate storefront), custom software, and high-speed web builds by Swift Stack Digital.',
+  alternates: {
+    canonical: '/work',
+  },
+  openGraph: {
+    type: 'website',
+    url: `${SITE_URL}/work`,
+    siteName: SITE_NAME,
+    title: `Our Work & Case Studies | ${SITE_NAME}`,
+    description:
+      'Real commercial case studies showing business problems solved, deliverables, tech stacks, and measurable web growth.',
+    images: DEFAULT_SOCIAL_IMAGES,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Our Work & Case Studies | ${SITE_NAME}`,
+    description:
+      'Explore client builds by Swift Stack Digital across e-commerce, B2B platforms, wellness, and workflow automation.',
+    images: DEFAULT_SOCIAL_IMAGES.map((img) => img.url),
+  },
+};
 
 export default function WorkPage() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Header />
-      <main style={{ flex: 1, paddingTop: '80px', paddingBottom: '120px' }}>
-        <div className="container">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{ textAlign: 'center', marginBottom: '80px' }}
-          >
-            <div className="pill-badge" style={{ marginBottom: '24px' }}>
-              <span className="dot"></span>
-              Client Success Stories
+    <>
+      <JsonLd
+        data={getBreadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Our Work', path: '/work' },
+        ])}
+      />
+
+      <PageShellClient includeQuoteSection quoteSourcePage="/work">
+        {/* 1. HERO SECTION */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroAurora} aria-hidden="true" />
+          <div className={`${styles.container} ${styles.heroContent}`}>
+            <nav aria-label="Breadcrumb" className={styles.breadcrumbBar}>
+              <Link href="/" className={styles.breadcrumbLink}>
+                Home
+              </Link>
+              <span className={styles.breadcrumbSep} aria-hidden="true">/</span>
+              <span aria-current="page" className={styles.breadcrumbCurrent}>
+                Our Work
+              </span>
+            </nav>
+
+            <div className={styles.heroEyebrowWrap}>
+              <div className={styles.heroEyebrow}>
+                <span className={styles.heroEyebrowDot} aria-hidden="true" />
+                <span>Client Portfolio • Sri Lanka &amp; Global</span>
+              </div>
             </div>
-            <h1 className="headline-xl" style={{ marginBottom: '24px' }}>
-              We don't just build websites.<br />
-              <span className="hero-gradient-text">We build businesses.</span>
-            </h1>
-            <p className="body-lg" style={{ maxWidth: '650px', margin: '0 auto', color: 'var(--on-surface-variant)' }}>
-              Beautiful design is only half the equation. Explore how we combine visionary aesthetics with rigorous engineering to drive measurable growth, increase conversions, and deliver exceptional ROI for our partners.
-            </p>
-          </motion.div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '100px' }}>
-            {caseStudies.map((study, index) => (
-              <motion.div 
-                key={study.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                  gap: '64px',
-                  alignItems: 'center',
-                }}
-              >
-                <div style={{ order: index % 2 === 1 ? 2 : 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-                    <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--on-surface-variant)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                      {study.client}
-                    </span>
-                    <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'var(--outline)' }}></span>
-                    <span style={{ fontSize: '14px', color: 'var(--on-surface-variant)' }}>
-                      {study.industry}
-                    </span>
-                  </div>
-                  
-                  <h2 className="headline-lg" style={{ marginBottom: '24px' }}>{study.title}</h2>
-                  
-                  {/* Metrics Grid */}
-                  <div style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(3, 1fr)', 
-                    gap: '16px', 
-                    marginBottom: '32px',
-                    padding: '24px',
-                    backgroundColor: 'var(--surface-container-lowest)',
-                    borderRadius: 'var(--radius-lg)',
-                    border: '1px solid var(--outline-variant)'
-                  }}>
-                    {study.results.map((result, i) => (
-                      <div key={i} style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '28px', fontWeight: 800, color: 'var(--primary)', marginBottom: '4px', fontFamily: 'var(--font-family-primary)' }}>
-                          {result.metric}
-                        </div>
-                        <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--on-surface-variant)', textTransform: 'uppercase' }}>
-                          {result.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div style={{ marginBottom: '24px' }}>
-                    <h4 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '8px', color: 'var(--on-surface)' }}>The Challenge</h4>
-                    <p className="body-md" style={{ color: 'var(--on-surface-variant)' }}>{study.challenge}</p>
-                  </div>
-                  
-                  <div style={{ marginBottom: '32px' }}>
-                    <h4 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '8px', color: 'var(--on-surface)' }}>The Solution</h4>
-                    <p className="body-md" style={{ color: 'var(--on-surface-variant)' }}>{study.solution}</p>
-                  </div>
-
-                  {/* Testimonial 
-                  <div style={{ 
-                    borderLeft: '4px solid var(--primary)', 
-                    paddingLeft: '20px', 
-                    marginBottom: '32px',
-                    fontStyle: 'italic' 
-                  }}>
-                    <p className="body-lg" style={{ color: 'var(--on-surface)', marginBottom: '12px' }}>"{study.testimonial.quote}"</p>
-                    <p style={{ fontSize: '14px', fontWeight: 600, color: 'var(--on-surface-variant)' }}>— {study.testimonial.author}</p>
-                  </div>
-                  */}
-
-                  <a 
-                    href={study.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="btn btn-primary"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    View Live Project <span style={{ marginLeft: '8px' }}>↗</span>
-                  </a>
-                </div>
-                
-                <div style={{ 
-                  order: index % 2 === 1 ? 1 : 2,
-                  position: 'relative',
-                  width: '100%',
-                  aspectRatio: '4/5',
-                  borderRadius: 'var(--radius-xl)',
-                  overflow: 'hidden',
-                  backgroundColor: 'var(--surface-container-high)',
-                  border: '1px solid var(--outline-variant)',
-                  boxShadow: 'var(--shadow-elevated)'
-                }}>
-                  {/* Browser Mockup Header */}
-                  <div style={{ 
-                    height: '40px', 
-                    backgroundColor: 'var(--surface-container-highest)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: '0 20px',
-                    gap: '8px',
-                    borderBottom: '1px solid var(--outline-variant)'
-                  }}>
-                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ff5f56' }} />
-                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
-                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27c93f' }} />
-                  </div>
-                  
-                  {/* Live Preview Iframe */}
-                  <div style={{ width: '100%', height: 'calc(100% - 40px)', position: 'relative', overflow: 'hidden' }}>
-                    <div style={{ 
-                      position: 'absolute',
-                      width: '400%',
-                      height: '400%',
-                      transform: 'scale(0.25)',
-                      transformOrigin: 'top left',
-                      pointerEvents: 'none' /* Prevent interaction inside preview */
-                    }}>
-                      <iframe 
-                        src={study.url}
-                        style={{ width: '100%', height: '100%', border: 'none' }}
-                        sandbox="allow-scripts allow-same-origin"
-                        scrolling="no"
-                        title={`${study.title} Preview`}
-                      />
-                    </div>
-                    {/* Overlay */}
-                    <div style={{ 
-                      position: 'absolute', 
-                      inset: 0, 
-                      background: 'linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,0.1) 100%)',
-                      pointerEvents: 'none' 
-                    }} />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div 
-            className="work-cta-block"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ 
-              textAlign: 'center', 
-              marginTop: '120px',
-              backgroundColor: 'var(--primary)',
-              borderRadius: 'var(--radius-xl)',
-              color: 'var(--on-primary)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Background design element */}
-            <div style={{
-              position: 'absolute',
-              top: '-50%',
-              left: '-10%',
-              width: '600px',
-              height: '600px',
-              background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)',
-              borderRadius: '50%',
-              zIndex: 0,
-              pointerEvents: 'none'
-            }} />
-            
-            <div style={{ position: 'relative', zIndex: 1 }}>
-              <h2 className="headline-md" style={{ marginBottom: '16px' }}>Want these kinds of results?</h2>
-              <p className="body-lg" style={{ marginBottom: '32px', opacity: 0.9, maxWidth: '500px', margin: '0 auto 32px auto' }}>
-                Stop losing customers to slow, poorly designed websites. Let's engineer a solution that drives real revenue for your business.
+            <div className={styles.heroTitleBlock}>
+              <h1 className={styles.heroTitle}>
+                Case Studies &amp;{' '}
+                <span className={styles.heroTitleItalic}>Client Work</span>
+              </h1>
+              <p className={styles.heroSubtitle}>
+                We don&apos;t ship pretty mockups that sit idle. Explore how we help brands like Ceylon Naturalist, Chill Co., Prana Fuel, and B2B teams turn slow digital experiences into fast websites, loyalty-ready stores, and automated systems.
               </p>
-              <a href="/#contact" className="btn btn-secondary work-cta-btn" style={{ backgroundColor: 'var(--on-primary)', color: 'var(--primary)', borderColor: 'var(--on-primary)' }}>
-                Start Your Transformation
-              </a>
-            </div>
-          </motion.div>
-        </div>
 
-        <style dangerouslySetInnerHTML={{
-          __html: `
-          .work-cta-block {
-            padding: 64px;
-          }
-          @media(max-width: 768px) {
-            .work-cta-block {
-              padding: 32px 16px;
-              margin-top: 64px !important;
-            }
-            .work-cta-btn {
-              width: 100%;
-            }
-          }
-          `
-        }} />
-      </main>
-      <Footer />
-      <ContactModal />
-    </div>
+              <div className={styles.heroCtaRow}>
+                <TrackedCtaLink
+                  href="#estimate"
+                  label="Estimate Similar Project"
+                  location="work_hero"
+                  className={styles.primaryBtnWhite}
+                >
+                  <span>Estimate Your Project</span>
+                  <span aria-hidden="true">→</span>
+                </TrackedCtaLink>
+                <TrackedWhatsAppAnchor
+                  location="work_hero"
+                  message="Hi Swift Stack Digital, I reviewed your case studies and would like to discuss a project."
+                  className={styles.whatsappBtn}
+                >
+                  <span>Chat on WhatsApp</span>
+                  <span aria-hidden="true">↗</span>
+                </TrackedWhatsAppAnchor>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2. CASE STUDIES LIST */}
+        <section className={styles.tintSection}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionEyebrow}>Selected Launches</span>
+              <h2 className={styles.sectionTitle}>
+                Business Problems We <span className={styles.heroTitleItalic}>Solved</span>
+              </h2>
+              <p className={styles.sectionSubtitle}>
+                Every case study breaks down the client bottleneck, what we engineered, the production stack, and outcome metrics.
+              </p>
+            </div>
+
+            <div className={styles.workStack}>
+              {PROJECTS.map((project, idx) => (
+                <article
+                  key={project.id}
+                  className={`${styles.workFeatureCard} ${idx % 2 === 1 ? styles.workFeatureReversed : ''}`}
+                >
+                  <div>
+                    <div className={styles.workMetaLine}>
+                      <span className={styles.workClientBadge}>{project.client}</span>
+                      <span className={styles.workIndustry}>{project.industry}</span>
+                    </div>
+
+                    <h2 className={styles.workCardTitle}>{project.title}</h2>
+                    <p className={styles.workOverview}>{project.overview}</p>
+
+                    <div className={styles.metricsStrip}>
+                      {project.metrics.map((metric) => (
+                        <div key={metric.label} className={styles.metricItem}>
+                          <div className={styles.metricNum}>{metric.value}</div>
+                          <div className={styles.metricLabel}>{metric.label}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className={styles.workProblemBox}>
+                      <div className={styles.workMiniNote}>
+                        <h3>Client Challenge</h3>
+                        <p>{project.challenge}</p>
+                      </div>
+                      <div className={styles.workMiniNote}>
+                        <h3>What We Built</h3>
+                        <p>{project.solution}</p>
+                      </div>
+                    </div>
+
+                    <div className={styles.pillList}>
+                      {project.techStack.map((tech) => (
+                        <span key={tech} className={styles.techPill}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className={styles.cardActions}>
+                      <Link href={`/work/${project.id}`} className={styles.primaryBtnBlue}>
+                        <span>Read Case Study</span>
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.outlineBtnDark}
+                      >
+                        <span>Visit Live Site</span>
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className={styles.workImageCol}>
+                    <Image
+                      src={project.image}
+                      alt={project.imageAlt}
+                      fill
+                      sizes="(max-width: 1023px) calc(100vw - 64px), 560px"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Private NDA Software & Automation Banner */}
+            <div className={styles.darkCalloutBanner}>
+              <div style={{ maxWidth: '42rem' }}>
+                <span className={styles.channelLabel}>Confidential B2B &amp; Internal Systems</span>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-playfair), Georgia, serif',
+                    fontSize: 'clamp(1.6rem, 3vw, 2.35rem)',
+                    fontWeight: 500,
+                    margin: '0.45rem 0 0.75rem',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  Need custom software, internal CRMs, or AI automation?
+                </h2>
+                <p style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, fontSize: '0.97rem' }}>
+                  In addition to our public websites and e-commerce builds, we engineer private internal portals, custom quoting dashboards, loyalty engines, and AI support workflows. Anonymized architecture walkthroughs are available on your consultation call.
+                </p>
+              </div>
+              <div className={styles.cardActions}>
+                <Link href="/custom-software" className={styles.primaryBtnWhite}>
+                  <span>Custom Software</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/ai-automation" className={styles.secondaryBtnGlass}>
+                  <span>AI Automation</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </PageShellClient>
+    </>
   );
 }
