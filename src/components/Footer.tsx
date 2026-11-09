@@ -50,11 +50,11 @@ export function Footer({ onOpenContact }: FooterProps) {
           </div>
 
           <nav className="ref-footer-nav" aria-label="Footer Navigation">
-            <a href="#services" className="ref-footer-nav-link">Services</a>
-            <a href="#facilities" className="ref-footer-nav-link">Process</a>
+            <a href="/#services" className="ref-footer-nav-link">Services</a>
+            <a href="/#facilities" className="ref-footer-nav-link">Process</a>
             <a href="/work" className="ref-footer-nav-link">Work</a>
-            <a href="#testimonials" className="ref-footer-nav-link">Testimonials</a>
-            <a href="#faq" className="ref-footer-nav-link">FAQ</a>
+            <a href="/#testimonials" className="ref-footer-nav-link">Testimonials</a>
+            <a href="/#faq" className="ref-footer-nav-link">FAQ</a>
           </nav>
         </div>
 
@@ -231,6 +231,7 @@ export function Footer({ onOpenContact }: FooterProps) {
           gap: 0.35rem;
           transition: opacity 0.2s ease;
           cursor: pointer;
+          overflow-wrap: anywhere;
         }
         .ref-footer-email-link:hover {
           opacity: 0.85;

@@ -21,6 +21,7 @@ export function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
 
   return (
     <header
+      className={`site-header ${scrolled ? 'site-header--scrolled' : ''} ${onOpenMenu ? 'site-header--has-menu' : ''}`}
       style={{
         position: 'fixed',
         top: 0,
@@ -36,29 +37,34 @@ export function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
       }}
     >
       <div
+        className="site-header-inner"
         style={{
           maxWidth: '1440px',
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          gap: '0.75rem',
           width: '100%',
         }}
       >
         {/* Brand Logo & Name */}
         <Link
           href="/"
+          className="site-header-brand"
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.75rem',
             textDecoration: 'none',
             color: 'inherit',
+            minWidth: 0,
           }}
         >
           <img
             src="/Gemini_Generated_Image_p1oekyp1oekyp1oe-removebg-preview.png"
             alt="Swift Stack Logo"
+            className="site-header-logo"
             style={{
               width: '2.75rem',
               height: '2.75rem',
@@ -66,8 +72,9 @@ export function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
               flexShrink: 0,
             }}
           />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <span
+              className="site-header-title"
               style={{
                 fontFamily: '"Onest", "Plus Jakarta Sans", sans-serif',
                 fontSize: '1.05rem',
@@ -81,6 +88,7 @@ export function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
               Swift Stack
             </span>
             <span
+              className="site-header-sub"
               style={{
                 fontFamily: '"Onest", "Plus Jakarta Sans", sans-serif',
                 fontSize: '0.72rem',
@@ -187,7 +195,7 @@ export function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
         </nav>
 
         {/* CTA Button & Mobile Toggle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div className="site-header-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
           <button
             type="button"
             onClick={() => {
@@ -213,6 +221,7 @@ export function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.4rem',
+              whiteSpace: 'nowrap',
             }}
           >
             <span>Start a Project</span>
@@ -238,6 +247,7 @@ export function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
                 justifyContent: 'center',
                 cursor: 'pointer',
                 transition: 'background-color 0.2s',
+                flexShrink: 0,
               }}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -251,21 +261,83 @@ export function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
       </div>
 
       <style jsx>{`
-        .header-link:hover {
-          color: #ffffff !important;
+        .header-link {
+          white-space: nowrap;
         }
-        .header-cta-btn:hover {
-          background-color: #38bdf8 !important;
-          color: #ffffff !important;
-          box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
-          transform: translateY(-1px);
+
+        @media (hover: hover) and (pointer: fine) {
+          .header-link:hover {
+            color: #ffffff !important;
+          }
+          .header-cta-btn:hover {
+            background-color: #38bdf8 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+            transform: translateY(-1px);
+          }
         }
-        @media (max-width: 900px) {
+
+        @media (max-width: 1023px) {
+          .site-header {
+            padding: 12px 24px !important;
+          }
+          .site-header--scrolled {
+            padding: 10px 24px !important;
+          }
+          .site-header-logo {
+            width: 40px !important;
+            height: 40px !important;
+          }
+          .site-header-title {
+            font-size: 16px !important;
+          }
+          .site-header-sub {
+            font-size: 11px !important;
+          }
           .subpage-nav-links {
             display: none !important;
           }
+          .header-cta-btn {
+            padding: 9px 18px !important;
+            font-size: 12px !important;
+          }
           .header-menu-btn {
             display: flex !important;
+            width: 42px !important;
+            height: 42px !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .site-header {
+            padding: 12px 16px !important;
+          }
+          .site-header--scrolled {
+            padding: 10px 16px !important;
+          }
+          .site-header-brand {
+            gap: 10px !important;
+          }
+          .site-header-logo {
+            width: 38px !important;
+            height: 38px !important;
+          }
+          .site-header-title {
+            font-size: 15.5px !important;
+          }
+          .site-header-sub {
+            font-size: 10px !important;
+          }
+          .site-header--has-menu .header-cta-btn {
+            display: none !important;
+          }
+          .header-cta-btn {
+            padding: 8px 14px !important;
+            font-size: 11.5px !important;
+          }
+          .header-menu-btn {
+            width: 42px !important;
+            height: 42px !important;
           }
         }
       `}</style>

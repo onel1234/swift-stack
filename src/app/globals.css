@@ -100,3 +100,98 @@ html.lenis {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
+/* Global Modal & Menu Overlay Styles (shared across homepage and subpages) */
+.modal-container {
+  padding: 0.75rem !important;
+}
+
+.modal-panel {
+  padding: 1.5rem 1.25rem max(1.5rem, env(safe-area-inset-bottom)) !important;
+}
+
+.modal-title {
+  font-size: 2.25rem !important;
+}
+
+.modal-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--hairline);
+  background: var(--background);
+  padding: 0.75rem 1rem;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal-input:focus {
+  border-color: var(--brand-light);
+  box-shadow: 0 0 0 2px var(--brand-light);
+}
+
+.menu-panel {
+  padding: max(12px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom)) !important;
+  overflow-y: auto;
+}
+
+.menu-link {
+  font-size: clamp(32px, 8.5vw, 44px);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.menu-bottom {
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: stretch !important;
+  text-align: center;
+}
+
+.hover-white {
+  transition: color 0.2s;
+}
+
+.hover-white:hover {
+  color: white;
+}
+
+.hover-brand-light:hover {
+  color: var(--brand-light);
+}
+
+@media (min-width: 640px) {
+  .modal-container {
+    padding: 1.5rem !important;
+    align-items: center !important;
+  }
+
+  .modal-panel {
+    padding: 2rem !important;
+  }
+
+  .modal-title {
+    font-size: 3rem !important;
+  }
+
+  .modal-input {
+    font-size: max(16px, 0.875rem);
+  }
+
+  .menu-panel {
+    padding: 16px 40px 40px !important;
+  }
+
+  .menu-link {
+    font-size: clamp(44px, 6vw, 72px);
+  }
+
+  .menu-bottom {
+    flex-direction: row;
+    align-items: center !important;
+    text-align: left;
+  }
+}

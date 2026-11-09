@@ -1,0 +1,1606 @@
+.pageShell {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #0a0a0a;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  overflow-x: clip;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.containerNarrow {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.containerStack {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.containerCta {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+/* ========================================================================== */
+/* 1. HERO SECTION                                                            */
+/* ========================================================================== */
+.heroSection {
+  position: relative;
+  background-color: #02040a;
+  color: #ffffff;
+  padding: clamp(7rem, 12vh, 10rem) 0 clamp(4rem, 8vh, 6rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.heroAurora {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 500px;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(56, 189, 248, 0.2) 0%,
+    rgba(37, 99, 201, 0.08) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+}
+
+.heroEyebrowWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  max-width: 100%;
+  text-align: center;
+}
+
+.heroEyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  flex-shrink: 0;
+}
+
+.heroTitleBlock {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem 0;
+  color: #ffffff;
+  overflow-wrap: break-word;
+}
+
+.heroTitleItalic {
+  font-style: italic;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.heroSubtitle {
+  font-family: 'Onest', 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 720px;
+  margin: 0 auto 2.25rem auto;
+}
+
+.heroCtaRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryCta {
+  border-radius: 9999px;
+  padding: 0.85rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: #ffffff;
+  color: #02040a;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+}
+
+.primaryCta:active {
+  transform: scale(0.98);
+}
+
+.secondaryCta {
+  border-radius: 9999px;
+  padding: 0.85rem 1.85rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+  white-space: nowrap;
+}
+
+.secondaryCta:active {
+  transform: scale(0.98);
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(3rem, 6vh, 4.5rem);
+}
+
+.metricCard {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  min-width: 0;
+}
+
+.metricVal {
+  font-size: clamp(1.65rem, 2.4vw, 2.25rem);
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+  line-height: 1.15;
+}
+
+.metricLbl {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+}
+
+.bannerCard {
+  margin-top: clamp(2.5rem, 5vh, 4rem);
+  border-radius: 1.75rem;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+  height: clamp(260px, 40vw, 480px);
+}
+
+.bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(2, 4, 10, 0.88) 0%,
+    rgba(2, 4, 10, 0.25) 60%,
+    transparent 100%
+  );
+}
+
+.bannerContent {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.bannerEyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #38bdf8;
+  font-weight: 600;
+  display: block;
+}
+
+.bannerTitle {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: #ffffff;
+  margin: 0.2rem 0 0 0;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.bannerBadges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.bannerBadge {
+  font-size: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* ========================================================================== */
+/* SHARED SECTION HEADERS & PADDING                                           */
+/* ========================================================================== */
+.lightSection {
+  padding: clamp(5rem, 10vh, 7.5rem) 0;
+  background-color: #ffffff;
+}
+
+.tintSection {
+  padding: clamp(5rem, 10vh, 7.5rem) 0;
+  background-color: #f8f9ff;
+  border-top: 1px solid #e5eeff;
+  border-bottom: 1px solid #e5eeff;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: clamp(3rem, 6vh, 4.5rem);
+}
+
+.sectionEyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #2563c9;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: #0f0f11;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.sectionTitleItalic {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.sectionSubtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(15, 15, 17, 0.65);
+  max-width: 640px;
+  margin: 1rem auto 0 auto;
+}
+
+/* ========================================================================== */
+/* 2. WORKFLOW STEPS                                                          */
+/* ========================================================================== */
+.workflowGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.workflowCard {
+  background-color: #f8f9ff;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  border: 1px solid #e5eeff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  min-width: 0;
+}
+
+.workflowTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.workflowStepNum {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2563c9;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.workflowIconCircle {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #e5eeff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563c9;
+  flex-shrink: 0;
+}
+
+.workflowTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0f0f11;
+  margin: 0 0 0.65rem 0;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.workflowDesc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(15, 15, 17, 0.68);
+  margin: 0;
+}
+
+/* ========================================================================== */
+/* 3. ADVANTAGES                                                              */
+/* ========================================================================== */
+.advantagesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.advantageCard {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2.25rem;
+  border: 1px solid #e6e8ec;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  min-width: 0;
+}
+
+.advantageHeader {
+  display: block;
+}
+
+.advantageIconBox {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 1rem;
+  background-color: #eff4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.advantageTitle {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #0f0f11;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.advantageDesc {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(15, 15, 17, 0.68);
+  margin: 0;
+}
+
+/* ========================================================================== */
+/* 4. TECH STACK                                                              */
+/* ========================================================================== */
+.stackSection {
+  padding: clamp(4.5rem, 8vh, 6.5rem) 0;
+  background-color: #ffffff;
+}
+
+.stackTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 500;
+  color: #0f0f11;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.stackSubtitle {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(15, 15, 17, 0.65);
+  max-width: 580px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.stackPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.stackPill {
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: #f8f9ff;
+  color: #0f0f11;
+  border: 1px solid #dce9ff;
+  border-radius: 9999px;
+  padding: 0.65rem 1.35rem;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+/* ========================================================================== */
+/* 5. FEATURED WORK / CASE STUDIES                                            */
+/* ========================================================================== */
+.workSection {
+  padding: clamp(5rem, 10vh, 7.5rem) 0;
+  background-color: #02040a;
+  color: #ffffff;
+}
+
+.workHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: clamp(2.5rem, 5vh, 4rem);
+}
+
+.workEyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.workTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.workAllLink {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #38bdf8;
+  transition: opacity 0.2s ease;
+}
+
+.caseGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.caseLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  min-width: 0;
+}
+
+.caseCard {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.caseCard:active {
+  transform: scale(0.99);
+}
+
+.caseImageWrap {
+  position: relative;
+  height: 260px;
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.caseImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(2, 4, 10, 0.9) 0%, transparent 60%);
+}
+
+.caseCategory {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  max-width: calc(100% - 2.5rem);
+}
+
+.caseBody {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.caseClient {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.caseTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0.4rem 0 1.5rem 0;
+  line-height: 1.3;
+}
+
+.caseMetricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.25rem;
+  margin-top: auto;
+}
+
+.caseMetricsGrid > div {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.caseMetricVal {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #38bdf8;
+  line-height: 1.2;
+}
+
+.caseMetricLbl {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+.caseReadCue {
+  display: none;
+}
+
+/* ========================================================================== */
+/* 6. FAQ ACCORDION                                                           */
+/* ========================================================================== */
+.faqHeader {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vh, 4rem);
+}
+
+.faqTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: #0f0f11;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faqItem {
+  background-color: #f8f9ff;
+  border-radius: 1.25rem;
+  border: 1px solid #e5eeff;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.faqTrigger {
+  width: 100%;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.faqQuestion {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f0f11;
+  line-height: 1.4;
+}
+
+.faqIcon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #0f0f11;
+  border: 1px solid #dce9ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.faqIconOpen {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  padding: 0 1.75rem 1.5rem 1.75rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(15, 15, 17, 0.72);
+}
+
+/* ========================================================================== */
+/* 7. PRE-FOOTER CTA                                                          */
+/* ========================================================================== */
+.ctaSection {
+  padding: clamp(5rem, 8vh, 6.5rem) 0;
+  background-color: #eff4ff;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #0f0f11;
+  margin: 0 0 1.25rem 0;
+}
+
+.ctaSubtitle {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(15, 15, 17, 0.68);
+  max-width: 580px;
+  margin: 0 auto 2.25rem auto;
+}
+
+.ctaButton {
+  border-radius: 9999px;
+  padding: 1rem 2.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.ctaButton:active {
+  transform: scale(0.98);
+}
+
+.footerWrap {
+  background-color: #eff4ff;
+  padding: 0 0.75rem 0.75rem;
+  display: flow-root;
+}
+
+/* ========================================================================== */
+/* POINTER-ONLY HOVER STATES (prevents sticky hovers on touch devices)        */
+/* ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  .primaryCta:hover {
+    background-color: #38bdf8;
+    color: #ffffff;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .secondaryCta:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .workflowCard:hover {
+    transform: translateY(-4px);
+    border-color: #2563c9;
+    box-shadow: 0 20px 35px -10px rgba(37, 99, 201, 0.12);
+  }
+
+  .advantageCard:hover {
+    transform: translateY(-4px);
+    border-color: #2563c9;
+    box-shadow: 0 20px 40px -12px rgba(37, 99, 201, 0.15);
+  }
+
+  .stackPill:hover {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    border-color: #0a0a0a;
+    transform: translateY(-2px);
+  }
+
+  .caseCard:hover {
+    transform: translateY(-6px);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 20px 45px -10px rgba(56, 189, 248, 0.2);
+  }
+
+  .workAllLink:hover {
+    opacity: 0.85;
+  }
+
+  .ctaButton:hover {
+    background-color: #2563c9;
+    box-shadow: 0 12px 35px rgba(37, 99, 201, 0.35);
+    transform: translateY(-2px);
+  }
+}
+
+/* ========================================================================== */
+/* COMPACT DESKTOP (1024px - 1179px)                                          */
+/* ========================================================================== */
+@media (max-width: 1179px) and (min-width: 1024px) {
+  .workflowGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .advantagesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ========================================================================== */
+/* TABLET (641px - 1023px) - explicit px/clamp avoids 1.5625vw rem shrinkage  */
+/* ========================================================================== */
+@media (max-width: 1023px) {
+  .container,
+  .containerNarrow,
+  .containerStack,
+  .containerCta {
+    padding: 0 24px;
+  }
+
+  .heroSection {
+    padding: 104px 0 56px;
+  }
+
+  .heroEyebrowWrap {
+    margin-bottom: 20px;
+  }
+
+  .heroEyebrow {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    padding: 6px 14px;
+    gap: 8px;
+  }
+
+  .heroTitle {
+    font-size: clamp(38px, 5.8vw, 56px);
+    margin-bottom: 18px;
+  }
+
+  .heroSubtitle {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .heroCtaRow {
+    gap: 14px;
+  }
+
+  .primaryCta,
+  .secondaryCta {
+    padding: 13px 26px;
+    font-size: 13.5px;
+    min-height: 46px;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 40px;
+  }
+
+  .metricCard {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .metricVal {
+    font-size: 26px;
+    margin-bottom: 5px;
+  }
+
+  .metricLbl {
+    font-size: 12px;
+  }
+
+  .bannerCard {
+    margin-top: 36px;
+    height: 320px;
+    border-radius: 24px;
+  }
+
+  .bannerContent {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    gap: 12px;
+  }
+
+  .bannerEyebrow {
+    font-size: 11px;
+  }
+
+  .bannerTitle {
+    font-size: 19px;
+  }
+
+  .bannerBadge {
+    font-size: 11.5px;
+    padding: 5px 12px;
+  }
+
+  .lightSection,
+  .tintSection,
+  .workSection {
+    padding: 64px 0;
+  }
+
+  .stackSection,
+  .ctaSection {
+    padding: 56px 0;
+  }
+
+  .sectionHeader {
+    margin-bottom: 36px;
+  }
+
+  .sectionEyebrow,
+  .workEyebrow {
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    margin-bottom: 8px;
+  }
+
+  .sectionTitle,
+  .workTitle {
+    font-size: clamp(30px, 4.5vw, 42px);
+  }
+
+  .sectionSubtitle {
+    font-size: 15.5px;
+    margin-top: 12px;
+  }
+
+  .workflowGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .workflowCard {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .workflowCard:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .workflowTop {
+    margin-bottom: 16px;
+  }
+
+  .workflowStepNum {
+    font-size: 24px;
+  }
+
+  .workflowIconCircle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .workflowTitle {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .workflowDesc {
+    font-size: 14px;
+  }
+
+  .advantagesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .advantageCard {
+    padding: 26px 22px;
+    border-radius: 20px;
+  }
+
+  .advantageIconBox {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    margin-bottom: 18px;
+  }
+
+  .advantageTitle {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .advantageDesc {
+    font-size: 14.5px;
+  }
+
+  .stackTitle {
+    font-size: clamp(28px, 4vw, 38px);
+    margin-bottom: 12px;
+  }
+
+  .stackSubtitle {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .stackPills {
+    gap: 10px;
+  }
+
+  .stackPill {
+    font-size: 13.5px;
+    padding: 9px 18px;
+  }
+
+  .workHeaderRow {
+    margin-bottom: 32px;
+    gap: 16px;
+  }
+
+  .workAllLink {
+    font-size: 13px;
+  }
+
+  .caseGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .caseCard {
+    border-radius: 22px;
+  }
+
+  .caseImageWrap {
+    height: 220px;
+  }
+
+  .caseCategory {
+    top: 14px;
+    left: 14px;
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  .caseBody {
+    padding: 22px 20px;
+  }
+
+  .caseClient {
+    font-size: 12.5px;
+  }
+
+  .caseTitle {
+    font-size: 19px;
+    margin: 6px 0 18px;
+  }
+
+  .caseMetricsGrid {
+    gap: 10px;
+    padding-top: 16px;
+  }
+
+  .caseMetricVal {
+    font-size: 18px;
+  }
+
+  .caseMetricLbl {
+    font-size: 10.5px;
+  }
+
+  .faqHeader {
+    margin-bottom: 32px;
+  }
+
+  .faqTitle {
+    font-size: clamp(28px, 4.2vw, 40px);
+  }
+
+  .faqList {
+    gap: 12px;
+  }
+
+  .faqItem {
+    border-radius: 18px;
+  }
+
+  .faqTrigger {
+    padding: 20px 22px;
+    gap: 14px;
+  }
+
+  .faqQuestion {
+    font-size: 16.5px;
+  }
+
+  .faqIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .faqAnswer {
+    padding: 0 22px 20px;
+    font-size: 14.5px;
+  }
+
+  .ctaTitle {
+    font-size: clamp(30px, 5vw, 44px);
+    margin-bottom: 14px;
+  }
+
+  .ctaSubtitle {
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .ctaButton {
+    padding: 15px 34px;
+    font-size: 14px;
+    min-height: 48px;
+  }
+}
+
+/* ========================================================================== */
+/* SMALL TABLETS / LARGE PHONES (<= 768px)                                    */
+/* ========================================================================== */
+@media (max-width: 768px) {
+  .caseGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .caseReadCue {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #38bdf8;
+    margin-top: 16px;
+  }
+}
+
+/* ========================================================================== */
+/* MOBILE PHONES (<= 640px) - pixel-locked typography & thumb ergonomics      */
+/* ========================================================================== */
+@media (max-width: 640px) {
+  .container,
+  .containerNarrow,
+  .containerStack,
+  .containerCta {
+    padding: 0 16px;
+  }
+
+  .heroSection {
+    padding: 84px 0 40px;
+  }
+
+  .heroEyebrowWrap {
+    margin-bottom: 16px;
+  }
+
+  .heroEyebrow {
+    font-size: 10px;
+    letter-spacing: 0.11em;
+    padding: 6px 12px;
+    gap: 7px;
+  }
+
+  .heroTitle {
+    font-size: clamp(27px, 7.8vw, 40px);
+    line-height: 1.12;
+    margin-bottom: 14px;
+  }
+
+  .heroSubtitle {
+    font-size: 15px;
+    line-height: 1.58;
+    margin-bottom: 24px;
+  }
+
+  .heroCtaRow {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .primaryCta,
+  .secondaryCta {
+    width: 100%;
+    max-width: 320px;
+    min-height: 48px;
+    padding: 13px 20px;
+    font-size: 13.5px;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .metricCard {
+    padding: 16px 10px;
+    border-radius: 16px;
+  }
+
+  .metricVal {
+    font-size: clamp(19px, 5vw, 24px);
+    margin-bottom: 4px;
+  }
+
+  .metricLbl {
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+  }
+
+  .bannerCard {
+    margin-top: 24px;
+    height: 240px;
+    border-radius: 20px;
+  }
+
+  .bannerOverlay {
+    background: linear-gradient(
+      to top,
+      rgba(2, 4, 10, 0.94) 0%,
+      rgba(2, 4, 10, 0.48) 58%,
+      transparent 100%
+    );
+  }
+
+  .bannerContent {
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    gap: 10px;
+  }
+
+  .bannerEyebrow {
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+  }
+
+  .bannerTitle {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .bannerBadges {
+    gap: 6px;
+  }
+
+  .bannerBadge {
+    font-size: 10.5px;
+    padding: 4px 10px;
+  }
+
+  .lightSection,
+  .tintSection,
+  .workSection {
+    padding: 48px 0;
+  }
+
+  .stackSection,
+  .ctaSection {
+    padding: 44px 0;
+  }
+
+  .sectionHeader {
+    margin-bottom: 28px;
+  }
+
+  .sectionEyebrow,
+  .workEyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+  }
+
+  .sectionTitle,
+  .workTitle {
+    font-size: clamp(25px, 6.8vw, 34px);
+    line-height: 1.18;
+  }
+
+  .sectionSubtitle {
+    font-size: 14.5px;
+    line-height: 1.58;
+    margin-top: 10px;
+  }
+
+  /* 5-Step Process on Mobile */
+  .workflowGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .workflowCard {
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+
+  .workflowCard:last-child {
+    grid-column: auto;
+  }
+
+  .workflowTop {
+    margin-bottom: 12px;
+  }
+
+  .workflowStepNum {
+    font-size: 22px;
+  }
+
+  .workflowIconCircle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .workflowTitle {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .workflowDesc {
+    font-size: 13.5px;
+    line-height: 1.58;
+  }
+
+  /* Advantages on Mobile: Horizontal Icon + Title header */
+  .advantagesGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .advantageCard {
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+
+  .advantageHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .advantageIconBox {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    margin-bottom: 0;
+  }
+
+  .advantageIconBox svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .advantageTitle {
+    font-size: 17.5px;
+    margin: 0;
+  }
+
+  .advantageDesc {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Tech Stack Pills on Mobile */
+  .stackTitle {
+    font-size: clamp(24px, 6.4vw, 32px);
+    margin-bottom: 10px;
+  }
+
+  .stackSubtitle {
+    font-size: 14.5px;
+    margin-bottom: 22px;
+  }
+
+  .stackPills {
+    gap: 8px;
+  }
+
+  .stackPill {
+    font-size: 13px;
+    padding: 8px 14px;
+    line-height: 1.2;
+  }
+
+  /* Case Studies on Mobile */
+  .workHeaderRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .workAllLink {
+    font-size: 12.5px;
+    min-height: 44px;
+    padding-bottom: 0;
+    border-bottom-width: 1.5px;
+  }
+
+  .caseGrid {
+    gap: 16px;
+  }
+
+  .caseCard {
+    border-radius: 20px;
+  }
+
+  .caseImageWrap {
+    height: 195px;
+  }
+
+  .caseCategory {
+    top: 12px;
+    left: 12px;
+    font-size: 10.5px;
+    padding: 5px 11px;
+    max-width: calc(100% - 24px);
+  }
+
+  .caseBody {
+    padding: 18px 16px;
+  }
+
+  .caseClient {
+    font-size: 12px;
+  }
+
+  .caseTitle {
+    font-size: 18px;
+    line-height: 1.32;
+    margin: 6px 0 14px;
+  }
+
+  .caseMetricsGrid {
+    gap: 8px;
+    padding-top: 14px;
+  }
+
+  .caseMetricVal {
+    font-size: clamp(14.5px, 4.2vw, 18px);
+  }
+
+  .caseMetricLbl {
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    margin-top: 3px;
+  }
+
+  .caseReadCue {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  /* FAQ on Mobile */
+  .faqHeader {
+    margin-bottom: 24px;
+  }
+
+  .faqTitle {
+    font-size: clamp(24px, 6.5vw, 32px);
+  }
+
+  .faqList {
+    gap: 10px;
+  }
+
+  .faqItem {
+    border-radius: 16px;
+  }
+
+  .faqTrigger {
+    padding: 16px;
+    gap: 12px;
+    min-height: 56px;
+  }
+
+  .faqQuestion {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .faqIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .faqAnswer {
+    padding: 0 16px 16px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Pre-Footer CTA on Mobile */
+  .ctaTitle {
+    font-size: clamp(26px, 7vw, 34px);
+    margin-bottom: 12px;
+  }
+
+  .ctaSubtitle {
+    font-size: 14.5px;
+    line-height: 1.58;
+    margin-bottom: 24px;
+  }
+
+  .ctaButton {
+    width: 100%;
+    max-width: 320px;
+    min-height: 48px;
+    padding: 14px 22px;
+    font-size: 13.5px;
+  }
+
+  .footerWrap {
+    padding: 0;
+  }
+}
