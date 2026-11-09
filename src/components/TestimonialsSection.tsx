@@ -1,6 +1,9 @@
 'use client';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { motion } from 'framer-motion';
+import { trackCtaClick } from '@/lib/analytics';
+
+const emptySubscribe = () => () => {};
 
 interface TestimonialItem {
   id: string;
@@ -95,10 +98,10 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
   const [activeIndex, setActiveIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   // Monitor scroll track state on mobile
-  const checkScrollState = () => {
+  const checkScrollState = useCallback(() => {
     if (!scrollTrackRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = scrollTrackRef.current;
     setCanScrollLeft(scrollLeft > 10);
@@ -111,12 +114,16 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
       const index = Math.round(scrollLeft / cardWidthWithGap);
       setActiveIndex(Math.min(TESTIMONIALS.length - 1, Math.max(0, index)));
     }
-  };
+  }, []);
 
   useEffect(() => {
-    setIsMounted(true);
-    checkScrollState();
-  }, []);
+    const rafId = requestAnimationFrame(() => checkScrollState());
+    window.addEventListener('resize', checkScrollState);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', checkScrollState);
+    };
+  }, [checkScrollState]);
 
   const scrollNext = () => {
     if (!scrollTrackRef.current) return;
@@ -166,7 +173,7 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
             transition={{ type: 'spring', stiffness: 180, damping: 24 }}
             className="testimonials-heading-title"
             style={{
-              fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif",
+              fontFamily: "var(--font-playfair), Georgia, 'Times New Roman', serif",
               fontWeight: 500,
               lineHeight: 1.18,
               letterSpacing: '-0.01em',
@@ -204,7 +211,7 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
               padding: '0 0.75rem',
             }}
           >
-            Real stories and verified feedback from founders and engineering leaders who partner with Swift Stack to build, launch, and scale high-performance products.
+            Real stories and project feedback from founders and business leaders who partner with Swift Stack Digital to build, launch, and scale web products.
           </motion.p>
         </div>
 
@@ -258,7 +265,7 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
                     >
                       <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
-                    Verified Client
+                    Client Partner
                   </span>
                 </div>
 
@@ -407,7 +414,14 @@ export function TestimonialsSection({ onOpenContact }: TestimonialsSectionProps)
             </p>
           </div>
           {onOpenContact && (
-            <button onClick={onOpenContact} className="testimonials-cta-btn">
+            <button
+              type="button"
+              onClick={() => {
+                trackCtaClick('Start Your Project', 'testimonials_cta');
+                onOpenContact();
+              }}
+              className="testimonials-cta-btn"
+            >
               Start Your Project ↗
             </button>
           )}

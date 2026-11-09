@@ -7,9 +7,9 @@ import { CarouselDots } from './ui/CarouselDots';
 import Image from 'next/image';
 
 const SLIDES = [
-  { words: ['Modern', 'Web', 'Development', 'Agency'], img: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=400&auto=format&fit=crop', name: 'Web Development', role: 'Full-Stack Solutions', alt: 'Web Development' },
-  { words: ['Data-', 'Driven', 'SEO', 'Strategy'], img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400&auto=format&fit=crop', name: 'SEO', role: 'Search Engine Optimization', alt: 'SEO Analytics' },
-  { words: ['Smart', 'Cloud', '& AI', 'Systems'], img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop', name: 'AI & Cloud', role: 'Intelligent Infrastructure', alt: 'AI & Cloud Infrastructure' }
+  { words: ['Modern', 'Web', 'Development', 'Agency'], img: '/images/hero-workspace.jpg', name: 'Web Development', role: 'Full-Stack Solutions', alt: 'Web Development' },
+  { words: ['Data-', 'Driven', 'SEO', 'Strategy'], img: '/images/performance-optimization.jpg', name: 'SEO', role: 'Search Engine Optimization', alt: 'SEO Analytics' },
+  { words: ['Smart', 'Cloud', '& AI', 'Systems'], img: '/hero-software.png', name: 'AI & Cloud', role: 'Intelligent Infrastructure', alt: 'AI & Cloud Infrastructure' }
 ];
 
 export function TrustSection() {

@@ -65,7 +65,7 @@ export function Process() {
             <div className="process-content">
               <h3 className="headline-md process-title">Launch & Scale</h3>
               <p className="body-md" style={{ color: 'var(--on-surface-variant)' }}>
-                After rigorous QA testing and performance audits, we deploy your project. We don't just hand over the keys; we ensure your platform is primed for growth.
+                After rigorous QA testing and performance audits, we deploy your project. We don&apos;t just hand over the keys; we ensure your platform is primed for growth.
               </p>
             </div>
           </div>

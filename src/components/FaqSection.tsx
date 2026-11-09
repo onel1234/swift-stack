@@ -1,62 +1,13 @@
 'use client';
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-interface FaqItem {
-  id: string;
-  question: string;
-  answer: string;
-  category?: string;
-}
+import { HOME_FAQS } from '@/data/faqs';
+import { trackCtaClick } from '@/lib/analytics';
 
 interface FaqSectionProps {
   onOpenContact?: () => void;
 }
-
-const FAQS: FaqItem[] = [
-  {
-    id: '01',
-    category: 'Timeline & Process',
-    question: 'How long does a typical custom web development project take?',
-    answer:
-      'Most bespoke web applications and platforms launch in 3 to 6 weeks from initial architecture to final production release. We work in rapid 1-week iterative sprints with continuous staging access, so you can test real progress every week with zero launch-day surprises.',
-  },
-  {
-    id: '02',
-    category: 'Architecture & Performance',
-    question: 'Why choose custom Next.js development over WordPress or templates?',
-    answer:
-      'Pre-built templates carry heavy script bloat, slow database queries, and security vulnerabilities that directly damage your conversion rate and Google ranking. A custom Next.js application delivers sub-second page loads, 100/100 Core Web Vitals scores, complete brand flexibility, and enterprise-grade reliability.',
-  },
-  {
-    id: '03',
-    category: 'Search & Growth',
-    question: 'How do you ensure our website actually ranks on Google?',
-    answer:
-      'We engineer technical SEO directly into the source code rather than treating it as an afterthought. This includes semantic HTML markup, server-side rendered metadata, dynamic OpenGraph previews, automated sitemaps, JSON-LD schema markup, and optimized Core Web Vitals to outrank competitors.',
-  },
-  {
-    id: '04',
-    category: 'Scalability & Cloud',
-    question: 'Can your architecture handle viral traffic spikes and flash sales without crashing?',
-    answer:
-      'Yes. We deploy applications onto globally distributed serverless edge networks (AWS, Vercel, and Cloudflare) backed by auto-scaling containerized microservices. Whether you receive 100 visitors or 100,000 concurrent shoppers during a major drop, your site responds instantly with 99.99% uptime guaranteed.',
-  },
-  {
-    id: '05',
-    category: 'AI & Automation',
-    question: 'How can practical AI integration drive real business ROI for us?',
-    answer:
-      'We cut through the buzzwords to build practical, measurable automations: custom customer service AI agents trained on your proprietary docs, automated lead qualification, intelligent predictive search, and smart workflow automations that save hundreds of manual hours every month.',
-  },
-  {
-    id: '06',
-    category: 'Partnership & Support',
-    question: 'What support and maintenance do you provide after the website launches?',
-    answer:
-      'Every project includes 30 days of post-launch hyper-care. Beyond launch, we offer dedicated monthly retainers covering proactive security updates, continuous uptime monitoring, cloud optimization, feature sprints, and guaranteed SLA response times.',
-  },
-];
 
 export function FaqSection({ onOpenContact }: FaqSectionProps) {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -88,7 +39,7 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
             transition={{ type: 'spring', stiffness: 180, damping: 24 }}
             className="faq-heading-title"
             style={{
-              fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif",
+              fontFamily: "var(--font-playfair), Georgia, 'Times New Roman', serif",
               fontWeight: 500,
               lineHeight: 1.18,
               letterSpacing: '-0.01em',
@@ -126,13 +77,13 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
               padding: '0 0.75rem',
             }}
           >
-            Clear answers to common questions about our development process, tech stack, SEO strategies, and ongoing support.
+            Clear answers to common questions about pricing, timelines, technical SEO, custom software, and working with our team.
           </motion.p>
         </div>
 
         {/* FAQ Accordion List */}
         <div className="faq-list">
-          {FAQS.map((item, index) => {
+          {HOME_FAQS.map((item, index) => {
             const isOpen = openId === item.id;
 
             return (
@@ -142,7 +93,7 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{
-                  delay: index * 0.06,
+                  delay: index * 0.05,
                   duration: 0.4,
                   ease: 'easeOut',
                 }}
@@ -157,14 +108,11 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
                   <div className="faq-left">
                     <span className="faq-index">{item.id}</span>
                     <div style={{ textAlign: 'left' }}>
-                      {item.category && (
-                        <span className="faq-cat-pill">{item.category}</span>
-                      )}
+                      {item.category && <span className="faq-cat-pill">{item.category}</span>}
                       <h3 className="faq-q-text">{item.question}</h3>
                     </div>
                   </div>
 
-                  {/* Circular Rotating Plus Icon */}
                   <div className="faq-icon-btn">
                     <motion.div
                       animate={{ rotate: isOpen ? 45 : 0 }}
@@ -181,14 +129,13 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
                       </svg>
                     </motion.div>
                   </div>
                 </button>
 
-                {/* Animated Collapsible Answer */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
@@ -219,14 +166,21 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
           className="faq-bottom-cta"
         >
           <div>
-            <h4 className="faq-cta-title">Still have questions?</h4>
+            <h4 className="faq-cta-title">Not sure what your business needs?</h4>
             <p className="faq-cta-sub">
-              Book a free technical consultation with our engineering team to discuss your specific requirements.
+              Get a free consultation with our engineering team—we will recommend the right solution and an initial estimate.
             </p>
           </div>
           {onOpenContact && (
-            <button onClick={onOpenContact} className="faq-cta-btn">
-              Talk to Our Team ↗
+            <button
+              type="button"
+              onClick={() => {
+                trackCtaClick('Talk to Our Team', 'home_faq_cta');
+                onOpenContact();
+              }}
+              className="faq-cta-btn"
+            >
+              Get a Free Consultation ↗
             </button>
           )}
         </motion.div>
@@ -234,7 +188,7 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
 
       <style>{`
         .faq-section-root {
-          padding: 5rem 0 6.5rem;
+          padding: 5rem 0 6rem;
         }
         .faq-container {
           max-width: 68rem;
@@ -338,7 +292,6 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
           max-width: 52rem;
         }
 
-        /* Bottom CTA */
         .faq-bottom-cta {
           margin-top: 3.5rem;
           background-color: #0f0f11;
@@ -359,7 +312,7 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
         }
         .faq-cta-sub {
           font-size: 0.875rem;
-          color: rgba(255, 255, 255, 0.7);
+          color: rgba(255, 255, 255, 0.72);
           margin: 0;
           max-width: 32rem;
           line-height: 1.5;
@@ -383,7 +336,6 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
           background-color: #f1f1f4;
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
           .faq-section-root {
             padding: 3.5rem 0 4.5rem;
@@ -421,17 +373,24 @@ export function FaqSection({ onOpenContact }: FaqSectionProps) {
             line-height: 1.6;
           }
           .faq-bottom-cta {
-            padding: 1.75rem 1.5rem;
+            padding: 24px 18px;
+            border-radius: 20px;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 1.25rem;
-            margin-top: 2.5rem;
+            align-items: stretch;
+            gap: 16px;
+            margin-top: 32px;
           }
           .faq-cta-title {
-            font-size: 1.25rem;
+            font-size: 20px;
+          }
+          .faq-cta-sub {
+            font-size: 14px;
           }
           .faq-cta-btn {
             width: 100%;
+            min-height: 48px;
+            padding: 12px 20px;
+            font-size: 14px;
             justify-content: center;
           }
         }

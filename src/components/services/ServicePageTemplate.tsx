@@ -9,112 +9,14 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/Footer';
 import { ContactModal } from '@/components/ContactModal';
 import { MenuOverlay } from '@/components/MenuOverlay';
+import type {
+  AdvantageIconKey,
+  ServicePageData,
+  WorkflowIconKey,
+} from '@/data/services';
+import { getWhatsAppUrl } from '@/lib/site';
+import { trackCtaClick, trackWhatsAppClick } from '@/lib/analytics';
 import styles from './ServicePage.module.css';
-
-export type WorkflowIconKey =
-  | 'search'
-  | 'layoutGrid'
-  | 'code'
-  | 'shieldCheck'
-  | 'rocket'
-  | 'fileText'
-  | 'layers'
-  | 'globe'
-  | 'activity'
-  | 'starOutline'
-  | 'play'
-  | 'clipboard';
-
-export type AdvantageIconKey =
-  | 'trendUp'
-  | 'lock'
-  | 'zap'
-  | 'settings'
-  | 'search'
-  | 'chevronsRight'
-  | 'trendUpAlt'
-  | 'server'
-  | 'heart'
-  | 'star'
-  | 'alertCircle';
-
-export interface ServicePageData {
-  hero: {
-    eyebrow: string;
-    titlePrefix: string;
-    titleItalic: string;
-    subtitle: string;
-    primaryCtaLabel: string;
-    secondaryCtaLabel: string;
-    secondaryCtaHref: string;
-    metrics: { val: string; lbl: string }[];
-    banner: {
-      image: string;
-      alt: string;
-      eyebrow: string;
-      title: string;
-      badges: string[];
-    };
-  };
-  workflow: {
-    eyebrow: string;
-    titlePrefix: string;
-    titleItalic: string;
-    subtitle: string;
-    steps: {
-      step: string;
-      title: string;
-      desc: string;
-      icon: WorkflowIconKey;
-    }[];
-  };
-  advantages: {
-    eyebrow: string;
-    titlePrefix: string;
-    titleItalic: string;
-    subtitle: string;
-    items: {
-      title: string;
-      desc: string;
-      icon: AdvantageIconKey;
-    }[];
-  };
-  techStack: {
-    eyebrow: string;
-    titlePrefix: string;
-    titleItalic: string;
-    subtitle: string;
-    items: string[];
-  };
-  featuredWork: {
-    sectionId: string;
-    eyebrow: string;
-    titlePrefix: string;
-    titleItalic: string;
-    studies: {
-      client: string;
-      category: string;
-      title: string;
-      metrics: { lbl: string; val: string }[];
-      image: string;
-      link: string;
-    }[];
-  };
-  faq: {
-    eyebrow: string;
-    items: {
-      q: string;
-      a: string;
-    }[];
-  };
-  cta: {
-    eyebrow: string;
-    titlePrefix: string;
-    titleItalic: string;
-    subtitle: string;
-    buttonLabel: string;
-  };
-}
 
 function renderWorkflowIcon(key: WorkflowIconKey) {
   switch (key) {
@@ -293,12 +195,17 @@ export function ServicePageTemplate({ data }: { data: ServicePageData }) {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  const openQuoteModal = (source: string) => {
+    trackCtaClick(data.hero.primaryCtaLabel, source);
+    setIsContactOpen(true);
+  };
+
   return (
     <AppProvider>
       <div className={styles.pageShell}>
         <Header
           onOpenMenu={() => setIsMenuOpen(true)}
-          onOpenContact={() => setIsContactOpen(true)}
+          onOpenContact={() => openQuoteModal(`service_${data.slug}_header`)}
         />
 
         <main className={styles.main}>
@@ -307,24 +214,28 @@ export function ServicePageTemplate({ data }: { data: ServicePageData }) {
             <div className={styles.heroAurora} aria-hidden="true" />
 
             <div className={`${styles.container} ${styles.heroContent}`}>
+              <nav aria-label="Breadcrumb" className={styles.breadcrumbBar}>
+                <Link href="/" className={styles.breadcrumbLink}>
+                  Home
+                </Link>
+                <span className={styles.breadcrumbSep} aria-hidden="true">/</span>
+                <Link href="/#services" className={styles.breadcrumbLink}>
+                  Services
+                </Link>
+                <span className={styles.breadcrumbSep} aria-hidden="true">/</span>
+                <span aria-current="page" className={styles.breadcrumbCurrent}>
+                  {data.breadcrumbLabel}
+                </span>
+              </nav>
+
               <div className={styles.heroEyebrowWrap}>
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className={styles.heroEyebrow}
-                >
+                <div className={styles.heroEyebrow}>
                   <span className={styles.heroEyebrowDot} aria-hidden="true" />
                   <span>{data.hero.eyebrow}</span>
-                </motion.div>
+                </div>
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className={styles.heroTitleBlock}
-              >
+              <div className={styles.heroTitleBlock}>
                 <h1 className={styles.heroTitle}>
                   {data.hero.titlePrefix}{' '}
                   <span className={styles.heroTitleItalic}>{data.hero.titleItalic}</span>
@@ -335,7 +246,7 @@ export function ServicePageTemplate({ data }: { data: ServicePageData }) {
                 <div className={styles.heroCtaRow}>
                   <button
                     type="button"
-                    onClick={() => setIsContactOpen(true)}
+                    onClick={() => openQuoteModal(`service_${data.slug}_hero`)}
                     className={styles.primaryCta}
                   >
                     <span>{data.hero.primaryCtaLabel}</span>
@@ -347,35 +258,25 @@ export function ServicePageTemplate({ data }: { data: ServicePageData }) {
                     <span aria-hidden="true">↓</span>
                   </a>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Key Value Metrics Grid */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25 }}
-                className={styles.metricsGrid}
-              >
+              <div className={styles.metricsGrid}>
                 {data.hero.metrics.map((item, idx) => (
                   <div key={idx} className={styles.metricCard}>
                     <div className={styles.metricVal}>{item.val}</div>
                     <div className={styles.metricLbl}>{item.lbl}</div>
                   </div>
                 ))}
-              </motion.div>
+              </div>
 
               {/* Featured Visual Banner */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, delay: 0.35 }}
-                className={styles.bannerCard}
-              >
+              <div className={styles.bannerCard}>
                 <Image
                   src={data.hero.banner.image}
                   alt={data.hero.banner.alt}
                   fill
-                  priority
+                  preload
                   sizes="(max-width: 768px) calc(100vw - 32px), 1280px"
                   style={{ objectFit: 'cover' }}
                 />
@@ -393,7 +294,7 @@ export function ServicePageTemplate({ data }: { data: ServicePageData }) {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </section>
 
@@ -547,7 +448,37 @@ export function ServicePageTemplate({ data }: { data: ServicePageData }) {
             </div>
           </section>
 
-          {/* 6. SERVICE FAQ ACCORDION */}
+          {/* 6. HELPFUL BUYER GUIDES CROSS-LINK */}
+          {data.relatedGuides && data.relatedGuides.length > 0 && (
+            <section className={styles.guidesSection}>
+              <div className={styles.container}>
+                <div className={styles.sectionHeader}>
+                  <span className={styles.sectionEyebrow}>Research &amp; Pricing Resources</span>
+                  <h2 className={styles.sectionTitle}>
+                    Helpful Buyer <span className={styles.sectionTitleItalic}>Guides</span>
+                  </h2>
+                  <p className={styles.sectionSubtitle}>
+                    Compare options, realistic Sri Lankan LKR / USD budgets, and timelines before kicking off your build.
+                  </p>
+                </div>
+
+                <div className={styles.guidesGrid}>
+                  {data.relatedGuides.map((guide) => (
+                    <Link key={guide.href} href={guide.href} className={styles.guideCard}>
+                      <span className={styles.guideTag}>{guide.tag}</span>
+                      <h3 className={styles.guideTitle}>{guide.title}</h3>
+                      <p className={styles.guideDesc}>{guide.description}</p>
+                      <span className={styles.guideLink}>
+                        Read Full Guide <span aria-hidden="true">→</span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* 7. SERVICE FAQ ACCORDION */}
           <section className={styles.lightSection}>
             <div className={styles.containerNarrow}>
               <div className={styles.faqHeader}>
@@ -597,7 +528,7 @@ export function ServicePageTemplate({ data }: { data: ServicePageData }) {
             </div>
           </section>
 
-          {/* 7. PRE-FOOTER CALL TO ACTION */}
+          {/* 8. PRE-FOOTER CALL TO ACTION */}
           <section className={styles.ctaSection}>
             <div className={styles.containerCta}>
               <span className={styles.sectionEyebrow}>{data.cta.eyebrow}</span>
@@ -607,29 +538,46 @@ export function ServicePageTemplate({ data }: { data: ServicePageData }) {
               </h2>
               <p className={styles.ctaSubtitle}>{data.cta.subtitle}</p>
 
-              <button
-                type="button"
-                onClick={() => setIsContactOpen(true)}
-                className={styles.ctaButton}
-              >
-                <span>{data.cta.buttonLabel}</span>
-                <span aria-hidden="true" style={{ fontSize: '1.1rem' }}>↗</span>
-              </button>
+              <div className={styles.ctaActions}>
+                <button
+                  type="button"
+                  onClick={() => openQuoteModal(`service_${data.slug}_prefooter`)}
+                  className={styles.ctaButton}
+                >
+                  <span>{data.cta.buttonLabel}</span>
+                  <span aria-hidden="true" style={{ fontSize: '1.1rem' }}>↗</span>
+                </button>
+
+                <a
+                  href={getWhatsAppUrl(`Hi Swift Stack Digital, I'm interested in ${data.breadcrumbLabel} and would like a free consultation.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick(`service_${data.slug}_prefooter`, data.slug)}
+                  className={styles.ctaWhatsAppLink}
+                >
+                  <span>WhatsApp Us Directly</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
             </div>
           </section>
 
-          {/* 8. OFFICIAL FOOTER */}
+          {/* 9. OFFICIAL FOOTER */}
           <div className={styles.footerWrap}>
-            <Footer onOpenContact={() => setIsContactOpen(true)} />
+            <Footer onOpenContact={() => openQuoteModal(`service_${data.slug}_footer`)} />
           </div>
         </main>
 
         {/* Global Modals */}
-        <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+        <ContactModal
+          isOpen={isContactOpen}
+          onClose={() => setIsContactOpen(false)}
+          defaultService={data.quoteServiceDefault}
+        />
         <MenuOverlay
           isOpen={isMenuOpen}
           onClose={() => setIsMenuOpen(false)}
-          onOpenContact={() => setIsContactOpen(true)}
+          onOpenContact={() => openQuoteModal(`service_${data.slug}_menu`)}
         />
       </div>
     </AppProvider>

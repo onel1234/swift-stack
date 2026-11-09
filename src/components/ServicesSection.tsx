@@ -1,41 +1,24 @@
 'use client';
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { PRIMARY_SERVICES } from '@/lib/site';
+import { trackCtaClick } from '@/lib/analytics';
 
 interface ServicesSectionProps {
   onOpenContact?: () => void;
 }
 
-const SERVICES = [
-  {
-    id: '01',
-    title: 'Web Development',
-    desc: 'Custom, high-performance web applications built for scale and speed.',
-    link: '/custom-web-development',
-  },
-  {
-    id: '02',
-    title: 'SEO & Growth',
-    desc: 'Data-driven search strategies to dominate rankings and drive organic traffic.',
-    link: '/performance-optimization',
-  },
-  {
-    id: '03',
-    title: 'AI Integration',
-    desc: 'Intelligent automation and machine learning models tailored to your business.',
-    link: '#contact',
-  },
-  {
-    id: '04',
-    title: 'Cloud Services',
-    desc: 'Secure, scalable, and resilient cloud infrastructure deployment.',
-    link: '#contact',
-  },
-];
-
 export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
   const [activeId, setActiveId] = useState<string>('01');
+
+  const services = PRIMARY_SERVICES.map((svc, idx) => ({
+    id: String(idx + 1).padStart(2, '0'),
+    title: svc.label,
+    desc: svc.description,
+    link: svc.href,
+  }));
 
   return (
     <section
@@ -62,7 +45,7 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
             transition={{ type: 'spring', stiffness: 180, damping: 24 }}
             className="services-heading-title"
             style={{
-              fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif",
+              fontFamily: "var(--font-playfair), Georgia, 'Times New Roman', serif",
               fontWeight: 500,
               lineHeight: 1.18,
               letterSpacing: '-0.01em',
@@ -84,6 +67,19 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
               SERVICES
             </span>
           </motion.h2>
+          <p
+            style={{
+              marginTop: '1.35rem',
+              fontSize: '0.98rem',
+              lineHeight: 1.65,
+              color: 'rgba(15, 15, 17, 0.65)',
+              maxWidth: '40rem',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            Dedicated commercial web engineering, online stores, custom software, SEO, and AI automation tailored for Sri Lankan and international businesses.
+          </p>
         </div>
 
         {/* Services List */}
@@ -97,7 +93,7 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
             width: '100%',
           }}
         >
-          {SERVICES.map((service, index) => {
+          {services.map((service, index) => {
             const isActive = activeId === service.id;
 
             return (
@@ -105,18 +101,12 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
                 key={service.id}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.08, type: 'spring', stiffness: 200, damping: 24 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ delay: index * 0.05, type: 'spring', stiffness: 200, damping: 24 }}
                 style={{ width: '100%' }}
               >
                 <Link
                   href={service.link}
-                  onClick={(e) => {
-                    if (service.link === '#contact' && onOpenContact) {
-                      e.preventDefault();
-                      onOpenContact();
-                    }
-                  }}
                   onMouseEnter={() => setActiveId(service.id)}
                   onFocus={() => setActiveId(service.id)}
                   className={`service-row ${isActive ? 'service-row-active' : ''}`}
@@ -124,7 +114,8 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
                     display: 'block',
                     textDecoration: 'none',
                     borderRadius: '1.25rem',
-                    transition: 'background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                    transition:
+                      'background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                     backgroundColor: isActive ? '#0a0a0a' : 'transparent',
                     boxShadow: isActive ? '0 20px 40px -15px rgba(0, 0, 0, 0.28)' : 'none',
                     borderBottom: isActive ? '1px solid transparent' : '1px solid rgba(0, 0, 0, 0.12)',
@@ -152,7 +143,7 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
                       <h3
                         className="service-title-text"
                         style={{
-                          fontSize: 'clamp(1.5rem, 2.5vw, 2.25rem)',
+                          fontSize: 'clamp(1.35rem, 2.3vw, 2.05rem)',
                           fontWeight: 600,
                           letterSpacing: '-0.02em',
                           color: isActive ? '#ffffff' : '#0f0f11',
@@ -173,9 +164,9 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
                           margin: 0,
                           fontSize: '0.9375rem',
                           lineHeight: 1.6,
-                          color: isActive ? 'rgba(255, 255, 255, 0.78)' : 'rgba(15, 15, 17, 0.68)',
+                          color: isActive ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 15, 17, 0.68)',
                           transition: 'color 0.3s ease',
-                          maxWidth: '430px',
+                          maxWidth: '450px',
                         }}
                       >
                         {service.desc}
@@ -193,7 +184,8 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                          transition:
+                            'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                           backgroundColor: isActive ? '#ffffff' : 'transparent',
                           border: isActive ? '1px solid #ffffff' : '1px solid rgba(15, 15, 17, 0.3)',
                           color: isActive ? '#0a0a0a' : '#0f0f11',
@@ -215,8 +207,8 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
                             transform: isActive ? 'translate(1px, -1px)' : 'translate(0, 0)',
                           }}
                         >
-                          <line x1="7" y1="17" x2="17" y2="7"></line>
-                          <polyline points="7 7 17 7 17 17"></polyline>
+                          <line x1="7" y1="17" x2="17" y2="7" />
+                          <polyline points="7 7 17 7 17 17" />
                         </svg>
                       </div>
                     </div>
@@ -226,34 +218,99 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
             );
           })}
         </div>
+        {/* Bottom Quick Consultation Prompt */}
+        <div className="services-consult-strip">
+          <p className="services-consult-copy">
+            Not sure which package fits your goals? Get tailored architecture advice and an initial estimate.
+          </p>
+          {onOpenContact ? (
+            <button
+              type="button"
+              onClick={() => {
+                trackCtaClick('Get a Free Consultation', 'services_strip');
+                onOpenContact();
+              }}
+              className="services-consult-btn"
+            >
+              Get a Free Consultation ↗
+            </button>
+          ) : (
+            <Link href="/contact" className="services-consult-btn">
+              Get a Free Consultation ↗
+            </Link>
+          )}
+        </div>
       </div>
 
       <style>{`
         .services-section-root {
-          padding: 6.5rem 1.5rem;
+          padding: 6rem 1.5rem;
         }
 
         .services-header-box {
-          margin-bottom: 4.5rem;
+          margin-bottom: 4rem;
         }
 
         .services-heading-title {
           font-size: clamp(2.25rem, 5vw, 3.75rem);
         }
 
+        .services-consult-strip {
+          margin-top: 2.25rem;
+          padding: 1.5rem 2rem;
+          border-radius: 1.25rem;
+          background: #f8fafc;
+          border: 1px solid rgba(15, 15, 17, 0.09);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 1rem 1.5rem;
+        }
+
+        .services-consult-copy {
+          margin: 0;
+          font-size: 0.95rem;
+          line-height: 1.55;
+          color: rgba(15, 15, 17, 0.72);
+        }
+
+        .services-consult-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 44px;
+          padding: 0.7rem 1.35rem;
+          border-radius: 9999px;
+          background: #0f0f11;
+          color: #ffffff;
+          font-size: 0.875rem;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .services-consult-btn:hover {
+          transform: translateY(-1px);
+          background: #2563c9;
+        }
+
         .service-row-inner {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 2.25rem 2rem;
+          padding: 2rem 2rem;
           gap: 2rem;
         }
 
         .service-left-col {
           display: flex;
           align-items: center;
-          gap: 2rem;
-          min-width: 320px;
+          gap: 1.75rem;
+          min-width: 340px;
           flex-shrink: 0;
         }
 
@@ -273,7 +330,7 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
 
         @media (max-width: 1024px) {
           .service-row-inner {
-            padding: 1.75rem 1.5rem;
+            padding: 1.65rem 1.5rem;
             gap: 1.5rem;
           }
           .service-left-col {
@@ -286,8 +343,21 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
           }
         }
 
-        /* Mobile & Small Tablets - Scaled to match other sections while preserving desktop styling */
         @media (max-width: 860px) {
+          .services-consult-strip {
+            margin-top: 24px !important;
+            padding: 18px 16px !important;
+            border-radius: 16px !important;
+            gap: 12px !important;
+          }
+          .services-consult-copy {
+            font-size: 14px !important;
+          }
+          .services-consult-btn {
+            width: 100%;
+            font-size: 13.5px !important;
+            padding: 10px 18px !important;
+          }
           .services-section-root {
             padding: 3.5rem 1.25rem 4rem !important;
           }
@@ -315,7 +385,7 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
             min-width: 1.75rem !important;
           }
           .service-title-text {
-            font-size: 1.25rem !important;
+            font-size: 1.2rem !important;
           }
           .service-mid-col {
             padding: 0;
@@ -363,15 +433,17 @@ export function ServicesSection({ onOpenContact }: ServicesSectionProps) {
             min-width: 1.5rem !important;
           }
           .service-title-text {
-            font-size: 1.15rem !important;
+            font-size: 1.1rem !important;
           }
           .service-desc-text {
             font-size: 0.8125rem !important;
             line-height: 1.5 !important;
           }
-          .service-circle-btn {
+          .service-right-col {
             top: 1rem !important;
             right: 1rem !important;
+          }
+          .service-circle-btn {
             width: 2.15rem !important;
             height: 2.15rem !important;
           }

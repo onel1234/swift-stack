@@ -2,6 +2,16 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import {
+  getWhatsAppUrl,
+  PRIMARY_SERVICES,
+  SITE_EMAIL,
+  SITE_LOCATION_LABEL,
+  SITE_PHONE_DISPLAY,
+  SITE_PHONE_E164,
+} from '@/lib/site';
+import { trackPhoneClick, trackWhatsAppClick } from '@/lib/analytics';
 
 interface FooterProps {
   onOpenContact?: () => void;
@@ -10,28 +20,26 @@ interface FooterProps {
 export function Footer({ onOpenContact }: FooterProps) {
   return (
     <footer id="contact" className="ref-footer-section">
-      {/* Ambient Radial Glowing Auroras matching reference */}
+      {/* Ambient Radial Glowing Auroras */}
       <div className="ref-footer-glow ref-footer-glow-primary" aria-hidden="true" />
       <div className="ref-footer-glow ref-footer-glow-secondary" aria-hidden="true" />
 
       <div className="ref-footer-inner">
-        {/* Top Eyebrow Tag */}
         <div className="ref-footer-tag">
           <span className="ref-footer-tag-dot" />
-          <span>Contact Us</span>
+          <span>Get a Free Website Consultation</span>
         </div>
 
-        {/* Main Headline - Tailored for Swift Stack Digital */}
         <h2 className="ref-footer-heading">
-          Interested in working together, building your next digital project, or simply learning more?
+          Ready to build a website, online store, or custom software that brings real enquiries?
         </h2>
 
-        {/* Middle Row: Agency Contact Details on Left, Real Site Navigation on Right */}
+        {/* Middle Row: Agency Contact Details on Left, Crawlable Service & Company Links on Right */}
         <div className="ref-footer-middle">
           <div className="ref-footer-contact">
-            <span className="ref-footer-contact-lbl">Contact our team:</span>
+            <span className="ref-footer-contact-lbl">Direct agency desk:</span>
             <a
-              href="mailto:contact@swiftstack.digital"
+              href={`mailto:${SITE_EMAIL}`}
               onClick={(e) => {
                 if (onOpenContact) {
                   e.preventDefault();
@@ -40,74 +48,84 @@ export function Footer({ onOpenContact }: FooterProps) {
               }}
               className="ref-footer-email-link"
             >
-              contact@swiftstack.digital
+              {SITE_EMAIL}
               <span className="ref-footer-arrow">↗</span>
             </a>
             <div className="ref-footer-contact-meta">
-              <a href="tel:+94758441413" className="ref-footer-meta-item">+94 75 8441413</a>
+              <a
+                href={`tel:${SITE_PHONE_E164}`}
+                onClick={() => trackPhoneClick('footer')}
+                className="ref-footer-meta-item"
+              >
+                {SITE_PHONE_DISPLAY}
+              </a>
               <span className="ref-footer-meta-dot">&bull;</span>
-              <span className="ref-footer-meta-item">Kiribathgoda, Sri Lanka</span>
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick('footer')}
+                className="ref-footer-meta-item ref-footer-wa-link"
+              >
+                WhatsApp Direct ↗
+              </a>
+              <span className="ref-footer-meta-dot">&bull;</span>
+              <span className="ref-footer-meta-item">{SITE_LOCATION_LABEL}</span>
             </div>
           </div>
 
-          <nav className="ref-footer-nav" aria-label="Footer Navigation">
-            <Link href="/#services" className="ref-footer-nav-link">Services</Link>
-            <Link href="/#facilities" className="ref-footer-nav-link">Process</Link>
-            <Link href="/work" className="ref-footer-nav-link">Work</Link>
-            <Link href="/#testimonials" className="ref-footer-nav-link">Testimonials</Link>
-            <Link href="/#faq" className="ref-footer-nav-link">FAQ</Link>
-          </nav>
+          <div className="ref-footer-columns">
+            <nav className="ref-footer-col" aria-label="Services Navigation">
+              <span className="ref-footer-col-title">Services</span>
+              <div className="ref-footer-col-links">
+                {PRIMARY_SERVICES.map((svc) => (
+                  <Link key={svc.href} href={svc.href} className="ref-footer-nav-link">
+                    {svc.shortLabel}
+                  </Link>
+                ))}
+              </div>
+            </nav>
+
+            <nav className="ref-footer-col" aria-label="Company Navigation">
+              <span className="ref-footer-col-title">Company &amp; Guides</span>
+              <div className="ref-footer-col-links">
+                <Link href="/work" className="ref-footer-nav-link">Our Work</Link>
+                <Link href="/blog" className="ref-footer-nav-link">Cost &amp; Buyer Guides</Link>
+                <Link href="/about" className="ref-footer-nav-link">About Swift Stack</Link>
+                <Link href="/contact" className="ref-footer-nav-link">Get a Quote</Link>
+              </div>
+            </nav>
+          </div>
         </div>
 
         {/* Giant Logo & Wordmark Showcase */}
         <div className="ref-footer-brand-hero">
-          <img
+          <Image
             src="/Gemini_Generated_Image_p1oekyp1oekyp1oe-removebg-preview.png"
-            alt="Swift Stack Logo"
+            alt="Swift Stack Digital Logo"
+            width={144}
+            height={144}
             className="ref-footer-giant-logo"
           />
           <span className="ref-footer-giant-text">Swift Stack</span>
         </div>
 
-        {/* Bottom Bar: Copyright & Social Links */}
+        {/* Bottom Bar: Verified Quick Links & Copyright */}
         <div className="ref-footer-bottom">
           <div className="ref-footer-socials">
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ref-footer-social-link"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ref-footer-social-link"
-            >
-              Twitter
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ref-footer-social-link"
-            >
-              Facebook
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ref-footer-social-link"
-            >
-              Instagram
-            </a>
+            <Link href="/blog/website-cost-in-sri-lanka-2026" className="ref-footer-social-link">
+              2026 Sri Lanka Website Cost Guide
+            </Link>
+            <Link href="/work" className="ref-footer-social-link">
+              Case Studies
+            </Link>
+            <Link href="/contact" className="ref-footer-social-link">
+              Request Estimate
+            </Link>
           </div>
 
           <div className="ref-footer-copyright">
-            &copy; {new Date().getFullYear()} Swift Stack Digital. All rights reserved.
+            &copy; {new Date().getFullYear()} Swift Stack Digital. Built in Sri Lanka for ambitious businesses.
           </div>
         </div>
       </div>
@@ -124,7 +142,6 @@ export function Footer({ onOpenContact }: FooterProps) {
           box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.45);
         }
 
-        /* Ambient glowing background aura */
         .ref-footer-glow {
           position: absolute;
           border-radius: 50%;
@@ -170,14 +187,13 @@ export function Footer({ onOpenContact }: FooterProps) {
           flex-direction: column;
         }
 
-        /* Eyebrow tag */
         .ref-footer-tag {
           display: inline-flex;
           align-items: center;
           gap: 0.55rem;
           font-size: 0.8125rem;
           font-weight: 500;
-          color: rgba(255, 255, 255, 0.75);
+          color: rgba(255, 255, 255, 0.78);
           letter-spacing: 0.03em;
         }
         .ref-footer-tag-dot {
@@ -189,42 +205,41 @@ export function Footer({ onOpenContact }: FooterProps) {
           display: inline-block;
         }
 
-        /* Main Heading */
         .ref-footer-heading {
-          font-family: var(--font-onest, 'Plus Jakarta Sans', 'Onest', sans-serif);
-          font-size: clamp(2rem, 3.8vw, 3.5rem);
+          font-family: var(--font-onest), 'Plus Jakarta Sans', sans-serif;
+          font-size: clamp(1.9rem, 3.6vw, 3.25rem);
           font-weight: 500;
           line-height: 1.15;
           letter-spacing: -0.025em;
           color: #ffffff;
-          max-width: 48rem;
+          max-width: 50rem;
           margin-top: 1.25rem;
           margin-bottom: 0;
         }
 
-        /* Middle Row */
         .ref-footer-middle {
           display: flex;
           justify-content: space-between;
-          align-items: flex-end;
+          align-items: flex-start;
           flex-wrap: wrap;
-          gap: 2.5rem;
-          margin-top: clamp(3rem, 6vw, 5.5rem);
-          margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
+          gap: 2.5rem 3.5rem;
+          margin-top: clamp(2.75rem, 5vw, 4.75rem);
+          margin-bottom: clamp(3rem, 5vw, 4.75rem);
         }
 
         .ref-footer-contact {
           display: flex;
           flex-direction: column;
-          gap: 0.45rem;
+          gap: 0.5rem;
+          max-width: 34rem;
         }
         .ref-footer-contact-lbl {
           font-size: 0.8125rem;
-          color: rgba(255, 255, 255, 0.45);
+          color: rgba(255, 255, 255, 0.5);
           font-weight: 400;
         }
         .ref-footer-email-link {
-          font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+          font-size: clamp(1.1rem, 1.5vw, 1.35rem);
           font-weight: 500;
           color: #ffffff;
           display: inline-flex;
@@ -249,41 +264,60 @@ export function Footer({ onOpenContact }: FooterProps) {
         .ref-footer-contact-meta {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          font-size: 0.8125rem;
-          color: rgba(255, 255, 255, 0.45);
-          margin-top: 0.25rem;
+          flex-wrap: wrap;
+          gap: 0.45rem 0.65rem;
+          font-size: 0.84rem;
+          color: rgba(255, 255, 255, 0.62);
+          margin-top: 0.35rem;
         }
         .ref-footer-meta-item {
-          color: rgba(255, 255, 255, 0.5);
+          color: rgba(255, 255, 255, 0.72);
           transition: color 0.2s ease;
+        }
+        .ref-footer-wa-link {
+          color: #4ade80;
+          font-weight: 500;
         }
         a.ref-footer-meta-item:hover {
           color: #ffffff;
         }
         .ref-footer-meta-dot {
-          color: rgba(255, 255, 255, 0.25);
+          color: rgba(255, 255, 255, 0.28);
         }
 
-        /* Navigation Links */
-        .ref-footer-nav {
+        .ref-footer-columns {
           display: flex;
-          align-items: center;
-          gap: clamp(1.25rem, 2.5vw, 2.25rem);
           flex-wrap: wrap;
+          gap: 2.5rem 4rem;
+        }
+        .ref-footer-col {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .ref-footer-col-title {
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #38bdf8;
+        }
+        .ref-footer-col-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0.55rem;
         }
         .ref-footer-nav-link {
-          font-size: 0.9375rem;
+          font-size: 0.9rem;
           font-weight: 500;
-          color: rgba(255, 255, 255, 0.65);
+          color: rgba(255, 255, 255, 0.72);
           transition: color 0.2s ease, transform 0.2s ease;
         }
         .ref-footer-nav-link:hover {
           color: #ffffff;
-          transform: translateY(-1px);
+          transform: translateX(2px);
         }
 
-        /* Giant Brand Logo & Wordmark */
         .ref-footer-brand-hero {
           display: flex;
           align-items: center;
@@ -301,7 +335,7 @@ export function Footer({ onOpenContact }: FooterProps) {
           filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.5));
         }
         .ref-footer-giant-text {
-          font-family: var(--font-onest, 'Plus Jakarta Sans', 'Onest', sans-serif);
+          font-family: var(--font-onest), 'Plus Jakarta Sans', sans-serif;
           font-size: clamp(3.25rem, 10.5vw, 10.5rem);
           font-weight: 800;
           letter-spacing: -0.035em;
@@ -309,7 +343,6 @@ export function Footer({ onOpenContact }: FooterProps) {
           white-space: nowrap;
         }
 
-        /* Bottom Bar */
         .ref-footer-bottom {
           display: flex;
           justify-content: space-between;
@@ -317,9 +350,9 @@ export function Footer({ onOpenContact }: FooterProps) {
           flex-wrap: wrap;
           gap: 1.25rem;
           padding-top: 1.75rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
           font-size: 0.8125rem;
-          color: rgba(255, 255, 255, 0.4);
+          color: rgba(255, 255, 255, 0.55);
         }
         .ref-footer-copyright {
           letter-spacing: 0.01em;
@@ -327,47 +360,70 @@ export function Footer({ onOpenContact }: FooterProps) {
         .ref-footer-socials {
           display: flex;
           align-items: center;
-          gap: 1.75rem;
+          flex-wrap: wrap;
+          gap: 1.5rem;
         }
         .ref-footer-social-link {
-          color: rgba(255, 255, 255, 0.4);
+          color: rgba(255, 255, 255, 0.65);
           transition: color 0.2s ease;
         }
         .ref-footer-social-link:hover {
           color: #ffffff;
         }
 
-        /* Tablet & Mobile Responsiveness */
+        @media (max-width: 1023px) {
+          .ref-footer-section {
+            padding: 44px 28px 32px;
+            border-radius: 24px;
+          }
+          .ref-footer-tag {
+            font-size: 13px;
+          }
+          .ref-footer-contact-lbl {
+            font-size: 13px;
+          }
+          .ref-footer-email-link {
+            font-size: 20px;
+          }
+          .ref-footer-contact-meta {
+            font-size: 13.5px;
+            gap: 8px 10px;
+          }
+          .ref-footer-col-title {
+            font-size: 11.5px;
+          }
+          .ref-footer-nav-link {
+            font-size: 14.5px;
+          }
+          .ref-footer-bottom {
+            font-size: 13px;
+            padding-top: 24px;
+          }
+        }
+
         @media (max-width: 768px) {
           .ref-footer-section {
             padding: 3rem 1.5rem max(3.5rem, calc(2rem + env(safe-area-inset-bottom, 1.5rem)));
           }
           .ref-footer-heading {
-            font-size: clamp(1.6rem, 5.5vw, 2.25rem);
+            font-size: clamp(1.55rem, 5.5vw, 2.2rem);
             line-height: 1.2;
             letter-spacing: -0.02em;
           }
           .ref-footer-middle {
             flex-direction: column;
             align-items: flex-start;
-            gap: 2rem;
-            margin-top: 2.5rem;
-            margin-bottom: 3rem;
+            gap: 2.25rem;
+            margin-top: 2.25rem;
+            margin-bottom: 2.75rem;
           }
-          .ref-footer-nav {
-            display: grid;
-            grid-template-columns: repeat(2, auto);
-            justify-content: start;
-            gap: 0.85rem 2.5rem;
+          .ref-footer-columns {
+            gap: 2rem 3rem;
             width: 100%;
-          }
-          .ref-footer-nav-link {
-            font-size: 0.9375rem;
-            padding: 0.2rem 0;
           }
           .ref-footer-brand-hero {
             gap: clamp(0.6rem, 2vw, 1.25rem);
-            margin-bottom: 3rem;
+            margin-bottom: 2.75rem;
           }
           .ref-footer-giant-logo {
             height: clamp(2.25rem, 8vw, 4.25rem);
@@ -379,35 +435,25 @@ export function Footer({ onOpenContact }: FooterProps) {
           .ref-footer-bottom {
             flex-direction: column;
             align-items: flex-start;
-            gap: 1.25rem;
+            gap: 1rem;
             padding-top: 1.5rem;
           }
           .ref-footer-socials {
-            gap: 1.5rem;
-            flex-wrap: wrap;
+            gap: 1rem 1.5rem;
           }
         }
 
-        /* Small Phones (iPhone SE, Galaxy, Pixel, etc.) */
         @media (max-width: 480px) {
           .ref-footer-section {
             padding: 2.5rem 1.25rem max(4.25rem, calc(3rem + env(safe-area-inset-bottom, 1.5rem)));
           }
           .ref-footer-heading {
-            font-size: clamp(1.4rem, 6.8vw, 1.75rem);
+            font-size: clamp(1.38rem, 6.4vw, 1.7rem);
             line-height: 1.22;
-          }
-          .ref-footer-middle {
-            gap: 1.75rem;
-            margin-top: 2.25rem;
-            margin-bottom: 2.5rem;
-          }
-          .ref-footer-nav {
-            gap: 0.75rem 2rem;
           }
           .ref-footer-brand-hero {
             gap: 0.6rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.25rem;
           }
           .ref-footer-giant-logo {
             height: clamp(1.85rem, 7vw, 2.5rem);
@@ -416,14 +462,10 @@ export function Footer({ onOpenContact }: FooterProps) {
             font-size: clamp(1.65rem, 7.5vw, 2.4rem);
           }
           .ref-footer-contact-meta {
-            font-size: 0.75rem;
-            flex-wrap: wrap;
+            font-size: 0.78rem;
           }
           .ref-footer-email-link {
             font-size: 1.05rem;
-          }
-          .ref-footer-socials {
-            gap: 1.15rem;
           }
         }
       `}</style>

@@ -1,7 +1,10 @@
 'use client';
+
 import { useRef } from 'react';
+import Link from 'next/link';
+import Image, { getImageProps } from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
+import { trackCtaClick } from '@/lib/analytics';
 
 interface HeroSectionProps {
   onOpenMenu?: () => void;
@@ -12,13 +15,44 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start']
+    offset: ['start start', 'end start'],
   });
 
   // Smooth subtle parallax for the celestial background image
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '7%']);
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '9%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.3]);
+
+  const commonImg = {
+    alt: 'Astronaut beneath a glowing Earthlike horizon representing digital growth with Swift Stack Digital',
+    sizes: '100vw',
+    quality: 85,
+  };
+
+  const {
+    props: { srcSet: desktopSrcSet },
+  } = getImageProps({
+    ...commonImg,
+    width: 1660,
+    height: 948,
+    src: '/images/astronaut-horizon-desktop.webp',
+  });
+
+  const {
+    props: { alt: mobileAlt, ...mobileImgProps },
+  } = getImageProps({
+    ...commonImg,
+    width: 576,
+    height: 1024,
+    src: '/images/astronaut-mobile-horizon.webp',
+  });
+
+  const handlePrimaryCta = (location: string) => {
+    trackCtaClick('Get a Free Consultation', location);
+    if (onOpenContact) {
+      onOpenContact();
+    }
+  };
 
   return (
     <section
@@ -38,10 +72,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
         flexDirection: 'column',
       }}
     >
-      {/* Background Image Container:
-          Locked to 16:9 / 16:10 celestial framing so that on wider/bigger monitors
-          the Earth horizon and astronaut stay perfectly anchored at the exact same vertical ratio
-      */}
+      {/* Art-directed celestial backdrop: loads only 32KB WebP on mobile or 107KB WebP on desktop */}
       <motion.div
         className="hero-bg-container"
         style={{
@@ -52,60 +83,20 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           height: '100%',
           zIndex: 0,
           pointerEvents: 'none',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
           overflow: 'hidden',
         }}
       >
-        {/* Desktop Celestial Background Frame */}
-        <div
-          className="hero-bg-frame hero-bg-desktop"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '104%',
-            top: '4%',
-          }}
-        >
-          <Image
-            src="/images/Astronaut Beneath a Glowing Earthlike Horizon.png"
-            alt="Astronaut Beneath a Glowing Earthlike Horizon - Swift Stack Digital"
-            fill
-            priority
-            sizes="100vw"
-            quality={95}
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center 20%',
-            }}
+        <picture className="hero-picture">
+          <source media="(min-width: 901px)" srcSet={desktopSrcSet} sizes="100vw" />
+          <img
+            {...mobileImgProps}
+            alt={mobileAlt}
+            fetchPriority="high"
+            loading="eager"
+            decoding="sync"
+            className="hero-bg-img"
           />
-        </div>
-
-        {/* Mobile Portrait Background Frame (Pixel-Matched to Mobile Design Horizon) */}
-        <div
-          className="hero-bg-frame hero-bg-mobile"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-          }}
-        >
-          <Image
-            src="/images/Astronaut-Mobile-Horizon.jpg"
-            alt="Astronaut Horizon Mobile - Swift Stack Digital"
-            fill
-            priority
-            sizes="100vw"
-            quality={95}
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center top',
-            }}
-          />
-        </div>
+        </picture>
 
         {/* Ambient atmospheric vignettes to blend edges seamlessly into space background */}
         <div
@@ -127,10 +118,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
       </motion.div>
 
       {/* Top Header / Navigation Bar */}
-      <motion.header
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      <header
         className="hero-header"
         style={{
           position: 'relative',
@@ -145,8 +133,8 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
         }}
       >
         {/* Brand Logo & Name */}
-        <a
-          href="#"
+        <Link
+          href="/"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -155,9 +143,12 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             color: 'inherit',
           }}
         >
-          <img
+          <Image
             src="/Gemini_Generated_Image_p1oekyp1oekyp1oe-removebg-preview.png"
-            alt="Swift Stack Logo"
+            alt="Swift Stack Digital Logo"
+            width={56}
+            height={56}
+            loading="eager"
             style={{
               width: '3.5rem',
               height: '3.5rem',
@@ -168,7 +159,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span
               style={{
-                fontFamily: 'var(--font-onest, "Plus Jakarta Sans", "Onest", sans-serif)',
+                fontFamily: 'var(--font-onest), "Plus Jakarta Sans", sans-serif',
                 fontSize: '1.05rem',
                 fontWeight: 700,
                 color: '#ffffff',
@@ -181,7 +172,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             </span>
             <span
               style={{
-                fontFamily: 'var(--font-onest, "Plus Jakarta Sans", "Onest", sans-serif)',
+                fontFamily: 'var(--font-onest), "Plus Jakarta Sans", sans-serif',
                 fontSize: '0.75rem',
                 fontWeight: 400,
                 color: '#94a3b8',
@@ -193,12 +184,16 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
               Digital
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hero-nav-links" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1.75rem, 2.2vw, 2.75rem)' }}>
-          <a
-            href="#"
+        <nav
+          aria-label="Primary Navigation"
+          className="hero-nav-links"
+          style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1.5rem, 2vw, 2.5rem)' }}
+        >
+          <Link
+            href="/"
             className="hero-nav-link active"
             style={{
               position: 'relative',
@@ -223,77 +218,89 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
                 boxShadow: '0 0 10px rgba(56, 189, 248, 0.9), 0 0 16px rgba(56, 189, 248, 0.5)',
               }}
             />
-          </a>
-          <a
-            href="#programs"
+          </Link>
+          <Link
+            href="/#services"
             className="hero-nav-link"
             style={{
               fontSize: '0.875rem',
               fontWeight: 400,
-              color: 'rgba(255, 255, 255, 0.72)',
+              color: 'rgba(255, 255, 255, 0.78)',
               textDecoration: 'none',
               transition: 'color 0.2s ease',
               whiteSpace: 'nowrap',
             }}
           >
             Services
-          </a>
-          <a
-            href="#facilities"
+          </Link>
+          <Link
+            href="/work"
             className="hero-nav-link"
             style={{
               fontSize: '0.875rem',
               fontWeight: 400,
-              color: 'rgba(255, 255, 255, 0.72)',
+              color: 'rgba(255, 255, 255, 0.78)',
               textDecoration: 'none',
               transition: 'color 0.2s ease',
               whiteSpace: 'nowrap',
             }}
           >
             Our Work
-          </a>
-          <a
-            href="#trust-title"
+          </Link>
+          <Link
+            href="/blog"
             className="hero-nav-link"
             style={{
               fontSize: '0.875rem',
               fontWeight: 400,
-              color: 'rgba(255, 255, 255, 0.72)',
+              color: 'rgba(255, 255, 255, 0.78)',
+              textDecoration: 'none',
+              transition: 'color 0.2s ease',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Blog
+          </Link>
+          <Link
+            href="/about"
+            className="hero-nav-link"
+            style={{
+              fontSize: '0.875rem',
+              fontWeight: 400,
+              color: 'rgba(255, 255, 255, 0.78)',
               textDecoration: 'none',
               transition: 'color 0.2s ease',
               whiteSpace: 'nowrap',
             }}
           >
             About
-          </a>
-          <button
-            onClick={onOpenContact}
+          </Link>
+          <Link
+            href="/contact"
             className="hero-nav-link"
             style={{
               fontSize: '0.875rem',
               fontWeight: 400,
-              color: 'rgba(255, 255, 255, 0.72)',
-              background: 'none',
-              border: 'none',
-              padding: 0,
-              cursor: 'pointer',
+              color: 'rgba(255, 255, 255, 0.78)',
+              textDecoration: 'none',
               transition: 'color 0.2s ease',
               whiteSpace: 'nowrap',
             }}
           >
             Contact
-          </button>
+          </Link>
         </nav>
 
         {/* Right CTA / Mobile Menu Button */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <button
-            onClick={onOpenContact}
+            type="button"
+            onClick={() => handlePrimaryCta('hero_header')}
             className="hero-consultation-btn"
             style={{
               borderRadius: '9999px',
-              border: '1px solid rgba(255, 255, 255, 0.22)',
-              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid rgba(255, 255, 255, 0.24)',
+              background: 'rgba(255, 255, 255, 0.05)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
               padding: '0.52rem 1.35rem',
@@ -314,6 +321,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
 
           {/* Mobile hamburger menu toggle */}
           <button
+            type="button"
             onClick={onOpenMenu}
             className="hero-mobile-menu-btn"
             aria-label="Open menu"
@@ -334,11 +342,9 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             <div style={{ height: '1.5px', width: '1.1rem', background: '#ffffff', borderRadius: '1px' }} />
           </button>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Main Hero Content (Eyebrow, Headline, Subtitle, CTA Buttons)
-          Positioned stably in deep space so it never jumps or breaks on wider screens
-      */}
+      {/* Main Hero Content (No opacity:0 initial hide so LCP & H1 paint on initial HTML) */}
       <motion.div
         style={{
           y: contentY,
@@ -349,42 +355,34 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           maxWidth: '64rem',
           margin: '0 auto',
           textAlign: 'center',
-          padding: 'clamp(4rem, 12vh, 10rem) 1.5rem 0',
+          padding: 'clamp(3.25rem, 10vh, 8.5rem) 1.5rem 0',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}
         className="hero-content-wrapper"
       >
-        {/* Eyebrow / Tagline: single line */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        <div
           className="hero-eyebrow"
           style={{
-            fontFamily: 'var(--font-onest, "Plus Jakarta Sans", "Onest", sans-serif)',
+            fontFamily: 'var(--font-onest), "Plus Jakarta Sans", sans-serif',
             fontSize: 'clamp(0.6875rem, 0.8vw, 0.78125rem)',
             fontWeight: 600,
             textTransform: 'uppercase',
-            letterSpacing: '0.22em',
+            letterSpacing: '0.2em',
             color: '#7dd3fc',
             marginBottom: 'clamp(0.65rem, 1.2vh, 1rem)',
             textShadow: '0 0 18px rgba(56, 189, 248, 0.5)',
             whiteSpace: 'nowrap',
           }}
         >
-          WEB DEVELOPMENT &nbsp;/&nbsp; SEO &nbsp;/&nbsp; DIGITAL SOLUTIONS
-        </motion.div>
+          SRI LANKA &amp; GLOBAL &nbsp;&bull;&nbsp; WEB &middot; E-COMMERCE &middot; SOFTWARE &middot; AI
+        </div>
 
-        {/* Main Headline: Two clean lines locked on desktop, 3 lines on mobile matching reference */}
-        <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        <h1
           className="hero-headline"
           style={{
-            fontFamily: 'var(--font-onest, "Plus Jakarta Sans", "Onest", sans-serif)',
+            fontFamily: 'var(--font-onest), "Plus Jakarta Sans", sans-serif',
             fontSize: 'clamp(2.15rem, 3.4vw, 3.85rem)',
             fontWeight: 700,
             lineHeight: 1.15,
@@ -397,40 +395,32 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           }}
         >
           <span className="hero-hl-desktop" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-            Build Your Digital Future
+            Websites, Stores &amp; Software
           </span>
-          <span className="hero-hl-mobile-1">Build Your</span>
-          <span className="hero-hl-mobile-2">Digital Future</span>
+          <span className="hero-hl-mobile-1">Websites, Stores</span>
+          <span className="hero-hl-mobile-2">&amp; Custom Software</span>
           <span className="hero-gradient-text hero-hl-gradient" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-            With Swift Stack
+            Built for Real Growth
           </span>
-        </motion.h1>
+        </h1>
 
-        {/* Subtitle description */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        <p
           className="hero-subtitle"
           style={{
-            maxWidth: '44rem',
+            maxWidth: '46rem',
             margin: '0 auto clamp(1rem, 2vh, 1.75rem)',
-            fontSize: 'clamp(0.8125rem, 0.98vw, 0.9875rem)',
+            fontSize: 'clamp(0.84rem, 1vw, 1rem)',
             lineHeight: 1.6,
-            color: '#94a3b8',
+            color: '#cbd5e1',
             fontWeight: 400,
           }}
         >
           <span className="hero-sub-text">
-            We help ambitious businesses in Sri Lanka and beyond build high-performing websites, powerful applications, and stronger online presence.
+            We partner with businesses across Sri Lanka and worldwide to engineer fast websites, high-converting e-commerce stores, custom CRM software, SEO, and practical AI automation.
           </span>
-        </motion.p>
+        </p>
 
-        {/* CTA Buttons - resting cleanly in deep space above the glowing Earth horizon */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        <div
           className="hero-cta-row"
           style={{
             display: 'flex',
@@ -440,15 +430,15 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             flexWrap: 'nowrap',
           }}
         >
-          {/* Primary CTA: Get Started */}
           <button
-            onClick={onOpenContact}
+            type="button"
+            onClick={() => handlePrimaryCta('hero_main')}
             className="hero-primary-cta"
             style={{
               borderRadius: '9999px',
               background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
               color: '#ffffff',
-              padding: 'clamp(0.62rem, 1vh, 0.8rem) clamp(1.6rem, 1.8vw, 2.2rem)',
+              padding: 'clamp(0.65rem, 1vh, 0.85rem) clamp(1.6rem, 1.8vw, 2.2rem)',
               fontSize: 'clamp(0.8125rem, 0.88vw, 0.9375rem)',
               fontWeight: 600,
               cursor: 'pointer',
@@ -462,22 +452,22 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
               whiteSpace: 'nowrap',
             }}
           >
-            Get Started
+            Get a Free Consultation
             <span style={{ fontSize: '0.9375rem', transition: 'transform 0.2s ease' }}>&rarr;</span>
           </button>
 
-          {/* Secondary CTA: View Our Work */}
-          <a
-            href="#facilities"
+          <Link
+            href="/work"
+            onClick={() => trackCtaClick('View Our Work', 'hero_main')}
             className="hero-secondary-cta"
             style={{
               borderRadius: '9999px',
-              background: 'rgba(15, 23, 42, 0.5)',
-              border: '1px solid rgba(255, 255, 255, 0.22)',
+              background: 'rgba(15, 23, 42, 0.55)',
+              border: '1px solid rgba(255, 255, 255, 0.24)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
               color: '#ffffff',
-              padding: 'clamp(0.62rem, 1vh, 0.8rem) clamp(1.6rem, 1.8vw, 2.2rem)',
+              padding: 'clamp(0.65rem, 1vh, 0.85rem) clamp(1.6rem, 1.8vw, 2.2rem)',
               fontSize: 'clamp(0.8125rem, 0.88vw, 0.9375rem)',
               fontWeight: 500,
               cursor: 'pointer',
@@ -490,21 +480,18 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             }}
           >
             View Our Work
-          </a>
-        </motion.div>
+          </Link>
+        </div>
       </motion.div>
 
-      {/* Bottom Feature Section: Borderless horizontal row seated directly across the mountain terrain */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      {/* Bottom Feature Section */}
+      <div
         className="hero-features-container"
         style={{
           position: 'relative',
           zIndex: 20,
           width: '100%',
-          maxWidth: '62rem',
+          maxWidth: '64rem',
           margin: '0 auto',
           marginTop: 'auto',
           padding: '0 clamp(1.5rem, 3vw, 3rem) clamp(1.5rem, 3.5vh, 2.5rem)',
@@ -519,19 +506,9 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             width: '100%',
           }}
         >
-          {/* Feature 1: Custom Web Development */}
-          <div className="hero-feature-item" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-            <div
-              style={{
-                width: '2rem',
-                height: '2rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              {/* < / > Code Icon */}
+          {/* Pillar 1 */}
+          <Link href="/web-development" className="hero-feature-item" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.85rem', textDecoration: 'none' }}>
+            <div style={{ width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="7 8 3 12 7 16" />
                 <line x1="14" y1="4" x2="10" y2="20" />
@@ -541,47 +518,24 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div
                 className="hero-feature-title"
-                style={{
-                  fontSize: 'clamp(0.8125rem, 0.9vw, 0.9375rem)',
-                  fontWeight: 600,
-                  color: '#ffffff',
-                  lineHeight: 1.25,
-                  whiteSpace: 'nowrap',
-                }}
+                style={{ fontSize: 'clamp(0.8125rem, 0.9vw, 0.9375rem)', fontWeight: 600, color: '#ffffff', lineHeight: 1.25, whiteSpace: 'nowrap' }}
               >
-                Custom Web Development
+                Web &amp; E-Commerce
               </div>
               <div
                 className="hero-feature-desc"
-                style={{
-                  fontSize: 'clamp(0.7rem, 0.75vw, 0.8125rem)',
-                  color: '#94a3b8',
-                  marginTop: '0.15rem',
-                  lineHeight: 1.35,
-                  whiteSpace: 'nowrap',
-                }}
+                style={{ fontSize: 'clamp(0.7rem, 0.75vw, 0.8125rem)', color: '#94a3b8', marginTop: '0.15rem', lineHeight: 1.35, whiteSpace: 'nowrap' }}
               >
-                Modern, scalable, and built for growth.
+                Next.js sites &amp; online stores built to convert.
               </div>
             </div>
-          </div>
+          </Link>
 
-          {/* Thin Vertical Divider */}
-          <div className="hero-feature-divider" style={{ width: '1px', height: '2rem', background: 'rgba(255, 255, 255, 0.12)', margin: '0 clamp(1rem, 2vw, 2rem)', flexShrink: 0 }} />
+          <div className="hero-feature-divider" style={{ width: '1px', height: '2rem', background: 'rgba(255, 255, 255, 0.14)', margin: '0 clamp(1rem, 2vw, 2rem)', flexShrink: 0 }} />
 
-          {/* Feature 2: SEO That Delivers */}
-          <div className="hero-feature-item" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-            <div
-              style={{
-                width: '2rem',
-                height: '2rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              {/* Magnifying Glass Search Icon */}
+          {/* Pillar 2 */}
+          <Link href="/seo-services" className="hero-feature-item" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.85rem', textDecoration: 'none' }}>
+            <div style={{ width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="7" />
                 <line x1="21" y1="21" x2="16.5" y2="16.5" />
@@ -590,47 +544,24 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div
                 className="hero-feature-title"
-                style={{
-                  fontSize: 'clamp(0.8125rem, 0.9vw, 0.9375rem)',
-                  fontWeight: 600,
-                  color: '#ffffff',
-                  lineHeight: 1.25,
-                  whiteSpace: 'nowrap',
-                }}
+                style={{ fontSize: 'clamp(0.8125rem, 0.9vw, 0.9375rem)', fontWeight: 600, color: '#ffffff', lineHeight: 1.25, whiteSpace: 'nowrap' }}
               >
-                SEO That Delivers
+                Technical SEO &amp; Speed
               </div>
               <div
                 className="hero-feature-desc"
-                style={{
-                  fontSize: 'clamp(0.7rem, 0.75vw, 0.8125rem)',
-                  color: '#94a3b8',
-                  marginTop: '0.15rem',
-                  lineHeight: 1.35,
-                  whiteSpace: 'nowrap',
-                }}
+                style={{ fontSize: 'clamp(0.7rem, 0.75vw, 0.8125rem)', color: '#94a3b8', marginTop: '0.15rem', lineHeight: 1.35, whiteSpace: 'nowrap' }}
               >
-                More visibility. More customers.
+                Google search visibility &amp; mobile speed.
               </div>
             </div>
-          </div>
+          </Link>
 
-          {/* Thin Vertical Divider */}
-          <div className="hero-feature-divider" style={{ width: '1px', height: '2rem', background: 'rgba(255, 255, 255, 0.12)', margin: '0 clamp(1rem, 2vw, 2rem)', flexShrink: 0 }} />
+          <div className="hero-feature-divider" style={{ width: '1px', height: '2rem', background: 'rgba(255, 255, 255, 0.14)', margin: '0 clamp(1rem, 2vw, 2rem)', flexShrink: 0 }} />
 
-          {/* Feature 3: Digital Growth Solutions */}
-          <div className="hero-feature-item" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-            <div
-              style={{
-                width: '2rem',
-                height: '2rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              {/* Rising Analytics Growth Chart with Trend Arrow */}
+          {/* Pillar 3 */}
+          <Link href="/custom-software" className="hero-feature-item" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.85rem', textDecoration: 'none' }}>
+            <div style={{ width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 20V10" />
                 <path d="M12 20V4" />
@@ -642,37 +573,43 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div
                 className="hero-feature-title"
-                style={{
-                  fontSize: 'clamp(0.8125rem, 0.9vw, 0.9375rem)',
-                  fontWeight: 600,
-                  color: '#ffffff',
-                  lineHeight: 1.25,
-                  whiteSpace: 'nowrap',
-                }}
+                style={{ fontSize: 'clamp(0.8125rem, 0.9vw, 0.9375rem)', fontWeight: 600, color: '#ffffff', lineHeight: 1.25, whiteSpace: 'nowrap' }}
               >
-                Digital Growth Solutions
+                Custom Software &amp; AI
               </div>
               <div
                 className="hero-feature-desc"
-                style={{
-                  fontSize: 'clamp(0.7rem, 0.75vw, 0.8125rem)',
-                  color: '#94a3b8',
-                  marginTop: '0.15rem',
-                  lineHeight: 1.35,
-                  whiteSpace: 'nowrap',
-                }}
+                style={{ fontSize: 'clamp(0.7rem, 0.75vw, 0.8125rem)', color: '#94a3b8', marginTop: '0.15rem', lineHeight: 1.35, whiteSpace: 'nowrap' }}
               >
-                Strategy, design, and tech — all in one place.
+                CRMs, portals &amp; AI business automation.
               </div>
             </div>
-          </div>
+          </Link>
         </div>
-      </motion.div>
+      </div>
 
       {/* Section-scoped styles */}
       <style>{`
         .hero-root {
           box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-picture {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+
+        .hero-bg-img {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 104%;
+          top: 4%;
+          object-fit: cover;
+          object-position: center 20%;
         }
 
         .hero-gradient-text {
@@ -687,7 +624,7 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
         }
 
         .hero-consultation-btn:hover {
-          background: rgba(255, 255, 255, 0.12) !important;
+          background: rgba(255, 255, 255, 0.14) !important;
           border-color: rgba(255, 255, 255, 0.45) !important;
         }
         .hero-consultation-btn:hover span {
@@ -708,13 +645,6 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           border-color: rgba(255, 255, 255, 0.45) !important;
         }
 
-        .hero-bg-desktop {
-          display: block;
-        }
-        .hero-bg-mobile {
-          display: none;
-        }
-
         .hero-hl-desktop {
           display: inline-block;
         }
@@ -723,8 +653,8 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           display: none;
         }
 
-        @media (min-aspect-ratio: 16/9) {
-          .hero-bg-desktop {
+        @media (min-aspect-ratio: 16/9) and (min-width: 901px) {
+          .hero-bg-img {
             height: 108% !important;
             top: 2% !important;
           }
@@ -737,12 +667,10 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             min-height: 640px !important;
           }
 
-          /* Responsive Background Switch */
-          .hero-bg-desktop {
-            display: none !important;
-          }
-          .hero-bg-mobile {
-            display: block !important;
+          .hero-bg-img {
+            height: 100% !important;
+            top: 0 !important;
+            object-position: center top !important;
           }
 
           /* Header on Mobile */
@@ -761,22 +689,20 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             height: 2.35rem !important;
           }
 
-          /* Content wrapper: positioned in upper deep space */
           .hero-content-wrapper {
-            padding: clamp(24px, 5vh, 42px) 16px 0 !important;
+            padding: clamp(22px, 4.5vh, 40px) 16px 0 !important;
             max-width: 100% !important;
           }
 
-          /* Eyebrow: single delicate line with sky blue glow */
           .hero-eyebrow {
-            font-size: 10.5px !important;
-            letter-spacing: 0.16em !important;
-            white-space: nowrap !important;
-            margin-bottom: 14px !important;
-            color: #38bdf8 !important;
+            font-size: 9.5px !important;
+            letter-spacing: 0.13em !important;
+            white-space: normal !important;
+            line-height: 1.4 !important;
+            margin-bottom: 12px !important;
+            color: #7dd3fc !important;
           }
 
-          /* Headline: exactly 3 clean lines matching mobile reference */
           .hero-hl-desktop {
             display: none !important;
           }
@@ -789,25 +715,23 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             white-space: nowrap !important;
           }
           .hero-headline {
-            font-size: clamp(1.95rem, 8.2vw, 2.35rem) !important;
+            font-size: clamp(1.85rem, 7.6vw, 2.3rem) !important;
             line-height: 1.14 !important;
             letter-spacing: -0.025em !important;
-            margin-bottom: 14px !important;
+            margin-bottom: 12px !important;
           }
 
-          /* Subtitle: compact 4-line centered structure */
           .hero-subtitle {
-            max-width: 325px !important;
+            max-width: 340px !important;
             margin: 0 auto 18px !important;
           }
           .hero-sub-text {
             font-size: 13px !important;
             line-height: 1.55 !important;
-            color: #94a3b8 !important;
+            color: #cbd5e1 !important;
             display: inline-block !important;
           }
 
-          /* CTA buttons: compact centered pills matching reference */
           .hero-cta-row {
             flex-direction: column !important;
             align-items: center !important;
@@ -816,11 +740,10 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           }
           .hero-primary-cta {
             width: auto !important;
-            min-width: 175px !important;
-            max-width: 195px !important;
-            height: 42px !important;
-            padding: 0 24px !important;
-            font-size: 14.5px !important;
+            min-width: 210px !important;
+            height: 44px !important;
+            padding: 0 22px !important;
+            font-size: 14px !important;
             font-weight: 600 !important;
             justify-content: center !important;
             border-radius: 9999px !important;
@@ -829,11 +752,10 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           }
           .hero-secondary-cta {
             width: auto !important;
-            min-width: 175px !important;
-            max-width: 195px !important;
+            min-width: 185px !important;
             height: 42px !important;
-            padding: 0 24px !important;
-            font-size: 14px !important;
+            padding: 0 22px !important;
+            font-size: 13.5px !important;
             font-weight: 500 !important;
             justify-content: center !important;
             border-radius: 9999px !important;
@@ -843,7 +765,6 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
             WebkitBackdropFilter: blur(10px) !important;
           }
 
-          /* Bottom features container & bar */
           .hero-features-container {
             padding: 0 10px 18px !important;
             max-width: 100% !important;
@@ -875,15 +796,15 @@ export function HeroSection({ onOpenMenu, onOpenContact }: HeroSectionProps) {
           }
           .hero-feature-title {
             white-space: normal !important;
-            font-size: 11.5px !important;
+            font-size: 11px !important;
             font-weight: 600 !important;
             line-height: 1.25 !important;
           }
           .hero-feature-desc {
             white-space: normal !important;
-            font-size: 10px !important;
+            font-size: 9.5px !important;
             line-height: 1.35 !important;
-            color: #94a3b8 !important;
+            color: #cbd5e1 !important;
             margin-top: 2px !important;
           }
         }
