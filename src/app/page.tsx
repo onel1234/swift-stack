@@ -19,11 +19,11 @@ export default function Page() {
   return (
     <AppProvider>
       <Loader />
-      
+
       <main className="main-container" style={{ width: '100%', overflowX: 'clip' }}>
-        <HeroSection 
-          onOpenMenu={() => setIsMenuOpen(true)} 
-          onOpenContact={() => setIsContactOpen(true)} 
+        <HeroSection
+          onOpenMenu={() => setIsMenuOpen(true)}
+          onOpenContact={() => setIsContactOpen(true)}
         />
         <ServicesSection onOpenContact={() => setIsContactOpen(true)} />
 
@@ -38,32 +38,9 @@ export default function Page() {
 
       <style>{`
         .main-container { padding: 0; }
-        .modal-container { padding: 0.75rem !important; }
-        .modal-panel { padding: 1.5rem !important; }
-        .modal-title { font-size: 2.25rem !important; }
-        .modal-input {
-          width: 100%; border-radius: 0.75rem; border: 1px solid var(--hairline);
-          background: var(--background); padding: 0.75rem 1rem; font-size: 0.875rem;
-          font-family: inherit; color: var(--ink); outline: none; transition: border-color 0.2s;
-        }
-        .modal-input:focus { border-color: var(--brand-light); box-shadow: 0 0 0 2px var(--brand-light); }
-        
-        .menu-panel { padding: 0.5rem 1.5rem 1.5rem !important; }
-        .menu-link { font-size: 3rem; }
-        .menu-bottom { flex-direction: column; gap: 1.5rem; align-items: stretch !important; text-align: center; }
-        
-        .hover-white { transition: color 0.2s; }
-        .hover-white:hover { color: white; }
-        .hover-brand-light:hover { color: var(--brand-light); }
 
         @media (min-width: 640px) {
           .main-container { padding: 0.75rem; }
-          .modal-container { padding: 1.5rem !important; align-items: center !important; }
-          .modal-panel { padding: 2rem !important; }
-          .modal-title { font-size: 3rem !important; }
-          .menu-panel { padding: 0.75rem 2.5rem 2.5rem !important; }
-          .menu-link { font-size: 4.5rem; }
-          .menu-bottom { flex-direction: row; align-items: center !important; text-align: left; }
         }
       `}</style>
     </AppProvider>
