@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 interface FooterProps {
   onOpenContact?: () => void;
@@ -50,11 +51,11 @@ export function Footer({ onOpenContact }: FooterProps) {
           </div>
 
           <nav className="ref-footer-nav" aria-label="Footer Navigation">
-            <a href="/#services" className="ref-footer-nav-link">Services</a>
-            <a href="/#facilities" className="ref-footer-nav-link">Process</a>
-            <a href="/work" className="ref-footer-nav-link">Work</a>
-            <a href="/#testimonials" className="ref-footer-nav-link">Testimonials</a>
-            <a href="/#faq" className="ref-footer-nav-link">FAQ</a>
+            <Link href="/#services" className="ref-footer-nav-link">Services</Link>
+            <Link href="/#facilities" className="ref-footer-nav-link">Process</Link>
+            <Link href="/work" className="ref-footer-nav-link">Work</Link>
+            <Link href="/#testimonials" className="ref-footer-nav-link">Testimonials</Link>
+            <Link href="/#faq" className="ref-footer-nav-link">FAQ</Link>
           </nav>
         </div>
 

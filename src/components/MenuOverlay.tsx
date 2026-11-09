@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toggleScrollLock } from './LenisProvider';
+
+const emptySubscribe = () => () => {};
 
 const SERVICE_LINKS = [
   { label: 'Web Development', href: '/custom-web-development' },
@@ -13,10 +15,8 @@ const SERVICE_LINKS = [
 ];
 
 export function MenuOverlay({ isOpen, onClose, onOpenContact }: { isOpen: boolean; onClose: () => void; onOpenContact: () => void }) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const pathname = usePathname();
-
-  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     if (isOpen) toggleScrollLock(true);
